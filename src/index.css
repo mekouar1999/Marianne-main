@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Custom CSS for enhanced animations and effects */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Text Justification for paragraph content - disabled on mobile */
+  p {
+    text-align: left;
+  }
+
+  /* Only apply text justification on larger screens */
+  @media (min-width: 768px) {
+    p {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
+  /* Preserve center alignment for specific contexts */
+  .text-center p,
+  .text-left p,
+  .text-right p {
+    text-align: inherit;
+  }
+
+  /* Exception for short text elements */
+  .no-justify,
+  .no-justify p,
+  button p,
+  .btn p,
+  nav p,
+  .navigation p {
+    text-align: inherit;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent;
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300;
+  }
+
+  .contact-submit-btn {
+    background-color: #172554 !important;
+    color: white !important;
+    border: none !important;
+  }
+
+  .contact-submit-btn * {
+    color: white !important;
+  }
+
+  .contact-submit-btn:hover {
+    background-color: #1e3a8a !important;
+    color: white !important;
+  }
+
+  .contact-submit-btn:hover * {
+    color: white !important;
+  }
+
+  /* Consistent spacing utilities */
+  .spacing-xs {
+    @apply mb-2 md:mb-4;
+  }
+  .spacing-sm {
+    @apply mb-4 md:mb-6;
+  }
+  .spacing-md {
+    @apply mb-6 md:mb-8;
+  }
+  .spacing-lg {
+    @apply mb-8 md:mb-10 lg:mb-12;
+  }
+  .spacing-xl {
+    @apply mb-12 md:mb-16 lg:mb-20;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+  .section-padding-sm {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+
+  /* Text justification classes - responsive */
+  .text-justify-force {
+    text-align: left !important;
+  }
+
+  .text-justify-paragraph p {
+    text-align: left;
+  }
+
+  /* Apply text justification only on larger screens */
+  @media (min-width: 768px) {
+    .text-justify-force {
+      text-align: justify !important;
+      text-justify: inter-word;
+    }
+
+    .text-justify-paragraph p {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
+  /* Fixed background effect for scroll sections */
+  .bg-fixed-scroll {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Mobile fallback for fixed backgrounds */
+  @media (max-width: 768px) {
+    .bg-fixed-scroll {
+      background-attachment: scroll;
+    }
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  /* Enhanced text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}

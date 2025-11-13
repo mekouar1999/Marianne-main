@@ -1,0 +1,52 @@
+{
+  "name": "customs-engineering-frontend",
+  "version": "1.0.0",
+  "description": "Modern React frontend for Customs Engineering Solutions",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "type-check": "tsc --noEmit",
+    "seed-blog": "node scripts/seed-blog-posts.js"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.0.0",
+    "dotenv": "^16.5.0",
+    "express-session": "^1.17.3",
+    "framer-motion": "^10.16.16",
+    "lucide-react": "^0.294.0",
+    "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
+    "next": "^14.0.4",
+    "postcss": "^8.4.32",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.20.1",
+    "resend": "^4.6.0",
+    "tailwind-merge": "^2.1.0",
+    "tailwindcss": "^3.3.6"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vitest": "^1.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

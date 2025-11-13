@@ -1,0 +1,126 @@
+{
+  "name": "Customs Engineering Solutions",
+  "short_name": "CES",
+  "description": "Solutions personnalisées en gestion douanière et commerce international",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "categories": ["business", "productivity", "education"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Contactez nos experts",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/icons/shortcut-contact.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Formation",
+      "short_name": "Formation",
+      "description": "Nos programmes de formation",
+      "url": "/formation",
+      "icons": [
+        {
+          "src": "/icons/shortcut-formation.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Consulting",
+      "short_name": "Consulting",
+      "description": "Services de consulting",
+      "url": "/consulting",
+      "icons": [
+        {
+          "src": "/icons/shortcut-consulting.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Calculateur",
+      "short_name": "Calculateur",
+      "description": "Calculateur de prix",
+      "url": "/#calculator",
+      "icons": [
+        {
+          "src": "/icons/shortcut-calculator.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate"
+}

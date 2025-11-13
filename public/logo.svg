@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 700 300"
+  width="700"
+  height="300"
+>
+  <!-- Left rhombus (center at 150,150) -->
+  <polygon
+    points="50,150   150,70   250,150   150,230"
+    fill="#11366A"
+  />
+
+  <!-- Middle rhombus (center at 350,150), left vertex touches the right vertex of the first -->
+  <polygon
+    points="250,150   350,70   450,150   350,230"
+    fill="#2D63A3"
+  />
+
+  <!-- Right rhombus (center at 550,150), left vertex touches the right vertex of the second -->
+  <polygon
+    points="450,150   550,70   650,150   550,230"
+    fill="#5EDCFB"
+  />
+</svg>
+
