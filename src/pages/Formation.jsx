@@ -127,33 +127,59 @@ const Formation = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="container mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mb-6"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {t.nav.formation}
-          </h1>
-          <p className="text-lg md:text-xl text-blue-100 max-w-4xl">
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-blue-100 max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {t.formation.hero.subtitle}
-          </p>
+          </motion.p>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots-pattern opacity-20" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                className="text-center group"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
                 viewport={{ once: true }}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <motion.div
+                  className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-all duration-300"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <benefit.icon className="w-8 h-8 text-blue-600" />
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {benefit.title}
                 </h3>
@@ -165,7 +191,7 @@ const Formation = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -174,6 +200,13 @@ const Formation = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
               {t.formation.hero.title}
             </h2>
@@ -216,8 +249,9 @@ const Formation = () => {
       </section>
 
       {/* Training Programs Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-mesh relative overflow-hidden">
+        <div className="absolute top-20 right-0 w-72 h-72 bg-blue-950/3 rounded-full blur-3xl" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -225,6 +259,13 @@ const Formation = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {t.formation.programs.title}
             </h2>
@@ -237,12 +278,15 @@ const Formation = () => {
             {trainings.map((training, index) => (
               <motion.div
                 key={training.id}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col border border-gray-100/80 hover:border-blue-200/50 group relative overflow-hidden"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
                 viewport={{ once: true }}
+                whileHover={{ y: -8 }}
               >
+                {/* Top gradient accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {training.title}
                 </h3>

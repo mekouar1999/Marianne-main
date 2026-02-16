@@ -114,20 +114,42 @@ const Experience = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="container mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6  text-white">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mb-6"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {t.experience.title}
-          </h1>
-          <p className="text-lg md:text-xl text-blue-100">
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-blue-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {t.experience.subtitle}
-          </p>
+          </motion.p>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent" />
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-mesh relative overflow-hidden">
+        <div className="absolute top-20 left-0 w-72 h-72 bg-blue-950/3 rounded-full blur-3xl" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -135,6 +157,13 @@ const Experience = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {t.experience.testimonials}
             </h2>
@@ -146,22 +175,25 @@ const Experience = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
-  key={testimonial.id}
-  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-  initial={{ opacity: 0, scale: 0.9 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.6, delay: index * 0.2 }}
-  viewport={{ once: true }}
->
+                key={testimonial.id}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/80 hover:border-blue-200/50 group"
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.7, delay: index * 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+              >
   <div className="text-center mb-6">
     {/* Professional photo with modern design */}
-    <div className="relative mb-6">
-      <img
+    <div className="relative mb-6 overflow-hidden rounded-xl">
+      <motion.img
         src={testimonial.photo}
         alt={`${testimonial.name}`}
         className="w-full h-48 object-cover rounded-xl shadow-lg"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.5 }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-transparent rounded-xl"></div>
     </div>
     <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
     <p className="text-gray-600 text-sm">{testimonial.position}</p>
@@ -194,14 +226,22 @@ const Experience = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+        <div className="absolute top-10 right-10 w-64 h-64 bg-blue-950/3 rounded-full blur-3xl animate-float-slow" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-gray-900 leading-tight">
               {t.misc.joinSatisfiedClients}
             </h2>
@@ -210,12 +250,17 @@ const Experience = () => {
             </p>
             <Link href="/contact">
               <motion.button
-                className="bg-blue-950 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-blue-800 transition-all duration-300 inline-flex items-center space-x-2 text-sm sm:text-base"
-                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-blue-950 to-blue-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center space-x-2 text-sm sm:text-base shimmer-btn btn-glow"
+                whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span>{t.misc.requestConsultation}</span>
-                <ArrowRight className="w-5 h-5" />
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
               </motion.button>
             </Link>
           </motion.div>

@@ -129,20 +129,44 @@ const About = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="container mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mb-6"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {t.about?.title || "À propos"}
-          </h1>
-          <p className="text-lg md:text-xl text-blue-100 max-w-4xl">
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-blue-100 max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {t.about?.subtitle ||
               "Votre partenaire de solutions douanes sur mesure"}
-          </p>
+          </motion.p>
         </div>
+        
+        {/* Gradient bottom transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent" />
       </section>
 
       {/* History Section - Card Layout like Notre expertise */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+      <section className="py-12 sm:py-16 lg:py-20 bg-mesh relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12 sm:mb-16"
@@ -151,6 +175,13 @@ const About = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
               {t.about?.history?.title || "Notre Histoire"}
             </h2>
@@ -164,18 +195,23 @@ const About = () => {
             {timeline.map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50"
+                initial={{ opacity: 0, y: 40, rotateY: -5 }}
+                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -8 }}
               >
                 {/* Icon Header */}
-                <div className="bg-blue-950 text-white p-8 text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
+                  <motion.div
+                    className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 relative z-10"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <item.icon className="w-8 h-8 text-white" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-bold leading-tight mb-2">
                     {item.title}
                   </h3>
@@ -197,8 +233,9 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots-pattern opacity-20" />
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
@@ -206,6 +243,13 @@ const About = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 
               className="text-4xl font-bold text-gray-900 mb-4"
               dangerouslySetInnerHTML={{ __html: t.about?.pillars?.title || "Nos Valeurs" }}
@@ -216,17 +260,23 @@ const About = () => {
             {pillars.map((pillar, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full hover:-translate-y-2"
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
                 viewport={{ once: true }}
+                whileHover={{ y: -8 }}
               >
                 {/* Icon Header */}
-                <div className="bg-blue-950 text-white p-8 text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
+                  <motion.div
+                    className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 relative z-10"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <pillar.icon className="w-8 h-8 text-white" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-bold leading-tight">
                     {pillar.title}
                   </h3>
@@ -245,8 +295,9 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-mesh relative overflow-hidden">
+        <div className="absolute top-10 left-0 w-64 h-64 bg-blue-950/3 rounded-full blur-3xl" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -254,6 +305,13 @@ const About = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               {t.about?.team || "La Direction"}
             </h2>
@@ -261,10 +319,10 @@ const About = () => {
 
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/80"
+              initial={{ opacity: 0, y: 40, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
               viewport={{ once: true }}
             >
               <div className="grid md:grid-cols-3 gap-8 items-center">
@@ -324,8 +382,13 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-customs-dark to-customs-medium text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+        <div className="absolute top-10 right-10 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute bottom-10 left-10 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl animate-float-slow animation-delay-400" />
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -338,8 +401,8 @@ const About = () => {
             ></h2>
             <Link href="/contact">
               <motion.button
-                className="bg-white text-customs-dark px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
+                className="bg-white text-blue-950 px-8 py-4 rounded-full font-semibold transition-all duration-300 shimmer-btn btn-glow"
+                whileHover={{ scale: 1.05, y: -3, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span>{t.about?.cta?.button || "Parlons-en !"}</span>

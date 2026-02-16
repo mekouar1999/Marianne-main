@@ -21,8 +21,9 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
               (timestamp - startTime) / (duration * 1000),
               1
             );
-
-            setCount(Math.floor(progress * end));
+            // Ease-out cubic for smoother feel
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * end));
 
             if (progress < 1) {
               animationId = requestAnimationFrame(animate);
@@ -46,7 +47,13 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
   return (
     <span
       ref={ref}
-      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-blue-950"
+      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold counter-glow"
+      style={{
+        background: "linear-gradient(135deg, #00346D, #0FC2F8)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+      }}
     >
       + {count}
       {suffix && suffix !== "+" ? suffix : ""}
@@ -58,39 +65,57 @@ const Stats = () => {
   const { t } = useLanguage();
   
   const stats = [
-    {
-      number: 20,
-      label: t.stats.experience,
-    },
-    {
-      number: 200,
-      label: t.stats.formations,
-    },
-    {
-      number: 300,
-      label: t.stats.clients,
-    },
+    { number: 20, label: t.stats.experience },
+    { number: 200, label: t.stats.formations },
+    { number: 300, label: t.stats.clients },
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
+      {/* Subtle background decoration */}
+      <div className="absolute inset-0 bg-dots-pattern opacity-30" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="text-center group"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
               viewport={{ once: true }}
             >
-              <div className="mb-4 md:mb-6">
+              <motion.div
+                className="relative inline-block mb-4 md:mb-6"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Glow ring behind counter */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-950/10 to-cyan-400/10 rounded-full blur-2xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <AnimatedCounter end={stat.number} duration={2.5} />
-              </div>
-              <p className="text-lg md:text-xl lg:text-2xl text-gray-700 font-medium leading-relaxed px-2">
+              </motion.div>
+              <motion.p
+                className="text-lg md:text-xl lg:text-2xl text-gray-700 font-medium leading-relaxed px-2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
+                viewport={{ once: true }}
+              >
                 {stat.label}
-              </p>
+              </motion.p>
+              {/* Decorative line under each stat */}
+              <motion.div
+                className="w-12 h-0.5 bg-gradient-to-r from-blue-950 to-cyan-400 mx-auto mt-4 rounded-full"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
+                viewport={{ once: true }}
+              />
             </motion.div>
           ))}
         </div>
