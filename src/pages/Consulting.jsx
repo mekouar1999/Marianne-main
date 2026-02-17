@@ -231,20 +231,37 @@ const Consulting = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight">
+      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              duration: 1,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              type: "spring",
+              stiffness: 100
+            }}
+          >
             {t.consulting.hero.title}
-          </h1>
-          <p 
-            className="text-base sm:text-lg md:text-xl text-blue-100 max-w-4xl leading-relaxed text-justify md:text-left"
-            style={{ 
-              textJustify: 'inter-word',
-              hyphens: 'auto'
+          </motion.h1>
+          <motion.p 
+            className="text-base sm:text-lg md:text-xl text-blue-100 max-w-4xl leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 1,
+              delay: 0.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
             }}
           >
             {t.consulting.hero.subtitle}
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -253,11 +270,18 @@ const Consulting = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12 sm:mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-20 h-1.5 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               {t.consulting.services.title}
             </h2>
@@ -279,9 +303,9 @@ const Consulting = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
           >
             <div className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 space-y-6">
@@ -317,11 +341,18 @@ const Consulting = () => {
       <section className="py-20 bg-gradient-to-r from-blue-950 to-blue-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
           >
+            <motion.div
+              className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            />
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 whitespace-pre-line">
               {t.misc.readyQuestion}
             </h2>

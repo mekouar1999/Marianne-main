@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -11,12 +12,14 @@ import {
   Linkedin,
   Youtube,
   Send,
+  User,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import Logo from "./Logo";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -54,19 +57,25 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white relative overflow-hidden z-50">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
       <div className="absolute top-20 right-0 w-96 h-96 bg-blue-950/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-80 h-80 bg-cyan-400/5 rounded-full blur-3xl" />
       
       {/* Main Footer Content */}
-      <div className="py-16 relative z-10">
+      <div className="py-8 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info - positioned left */}
             <div className="lg:pl-0 lg:justify-self-start">
-              <h3 className="text-xl font-bold mb-4">{t.footer.title}</h3>
+              <div className="mb-4">
+                <Link href="/">
+                  <span className="inline-block cursor-pointer">
+                    <Logo invert={true} />
+                  </span>
+                </Link>
+              </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 {t.footer.description}
               </p>
@@ -197,10 +206,25 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm whitespace-pre-line">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4" style={{ position: 'relative', zIndex: 10, pointerEvents: 'auto' }}>
+            <p className="text-gray-400 text-sm text-center md:text-left">
               {t.misc.copyright}
             </p>
+            
+            {/* Admin Login Icon */}
+            <Link href="/admin/login" className="ml-2">
+              <motion.div
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                title="Admin Login"
+                className="flex items-center justify-center transition-colors"
+                style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 20 }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-400 hover:text-white">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 19.125a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21c-2.676 0-5.216-.584-7.499-1.875z" />
+                </svg>
+              </motion.div>
+            </Link>
           </div>
         </div>
       </div>

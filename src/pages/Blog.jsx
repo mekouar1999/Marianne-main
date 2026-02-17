@@ -88,14 +88,37 @@ const Blog = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight">
+      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              duration: 1,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              type: "spring",
+              stiffness: 100
+            }}
+          >
             {t.blog.title}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed">
+          </motion.h1>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-blue-100 max-w-4xl leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 1,
+              delay: 0.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+          >
             {t.blog.subtitle}
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -144,9 +167,12 @@ const Blog = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className="bg-white rounded-2xl shadow-xl overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
               viewport={{ once: true }}
             >
               <div className="grid lg:grid-cols-2 gap-8">
@@ -229,12 +255,16 @@ const Blog = () => {
               {currentPosts.map((post, index) => (
                 <motion.article
                   key={post.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group"
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: index * 0.12,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
                 >
                   <div className="relative">
                     <img

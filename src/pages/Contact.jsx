@@ -131,14 +131,37 @@ const Contact = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-blue-950">
-        <div className="container mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              duration: 1,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              type: "spring",
+              stiffness: 100
+            }}
+          >
             {t.contact.title}
-          </h1>
-          <p className="text-lg md:text-xl text-blue-100 max-w-2xl whitespace-pre-line">
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-blue-100 max-w-2xl whitespace-pre-line"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 1,
+              delay: 0.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+          >
             {t.contact.subtitle}
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -150,16 +173,23 @@ const Contact = () => {
               <motion.div
                 key={index}
                 className="text-center group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
                 viewport={{ once: true }}
+                whileHover={{ y: -5 }}
               >
-                <div
-                  className={`w-16 h-16 bg-gradient-to-br ${info.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+                <motion.div
+                  className={`w-16 h-16 bg-gradient-to-br ${info.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-shadow duration-300`}
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <info.icon className="w-8 h-8 text-white" />
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {info.title}
                 </h3>
@@ -180,21 +210,39 @@ const Contact = () => {
       </section>
 
       {/* Main Contact Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="w-20 h-1.5 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-6"
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Envoyez-nous un message
+            </h2>
+            <p className="text-lg text-gray-600">
+              Nous vous répondrons dans les plus brefs délais
+            </p>
+          </motion.div>
+          
           <div className="flex justify-center">
             {/* Contact Form */}
             <motion.div
               className="bg-white rounded-2xl p-8 shadow-xl w-full max-w-2xl"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Nous contacter
-              </h2>
-
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>

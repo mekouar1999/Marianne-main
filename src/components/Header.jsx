@@ -173,6 +173,8 @@ const Header = () => {
               </span>
             </motion.button>
 
+            {/* Admin/User Icon */}
+
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`md:hidden p-2 rounded-lg transition-colors ${

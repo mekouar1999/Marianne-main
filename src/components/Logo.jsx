@@ -7,6 +7,7 @@ const Logo = ({
   height = "40",
   showText = true,
   textClassName = "text-xl font-bold text-gray-900",
+  invert = false,
 }) => {
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
@@ -18,7 +19,7 @@ const Logo = ({
         <img
           src="/Nouveau logo CES.png"
           alt="Customs Engineering Solutions"
-          className="h-8 w-auto max-w-[120px] sm:h-10 sm:max-w-[150px] object-contain"
+          className={`h-14 w-auto max-w-[180px] sm:h-16 sm:max-w-[220px] object-contain ${invert ? 'brightness-0 invert' : ''}`}
         />
       </motion.div>
 
