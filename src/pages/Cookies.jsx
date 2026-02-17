@@ -84,7 +84,6 @@ const Cookies = () => {
         </div>
       </section>
       </motion.div>
-      <Footer />
     </div>
   );
 };

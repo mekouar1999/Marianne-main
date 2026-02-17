@@ -21,7 +21,6 @@ export default function ConsultingPage() {
           <main className="relative">
             <Consulting />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

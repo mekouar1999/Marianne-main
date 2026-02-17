@@ -21,7 +21,6 @@ export default function FormationPage() {
           <main className="relative">
             <Formation />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

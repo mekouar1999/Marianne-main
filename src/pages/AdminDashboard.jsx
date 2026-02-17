@@ -11,7 +11,8 @@ import {
   FileText,
   LogOut,
   User,
-  Settings
+  Settings,
+  ArrowRight
 } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -142,7 +143,7 @@ const AdminDashboard = () => {
             <div className="flex items-center">
               <FileText className="w-8 h-8 text-blue-600" />
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Articles</p>
+                <p className="text-sm font-medium text-gray-600">Total articles</p>
                 <p className="text-2xl font-bold text-gray-900">{posts.length}</p>
               </div>
             </div>
@@ -176,7 +177,7 @@ const AdminDashboard = () => {
             <div className="flex items-center">
               <Calendar className="w-8 h-8 text-purple-600" />
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Ce Mois-ci</p>
+                <p className="text-sm font-medium text-gray-600">Ce mois-ci</p>
                 <p className="text-2xl font-bold text-gray-900">
                   {posts.filter(post => {
                     const postDate = new Date(post.createdAt);
@@ -192,13 +193,13 @@ const AdminDashboard = () => {
 
         {/* Actions */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Articles Récents</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Articles récents</h2>
           <Link
             href="/admin/create-post"
             className="inline-flex items-center space-x-2 bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors"
           >
             <Plus className="w-4 h-4" />
-            <span>Nouvel Article</span>
+            <span>Nouvel article</span>
           </Link>
         </div>
 
@@ -307,6 +308,13 @@ const AdminDashboard = () => {
           )}
         </div>
       </main>
+      {/* Back to site button */}
+      <div className="flex justify-center mt-8">
+        <Link href="/" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <ArrowRight className="w-4 h-4 mr-2" />
+          Retour au site
+        </Link>
+      </div>
     </div>
   );
 };

@@ -21,7 +21,6 @@ export default function PrivacyPage() {
           <main className="relative">
             <Privacy />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

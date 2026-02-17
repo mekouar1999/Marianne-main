@@ -66,9 +66,9 @@ const Footer = () => {
       {/* Main Footer Content */}
       <div className="py-8 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Company Info - positioned left */}
-            <div className="lg:pl-0 lg:justify-self-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Company Info */}
+            <div>
               <div className="mb-4">
                 <Link href="/">
                   <span className="inline-block cursor-pointer">
@@ -76,13 +76,13 @@ const Footer = () => {
                   </span>
                 </Link>
               </div>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <p className="text-gray-400 mb-6 text-left">
                 {t.footer.description}
               </p>
             </div>
 
-            {/* Quick Links - positioned center */}
-            <div className="lg:px-4 lg:justify-self-center">
+            {/* Quick Links */}
+            <div className="ml-32">
               <h4 className="text-lg font-semibold mb-6">{t.footer.links}</h4>
               <ul className="space-y-3">
                 <li>
@@ -128,8 +128,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Contact - positioned right */}
-            <div className="lg:px-4 lg:justify-self-end">
+            {/* Contact */}
+            <div>
               <h4 className="text-lg font-semibold mb-6">{t.footer.contact}</h4>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
@@ -170,36 +170,6 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Legal - positioned center */}
-            <div className="lg:pr-0 lg:justify-self-center">
-              <h4 className="text-lg font-semibold mb-6">{t.legal.title}</h4>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="/legal"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {t.footer.legal}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/privacy"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {t.footer.privacy}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/cookies"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {t.footer.cookies}
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -210,21 +180,32 @@ const Footer = () => {
             <p className="text-gray-400 text-sm text-center md:text-left">
               {t.misc.copyright}
             </p>
-            
-            {/* Admin Login Icon */}
-            <Link href="/admin/login" className="ml-2">
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.95 }}
-                title="Admin Login"
-                className="flex items-center justify-center transition-colors"
-                style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 20 }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-400 hover:text-white">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 19.125a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21c-2.676 0-5.216-.584-7.499-1.875z" />
-                </svg>
-              </motion.div>
-            </Link>
+            <div className="flex items-center space-x-4">
+              {/* Legal Links */}
+              <Link href="/legal" className="text-gray-400 hover:text-white text-sm transition-colors">
+                {t.footer.legal}
+              </Link>
+              <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+                {t.footer.privacy}
+              </Link>
+              <Link href="/cookies" className="text-gray-400 hover:text-white text-sm transition-colors">
+                {t.footer.cookies}
+              </Link>
+              {/* Admin Login Icon */}
+              <Link href="/admin/login" className="ml-2">
+                <motion.div
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Admin Login"
+                  className="flex items-center justify-center transition-colors"
+                  style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 20 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-400 hover:text-white">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 19.125a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21c-2.676 0-5.216-.584-7.499-1.875z" />
+                  </svg>
+                </motion.div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -233,3 +214,4 @@ const Footer = () => {
 };
 
 export default Footer;
+ 

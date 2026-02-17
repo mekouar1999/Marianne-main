@@ -21,7 +21,6 @@ export default function HomePage() {
           <main className="relative">
             <Home />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

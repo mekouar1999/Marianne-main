@@ -21,7 +21,6 @@ export default function ContactPage() {
           <main className="relative">
             <Contact />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

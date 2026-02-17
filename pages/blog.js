@@ -21,7 +21,6 @@ export default function BlogPage() {
           <main className="relative">
             <Blog />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

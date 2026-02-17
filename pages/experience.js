@@ -21,7 +21,6 @@ export default function ExperiencePage() {
           <main className="relative">
             <Experience />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>

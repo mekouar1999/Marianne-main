@@ -21,7 +21,6 @@ export default function AboutPage() {
           <main className="relative">
             <About />
           </main>
-          <Footer />
           <CookieBanner />
         </div>
       </RouteWrapper>
