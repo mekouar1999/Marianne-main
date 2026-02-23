@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import { CheckCircle, Users, Award, Clock, Target, ChevronDown } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useLanguage } from "../contexts/LanguageContext";
+import TextReveal from "../components/TextReveal";
+import TiltCard from "../components/TiltCard";
+import MagneticButton from "../components/MagneticButton";
 
 const Formation = () => {
   const { t } = useLanguage();
@@ -128,33 +131,32 @@ const Formation = () => {
     >
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        <motion.div
+          className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.2, 0.05] }}
+          transition={{ duration: 6, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2] }}
+          transition={{ duration: 8, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div
+          className="absolute right-16 top-20 w-44 h-44 border border-cyan-400/10 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        />
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              type: "spring",
-              stiffness: 100
-            }}
-          >
-            {t.nav.formation}
-          </motion.h1>
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white leading-tight">
+            <TextReveal text={t.nav.formation} delay={0.1} />
+          </div>
           <motion.p
             className="text-lg md:text-xl text-blue-100 max-w-4xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 1,
-              delay: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {t.formation.hero.subtitle}
           </motion.p>
@@ -162,7 +164,7 @@ const Formation = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-white relative overflow-hidden">
+      <section className="py-16 bg-section-tint relative overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-4 gap-8">
@@ -170,14 +172,14 @@ const Formation = () => {
               <motion.div
                 key={index}
                 className="text-center group"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                initial={{ opacity: 0, y: 60, scale: 0.7 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
               >
                 <motion.div
                   className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-all duration-300"
-                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  whileHover={{ rotate: 360, scale: 1.2, background: "linear-gradient(to bottom right, #1e3a8a, #0891b2)" }}
                   transition={{ duration: 0.6 }}
                 >
                   <benefit.icon className="w-8 h-8 text-blue-600" />
@@ -193,7 +195,7 @@ const Formation = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white relative">
+      <section className="py-20 bg-mesh relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -278,14 +280,13 @@ const Formation = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {trainings.map((training, index) => (
+              <TiltCard key={training.id} maxTilt={10} className="h-full">
               <motion.div
-                key={training.id}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col border border-gray-100/80 hover:border-blue-200/50 group relative overflow-hidden"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col border border-blue-100/60 hover:border-blue-200/50 group relative overflow-hidden h-full"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60, scale: 0.9 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
               >
                 {/* Top gradient accent */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
@@ -302,13 +303,13 @@ const Formation = () => {
                   {t.common.view}
                 </button>
               </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section id="contact-form" className="py-20 bg-gray-100">
+      <section id="contact-form" className="py-20 bg-mesh">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -334,7 +335,7 @@ const Formation = () => {
 
           {success ? (
             <motion.div
-              className="text-center bg-white rounded-2xl p-6 sm:p-8 lg:p-12 shadow-lg"
+              className="text-center bg-blue-50/80 rounded-2xl p-6 sm:p-8 lg:p-12 shadow-lg"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ 
@@ -354,7 +355,7 @@ const Formation = () => {
           ) : (
             <motion.form
               onSubmit={handleSubmit}
-              className="bg-white rounded-2xl p-8 shadow-lg space-y-6"
+              className="bg-slate-50/90 rounded-2xl p-8 shadow-lg space-y-6"
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}

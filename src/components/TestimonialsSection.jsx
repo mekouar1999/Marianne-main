@@ -1,5 +1,5 @@
 // frontend/src/components/TestimonialsSection.jsx
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Quote,
@@ -10,6 +10,8 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import TiltCard from "./TiltCard";
+import TextReveal from "./TextReveal";
 
 const TestimonialsSection = () => {
   const { t } = useLanguage();
@@ -53,6 +55,15 @@ const TestimonialsSection = () => {
     );
   };
 
+  // Auto-advance every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
   const testimonial = testimonials[currentTestimonial];
 
   const slideVariants = {
@@ -63,9 +74,19 @@ const TestimonialsSection = () => {
 
   return (
     <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden" ref={ref}>
-      {/* Decorative background */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-blue-950/3 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-cyan-400/3 rounded-full blur-3xl" />
+      {/* Animated orbs */}
+      <motion.div
+        className="absolute top-20 right-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(30,58,138,0.05) 0%, transparent 70%)" }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-0 w-80 h-80 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(34,211,238,0.05) 0%, transparent 70%)" }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -83,9 +104,9 @@ const TestimonialsSection = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           />
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            {t.experience.testimonials}
-          </h2>
+          <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+            <TextReveal text={t.experience.testimonials} delay={0.1} />
+          </div>
         </motion.div>
 
         {/* Testimonial Card */}
@@ -99,8 +120,11 @@ const TestimonialsSection = () => {
               animate="center"
               exit="exit"
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="bg-white rounded-2xl shadow-xl p-8 md:p-10 lg:p-12 relative border border-gray-100/80"
             >
+              <TiltCard maxTilt={7} className="w-full">
+              <div
+                className="bg-white rounded-2xl shadow-xl p-8 md:p-10 lg:p-12 relative border border-gray-100/80"
+              >
               {/* Decorative gradient corner */}
               <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-blue-950/5 to-transparent rounded-tl-2xl" />
               <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-cyan-400/5 to-transparent rounded-br-2xl" />
@@ -153,8 +177,20 @@ const TestimonialsSection = () => {
                   </div>
                 </div>
               </div>
+              </div>
+              </TiltCard>
             </motion.div>
           </AnimatePresence>
+          {/* Auto-progress bar */}
+          <div className="mt-4 h-0.5 bg-gray-200 rounded-full overflow-hidden">
+            <motion.div
+              key={currentTestimonial}
+              className="h-full bg-gradient-to-r from-blue-950 to-cyan-400"
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 6, ease: "linear" }}
+            />
+          </div>
         </div>
 
         {/* Navigation */}

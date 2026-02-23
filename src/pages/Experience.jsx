@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Quote, ArrowRight, CheckCircle } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import TextReveal from "../components/TextReveal";
+import TiltCard from "../components/TiltCard";
+import MagneticButton from "../components/MagneticButton";
 
 const Experience = () => {
   const { t } = useLanguage();
@@ -115,33 +118,35 @@ const Experience = () => {
     >
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        {/* Animated orbs */}
+        <motion.div
+          className="absolute top-16 right-20 w-80 h-80 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(96,165,250,0.18) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 1.25, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 left-10 w-60 h-60 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(34,211,238,0.14) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.9, 0.4] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/5"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              type: "spring",
-              stiffness: 100
-            }}
-          >
-            {t.experience.title}
-          </motion.h1>
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <TextReveal text={t.experience.title} delay={0.1} />
+          </div>
           <motion.p
             className="text-lg md:text-xl text-blue-100 max-w-4xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 1,
-              delay: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
+            initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {t.experience.subtitle}
           </motion.p>
@@ -176,14 +181,13 @@ const Experience = () => {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
+              <TiltCard key={testimonial.id} maxTilt={10} className="h-full">
               <motion.div
-                key={testimonial.id}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/80 hover:border-blue-200/50 group"
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70 hover:border-blue-200/50 group h-full"
+                initial={{ opacity: 0, y: 60, scale: 0.88 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.7, delay: index * 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.9, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
               >
   <div className="text-center mb-6">
     {/* Professional photo with modern design */}
@@ -222,6 +226,7 @@ const Experience = () => {
     )}
   </div>
 </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -250,21 +255,24 @@ const Experience = () => {
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
               {t.misc.ctaExperienceDescription}
             </p>
-            <Link href="/contact">
-              <motion.button
-                className="bg-gradient-to-r from-blue-950 to-blue-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center space-x-2 text-sm sm:text-base shimmer-btn btn-glow"
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>{t.misc.requestConsultation}</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
-              </motion.button>
-            </Link>
+            <div className="relative inline-block">
+              <motion.div
+                className="absolute inset-0 rounded-full bg-blue-400/30"
+                animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+              />
+              <Link href="/contact">
+                <MagneticButton className="bg-gradient-to-r from-blue-950 to-blue-900 text-white px-8 py-4 rounded-full font-semibold inline-flex items-center space-x-2 shimmer-btn btn-glow">
+                  <span>{t.misc.requestConsultation}</span>
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </MagneticButton>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

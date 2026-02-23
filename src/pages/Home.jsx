@@ -8,6 +8,8 @@ import Services from "../components/Services";
 import Stats from "../components/Stats";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ValuePropositions from "../components/ValuePropositions";
+import TextReveal from "../components/TextReveal";
+import MagneticButton from "../components/MagneticButton";
 
 const Home = () => {
   const { t } = useLanguage();
@@ -73,8 +75,14 @@ const Home = () => {
       </div>
 
       {/* Trust Indicators */}
-      <section className="pt-8 md:pt-12 lg:pt-16 pb-4 md:pb-6 lg:pb-8 bg-white relative overflow-hidden">
-        {/* Subtle background */}
+      <section className="pt-8 md:pt-12 lg:pt-16 pb-4 md:pb-6 lg:pb-8 bg-section-tint relative overflow-hidden">
+        {/* Animated orbs */}
+        <motion.div
+          className="absolute top-0 right-1/4 w-64 h-64 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
         <div className="absolute inset-0 bg-dots-pattern opacity-20" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -92,21 +100,27 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             />
-            <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-              {t.misc.trustMessage}
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 lg:gap-8 items-center">
+            <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+              <TextReveal text={t.misc.trustMessage} delay={0.1} />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 lg:gap-8 items-center" style={{ perspective: "800px" }}>
               {["Corteva Agriscience", "Dow Chemical", "GEFCO", "ALIS International", "VAT Solutions"].map((name, index) => (
                 <motion.div
                   key={name}
-                  className={`bg-gradient-to-br from-gray-50 to-gray-100 h-12 md:h-14 rounded-xl flex items-center justify-center px-4 border border-gray-200/50 hover:border-blue-200 hover:shadow-lg transition-all duration-500 group ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`relative bg-gradient-to-br from-white to-gray-50 h-14 md:h-16 rounded-xl flex items-center justify-center px-4 border border-gray-200/50 hover:border-blue-300 hover:shadow-xl transition-all duration-500 group cursor-default overflow-hidden ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
+                  initial={{ opacity: 0, rotateY: 90, scale: 0.8 }}
+                  whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
+                  transition={{ duration: 0.7, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -3, scale: 1.02 }}
+                  whileHover={{ y: -4, scale: 1.05 }}
                 >
-                  <span className="text-gray-600 group-hover:text-blue-950 font-semibold text-xs md:text-sm text-center transition-colors duration-300">
+                  {/* Spotlight on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-blue-950/5 to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                  {/* Left accent line */}
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-950 to-cyan-400 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-400 origin-top" />
+                  <span className="text-gray-600 group-hover:text-blue-950 font-semibold text-xs md:text-sm text-center transition-colors duration-300 relative z-10">
                     {name}
                   </span>
                 </motion.div>
@@ -122,7 +136,7 @@ const Home = () => {
       </div>
 
       {/* Final CTA */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 overflow-hidden relative">
+      <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-blue-50 via-slate-100 to-cyan-50/50 overflow-hidden relative">
         {/* Decorative elements */}
         <div className="absolute top-10 left-10 w-64 h-64 bg-blue-950/3 rounded-full blur-3xl animate-float-slow" />
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-400/3 rounded-full blur-3xl animate-float-slow animation-delay-400" />

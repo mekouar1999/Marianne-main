@@ -2,6 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import Squares from "./Squares";
+import TextReveal from "./TextReveal";
+import TiltCard from "./TiltCard";
+import MagneticButton from "./MagneticButton";
 
 const Services = () => {
   const { t } = useLanguage();
@@ -47,6 +51,20 @@ const Services = () => {
 
   return (
     <section className="py-16 md:py-20 lg:py-24 bg-mesh relative overflow-hidden">
+      {/* Squares animated background */}
+      <div className="absolute inset-0 z-0">
+        <Squares
+          speed={0.5}
+          squareSize={40}
+          direction="diagonal"
+          borderColor="#5881fe"
+          hoverFillColor="#e5f1ff"
+        />
+      </div>
+
+      {/* Light overlay so text stays readable */}
+      <div className="absolute inset-0 z-0 bg-white/80 backdrop-blur-[1px]" />
+
       {/* Decorative floating shapes */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-blue-950/5 rounded-full blur-3xl animate-float-slow" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-slow animation-delay-400" />
@@ -68,9 +86,9 @@ const Services = () => {
           >
             <div className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto" />
           </motion.div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            {t.services.title}
-          </h2>
+          <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+            <TextReveal text={t.services.title} delay={0.1} />
+          </div>
           <div className="max-w-3xl mx-auto">
             <p className="text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
               {t.services.subtitle}
@@ -91,9 +109,17 @@ const Services = () => {
               variants={cardVariants}
               className="group perspective-1000"
             >
-              <div className="bg-white rounded-2xl p-8 md:p-10 lg:p-12 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50 relative overflow-hidden">
+              <TiltCard maxTilt={12} className="h-full">
+              <div className="bg-slate-50/90 rounded-2xl p-8 md:p-10 lg:p-12 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col h-full border border-blue-100/60 hover:border-blue-200/80 relative overflow-hidden">
                 {/* Hover gradient effect */}
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+                {/* Animated scan line */}
+                <motion.div
+                  className={`absolute left-0 right-0 h-px bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100`}
+                  initial={{ top: "0%" }}
+                  whileHover={{ top: ["0%", "100%"] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                />
                 
                 <motion.h3
                   className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 text-center"
@@ -137,11 +163,9 @@ const Services = () => {
                   </div>
                 </div>
 
-                <motion.a
-                  href={service.href}
+                <MagneticButton
                   className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 md:py-4 px-6 md:px-8 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center space-x-2 text-base md:text-lg shimmer-btn btn-glow"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  onClick={() => window.location.href = service.href}
                 >
                   <span>{service.ctaText}</span>
                   <motion.div
@@ -150,8 +174,9 @@ const Services = () => {
                   >
                     <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                   </motion.div>
-                </motion.a>
+                </MagneticButton>
               </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

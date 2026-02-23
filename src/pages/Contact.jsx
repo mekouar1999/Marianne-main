@@ -91,13 +91,13 @@ const Contact = () => {
   if (success) {
     return (
       <motion.div
-        className="min-h-screen bg-gray-50 pt-20 flex items-center justify-center"
+        className="min-h-screen bg-section-tint pt-20 flex items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
         <motion.div
-          className="text-center bg-white rounded-2xl p-12 shadow-xl max-w-md mx-4"
+          className="text-center bg-blue-50/80 rounded-2xl p-12 shadow-xl max-w-md mx-4"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -166,7 +166,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-section-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {contactInfo.map((info, index) => (
@@ -210,7 +210,7 @@ const Contact = () => {
       </section>
 
       {/* Main Contact Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-mesh">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -237,7 +237,7 @@ const Contact = () => {
           <div className="flex justify-center">
             {/* Contact Form */}
             <motion.div
-              className="bg-white rounded-2xl p-8 shadow-xl w-full max-w-2xl"
+              className="bg-slate-50/90 rounded-2xl p-8 shadow-xl w-full max-w-2xl"
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}

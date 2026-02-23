@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, BookOpen, TrendingUp } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import TiltCard from "./TiltCard";
+import TextReveal from "./TextReveal";
+import MagneticButton from "./MagneticButton";
 
 const ValuePropositions = () => {
   const { t } = useLanguage();
@@ -77,9 +80,9 @@ const ValuePropositions = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           />
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            {t.misc.ourExpertise}
-          </h2>
+          <div className="text-4xl font-bold text-gray-900 mb-4">
+            <TextReveal text={t.misc.ourExpertise} delay={0.1} />
+          </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             {t.misc.ourExpertiseSubtitle}
           </p>
@@ -98,7 +101,12 @@ const ValuePropositions = () => {
               key={index}
               variants={cardVariants}
               className="group"
+              initial={{ opacity: 0, x: index === 0 ? -80 : index === 1 ? 0 : 80, y: index === 1 ? 60 : 30, scale: 0.88 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              transition={{ duration: 0.9, delay: index * 0.18, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
             >
+              <TiltCard maxTilt={10} className="h-full">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50">
                 {/* Icon Header with gradient */}
                 <div className={`bg-gradient-to-br ${proposition.gradient} text-white p-8 text-center relative overflow-hidden`}>
@@ -107,14 +115,22 @@ const ValuePropositions = () => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
                     <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-700 delay-100" />
                   </div>
-                  
-                  <motion.div
-                    className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 relative z-10"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <proposition.icon className="w-8 h-8 text-white" />
-                  </motion.div>
+                  {/* Pulsing ring on icon */}
+                  <div className="relative w-16 h-16 mx-auto mb-4">
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl bg-white/20"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
+                    />
+                    <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center relative z-10">
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.15 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <proposition.icon className="w-8 h-8 text-white" />
+                      </motion.div>
+                    </div>
+                  </div>
                   <h3 className="text-lg font-bold leading-tight relative z-10">
                     {proposition.title}
                   </h3>
@@ -138,11 +154,7 @@ const ValuePropositions = () => {
                   {/* CTA Button */}
                   <div className="mt-auto">
                     <Link href={proposition.ctaLink}>
-                      <motion.button
-                        className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shimmer-btn"
-                        whileHover={{ scale: 1.03, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
+                      <MagneticButton className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2 shimmer-btn">
                         <span className="text-center">{proposition.ctaText}</span>
                         <motion.div
                           animate={{ x: [0, 5, 0] }}
@@ -150,11 +162,12 @@ const ValuePropositions = () => {
                         >
                           <ArrowRight className="w-5 h-5" />
                         </motion.div>
-                      </motion.button>
+                      </MagneticButton>
                     </Link>
                   </div>
                 </div>
               </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

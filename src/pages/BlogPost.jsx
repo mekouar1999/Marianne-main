@@ -124,7 +124,7 @@ const BlogPost = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20">
+      <div className="min-h-screen bg-section-tint pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded mb-4"></div>
@@ -142,7 +142,7 @@ const BlogPost = () => {
 
   if (!currentPost) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20 flex items-center justify-center">
+      <div className="min-h-screen bg-section-tint pt-20 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Article non trouvé
@@ -157,13 +157,13 @@ const BlogPost = () => {
 
   return (
     <motion.div
-      className="min-h-screen bg-gray-50 pt-20"
+      className="min-h-screen bg-section-tint pt-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-blue-50/70 border-b border-blue-100/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center space-x-2 text-sm">
             <Link href="/" className="text-gray-500 hover:text-gray-700">
@@ -270,7 +270,7 @@ const BlogPost = () => {
           </header>
 
           {/* Article Content */}
-          <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
+          <div className="bg-slate-50/90 rounded-xl shadow-lg p-8 md:p-12">
             <div
               className={proseClasses}
               dangerouslySetInnerHTML={{ __html: currentPost.content }}
@@ -321,7 +321,7 @@ const BlogPost = () => {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 bg-gray-100">
+        <section className="py-16 bg-section-tint">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className="text-center mb-12"
@@ -342,7 +342,7 @@ const BlogPost = () => {
               {relatedPosts.map((relatedPost, index) => (
                 <motion.article
                   key={relatedPost.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                  className="bg-slate-50/90 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}

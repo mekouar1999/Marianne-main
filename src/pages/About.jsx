@@ -1,7 +1,7 @@
 // frontend/src/pages/About.jsx
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Award,
   Target,
@@ -15,6 +15,10 @@ import {
   Star,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import TextReveal from "../components/TextReveal";
+import TiltCard from "../components/TiltCard";
+import MagneticButton from "../components/MagneticButton";
+import GlitchText from "../components/GlitchText";
 
 const About = () => {
   const { t } = useLanguage();
@@ -130,37 +134,41 @@ const About = () => {
     >
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
+        {/* Animated pulsing orbs */}
+        <motion.div
+          className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.25, 0.1] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/3 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        {/* Rotating ring */}
+        <motion.div
+          className="absolute right-10 top-20 w-48 h-48 border border-cyan-400/10 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute right-16 top-24 w-36 h-36 border border-blue-400/10 rounded-full"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              type: "spring",
-              stiffness: 100
-            }}
-          >
-            {t.about?.title || "À propos"}
-          </motion.h1>
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white leading-tight">
+            <TextReveal text={t.about?.title || "À propos"} delay={0.1} />
+          </div>
           <motion.p
             className="text-lg md:text-xl text-blue-100 max-w-4xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 1,
-              delay: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            {t.about?.subtitle ||
-              "Votre partenaire de solutions douanes sur mesure"}
+            {t.about?.subtitle || "Votre partenaire de solutions douanes sur mesure"}
           </motion.p>
         </div>
       </section>
@@ -193,14 +201,13 @@ const About = () => {
           {/* History Cards Grid */}
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {timeline.map((item, index) => (
+              <TiltCard key={index} maxTilt={10} className="h-full">
               <motion.div
-                key={index}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50"
-                initial={{ opacity: 0, y: 40, rotateY: -5 }}
-                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="bg-slate-50/90 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-blue-100/70 hover:border-blue-200/50"
+                initial={{ opacity: 0, y: 60, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: index * 0.25, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
               >
                 {/* Icon Header */}
                 <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
@@ -227,13 +234,14 @@ const About = () => {
                   </p>
                 </div>
               </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-24 bg-section-tint relative overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-20" />
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
@@ -258,14 +266,13 @@ const About = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {pillars.map((pillar, index) => (
+              <TiltCard key={index} maxTilt={12} className="h-full">
               <motion.div
-                key={index}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="bg-slate-50/90 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col h-full border border-blue-100/70 hover:border-blue-200/50"
+                initial={{ opacity: 0, y: 50, scale: 0.88 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: index * 0.18, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
               >
                 {/* Icon Header */}
                 <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
@@ -289,6 +296,7 @@ const About = () => {
                   </p>
                 </div>
               </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -319,7 +327,7 @@ const About = () => {
 
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/80"
+              className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70"
               initial={{ opacity: 0, y: 40, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -385,8 +393,22 @@ const About = () => {
       <section className="py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
-        <div className="absolute top-10 right-10 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl animate-float-slow" />
-        <div className="absolute bottom-10 left-10 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl animate-float-slow animation-delay-400" />
+        <motion.div
+          className="absolute top-10 right-10 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.15, 0.05] }}
+          transition={{ duration: 6, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-10 left-10 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        {/* Animated ring */}
+        <motion.div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.05, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -395,18 +417,19 @@ const About = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 
+            <h2
               className="text-4xl font-bold mb-8"
               dangerouslySetInnerHTML={{ __html: t.about?.cta?.title || "Une question ? Un projet ?" }}
             ></h2>
             <Link href="/contact">
-              <motion.button
-                className="bg-white text-blue-950 px-8 py-4 rounded-full font-semibold transition-all duration-300 shimmer-btn btn-glow"
-                whileHover={{ scale: 1.05, y: -3, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
-                whileTap={{ scale: 0.95 }}
+              <MagneticButton
+                className="bg-white text-blue-950 px-10 py-4 rounded-full font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl relative overflow-hidden group"
               >
-                <span>{t.about?.cta?.button || "Parlons-en !"}</span>
-              </motion.button>
+                <span className="relative z-10">{t.about?.cta?.button || "Parlons-en !"}</span>
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-100 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
+                />
+              </MagneticButton>
             </Link>
           </motion.div>
         </div>
