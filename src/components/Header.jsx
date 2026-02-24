@@ -16,7 +16,9 @@ const Header = () => {
 
   // Pages that have white backgrounds and need dark header styling from the start
   const whiteBackgroundPages = [
-    // All pages now use transparent header except home
+    "/legal",
+    "/privacy",
+    "/cookies",
   ];
   const isWhiteBackgroundPage = whiteBackgroundPages.some(
     (page) =>

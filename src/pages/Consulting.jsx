@@ -20,8 +20,10 @@ const ServiceCard = ({ title, description, features, delay }) => (
     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent group-hover:translate-y-full transition-transform duration-1000" />
     </div>
-    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 whitespace-pre-line">{title}</h3>
-    <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">{description}</p>
+    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">{title}</h3>
+    <div className="min-h-[72px] flex items-start mb-6">
+      <p className="text-sm sm:text-base text-gray-600 leading-relaxed text-center w-full">{description}</p>
+    </div>
 
     <ul className="space-y-3">
       {features.map((feature, index) => (
@@ -83,7 +85,7 @@ const Consulting = () => {
   const services = {
     fr: [
       {
-        title: "Help\nline",
+        title: "Help line",
         description:
           "Support immédiat pour vos urgences douanières avec nos experts disponibles.",
         features: [
@@ -249,7 +251,7 @@ const Consulting = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+      <section className="pt-28 sm:pt-32 pb-10 sm:pb-12 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         <motion.div
           className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.2, 0.05] }}
@@ -268,17 +270,52 @@ const Consulting = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight">
+          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
             <TextReveal text={t.consulting.hero.title} delay={0.1} />
           </div>
-          <motion.p 
-            className="text-base sm:text-lg md:text-xl text-blue-100 max-w-4xl leading-relaxed"
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        </div>
+      </section>
+
+      {/* Subtitle Section */}
+      <section className="py-14 md:py-18 bg-section-tint relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots-pattern opacity-10" />
+        <div
+          className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
+          style={{ fontSize: "200px", opacity: 0.04 }}
+        >
+          "
+        </div>
+        <motion.div
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-blue-200/30 rounded-full blur-3xl"
+          animate={{ x: [0, 15, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-cyan-200/20 rounded-full blur-3xl"
+          animate={{ x: [0, -15, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+          />
+          <motion.p
+            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {t.consulting.hero.subtitle}
           </motion.p>
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-950 rounded-full mx-auto mt-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
+          />
         </div>
       </section>
 
@@ -316,37 +353,54 @@ const Consulting = () => {
       </section>
 
       {/* Consulting Description Section */}
-      <section className="py-20 bg-mesh">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-mesh relative overflow-hidden">
+        {/* Pulsing orbs */}
+        <motion.div
+          className="absolute -left-24 top-1/2 -translate-y-1/2 w-64 h-64 bg-blue-200/25 rounded-full blur-3xl"
+          animate={{ x: [0, 20, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -right-24 top-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-200/20 rounded-full blur-3xl"
+          animate={{ x: [0, -20, 0], scale: [1.1, 1, 1.1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        />
+        {/* Large decorative quote */}
+        <div
+          className="absolute top-2 left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
+          style={{ fontSize: "180px", opacity: 0.04 }}
+        >
+          "
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Top accent */}
           <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 50 }}
+            className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-10"
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            viewport={{ once: true }}
+          />
+
+          <motion.p
+            className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light italic text-center"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
           >
-            <div className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 space-y-6">
-              <p 
-                className="whitespace-pre-line md:text-justify"
-                style={{ 
-                  textJustify: 'inter-word',
-                  textAlignLast: 'justify',
-                  wordSpacing: '0.1em',
-                  hyphens: 'auto'
-                }}
-              >
-                {t.consulting.hero.description}
-              </p>
-            </div>
-            <Link href="/contact">
-              <MagneticButton
-                className="bg-blue-950 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-900 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center space-x-2"
-              >
-                <span>{t.consulting.hero.cta}</span>
-                <ArrowRight className="w-5 h-5" />
-              </MagneticButton>
-            </Link>
-          </motion.div>
+            {t.consulting.hero.description}
+          </motion.p>
+
+          {/* Bottom accent */}
+          <motion.div
+            className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-950 rounded-full mx-auto mt-10"
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          />
         </div>
       </section>
 

@@ -30,19 +30,19 @@ const translations = {
       cta: "Assurez votre conformité douanière",
       ctaSecondary: "Accédez à notre programme de formation",
       section1: {
-        title: "SÉCURISEZ VOS OPÉRATIONS D'IMPORT/EXPORT",
+        title: "Sécurisez vos opérations d'import/export",
         description:
           "Que ce soit en prévision d'un contrôle douanier ou simplement pour dérisquer vos opérations d'import/export, vous avez besoin d'un spécialiste à vos côtés qui rentre dans vos process et votre documentation pour garantir les bonnes pratiques en matière douanière. Évitez tout contentieux avec l'administration douanière des pays concernés.",
         cta: "Assurez votre conformité douanière",
       },
       section2: {
-        title: "FORMATION D'OPÉRATEURS DOUANE",
+        title: "Formation d'opérateurs douane",
         description:
           "La législation douanière est en constante évolution. C'est souvent difficile de rester à la page pour les équipes prises pour l'opérationnel, mais aussi d'intégrer de nouveaux collaborateurs. Nous formons des dizaines d'opérateurs douanes chaque année pour garantir un savoir-faire en conformité avec les dernières contraintes législatives en matière d'import/export.",
         cta: "Accédez à notre programme de formation",
       },
       section3: {
-        title: "OPTIMISEZ VOS FLUX D'IMPORT/EXPORT",
+        title: "Optimisez vos flux d'import/export",
         description:
           "Vous souhaitez optimiser financièrement vos opérations ? Vous souhaitez simplifier administrativement vos opérations ? Nous sommes à vos côtés pour optimiser toutes vos opérations d'import/export.",
         cta: "Simplifiez vos démarches dès aujourd'hui",
@@ -466,19 +466,19 @@ const translations = {
       cta: "Ensure your customs compliance",
       ctaSecondary: "Access our training program",
       section1: {
-        title: "SECURE YOUR IMPORT/EXPORT OPERATIONS",
+        title: "Secure your import/export operations",
         description:
           "Whether in anticipation of a customs control or simply to de-risk your import/export operations, you need a specialist by your side who enters your processes and documentation to guarantee best practices in customs matters. Avoid any dispute with the customs administration of the countries concerned.",
         cta: "Ensure your customs compliance",
       },
       section2: {
-        title: "CUSTOMS OPERATORS TRAINING",
+        title: "Customs operators training",
         description:
           "Customs legislation is constantly evolving. It is often difficult to stay up to date for teams caught up in operations, but also to integrate new collaborators. We train dozens of customs operators each year to guarantee know-how in compliance with the latest legislative constraints in import/export matters.",
         cta: "Access our training program",
       },
       section3: {
-        title: "OPTIMIZE YOUR IMPORT/EXPORT FLOWS",
+        title: "Optimize your import/export flows",
         description:
           "Do you want to financially optimize your operations? Do you want to administratively simplify your operations? We are by your side to optimize all your import/export operations.",
         cta: "Simplify your procedures today",

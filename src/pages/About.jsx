@@ -133,7 +133,7 @@ const About = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         {/* Animated pulsing orbs */}
         <motion.div
           className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
@@ -159,17 +159,54 @@ const About = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white leading-tight">
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
             <TextReveal text={t.about?.title || "À propos"} delay={0.1} />
           </div>
+        </div>
+      </section>
+
+      {/* Subtitle Section */}
+      <section className="py-16 md:py-20 bg-section-tint relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots-pattern opacity-10" />
+        {/* Decorative large quote mark */}
+        <div
+          className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
+          style={{ fontSize: "220px", opacity: 0.04 }}
+        >
+          "
+        </div>
+        {/* Animated side orbs */}
+        <motion.div
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-blue-200/30 rounded-full blur-3xl"
+          animate={{ x: [0, 15, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-cyan-200/20 rounded-full blur-3xl"
+          animate={{ x: [0, -15, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+          />
           <motion.p
-            className="text-lg md:text-xl text-blue-100 max-w-4xl"
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {t.about?.subtitle || "Votre partenaire de solutions douanes sur mesure"}
           </motion.p>
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-950 rounded-full mx-auto mt-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
+          />
         </div>
       </section>
 
@@ -209,20 +246,13 @@ const About = () => {
                 transition={{ duration: 0.8, delay: index * 0.25, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
               >
-                {/* Icon Header */}
+                {/* Header */}
                 <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                  <motion.div
-                    className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 relative z-10"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <item.icon className="w-8 h-8 text-white" />
-                  </motion.div>
-                  <h3 className="text-lg font-bold leading-tight mb-2">
+                  <h3 className="text-lg font-bold leading-tight mb-2 relative z-10">
                     {item.title}
                   </h3>
-                  <div className="text-white/80 font-semibold">
+                  <div className="text-white/80 font-semibold relative z-10">
                     {item.year}
                   </div>
                 </div>
@@ -274,17 +304,10 @@ const About = () => {
                 transition={{ duration: 0.9, delay: index * 0.18, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
               >
-                {/* Icon Header */}
+                {/* Header */}
                 <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                  <motion.div
-                    className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 relative z-10"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <pillar.icon className="w-8 h-8 text-white" />
-                  </motion.div>
-                  <h3 className="text-lg font-bold leading-tight">
+                  <h3 className="text-lg font-bold leading-tight relative z-10">
                     {pillar.title}
                   </h3>
                 </div>

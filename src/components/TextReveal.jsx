@@ -69,7 +69,7 @@ const TextReveal = ({
         <motion.span
           key={wIdx}
           variants={wordVariants}
-          className="inline-block overflow-hidden mr-[0.25em] last:mr-0"
+          className="inline-block overflow-hidden mr-[0.25em] last:mr-0 pb-[0.2em] mb-[-0.2em]"
           style={{ verticalAlign: "top" }}
         >
           {word.split("").map((char, cIdx) => (

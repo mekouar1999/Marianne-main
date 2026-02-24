@@ -183,7 +183,7 @@ const Experience = () => {
             {testimonials.map((testimonial, index) => (
               <TiltCard key={testimonial.id} maxTilt={10} className="h-full">
               <motion.div
-                className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70 hover:border-blue-200/50 group h-full"
+                className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70 hover:border-blue-200/50 group h-full flex flex-col"
                 initial={{ opacity: 0, y: 60, scale: 0.88 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.9, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -206,24 +206,28 @@ const Experience = () => {
     <p className="text-blue-950 text-sm font-medium">{testimonial.company}</p>
   </div>
 
-  {/* Le reste du contenu reste inchangé */}
-  <Quote className="w-8 h-8 text-blue-200 mb-4" />
-  <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
-
-  <div className="space-y-2">
-    <h5 className="font-semibold text-gray-900 text-sm">Résultats obtenus :</h5>
-    {testimonial.results.map((result, idx) => (
-      <div key={idx} className="flex items-center space-x-2">
-        <CheckCircle className="w-4 h-4 text-green-500" />
-        <span className="text-sm text-gray-600">{result}</span>
-      </div>
-    ))}
+  {/* Quote and text */}
+  <div className="flex-1">
+    <Quote className="w-8 h-8 text-blue-200 mb-4" />
+    <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
   </div>
 
-  <div className="mt-4 pt-4 border-t border-gray-200 flex justify-between items-center">
-    {testimonial.date && (
-      <span className="text-xs text-gray-500">{testimonial.date}</span>
-    )}
+  {/* Results always at bottom */}
+  <div className="mt-auto">
+    <div className="space-y-1 mb-4">
+      <h5 className="font-semibold text-gray-900 text-sm mb-1">Résultats obtenus :</h5>
+      {testimonial.results.map((result, idx) => (
+        <div key={idx} className="flex items-center space-x-2">
+          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+          <span className="text-sm text-gray-600">{result}</span>
+        </div>
+      ))}
+    </div>
+    <div className="pt-4 border-t border-gray-200">
+      {testimonial.date && (
+        <span className="text-xs text-gray-500">{testimonial.date}</span>
+      )}
+    </div>
   </div>
 </motion.div>
               </TiltCard>

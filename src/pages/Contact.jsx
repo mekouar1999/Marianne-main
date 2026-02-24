@@ -69,6 +69,12 @@ const Contact = () => {
 
   const contactInfo = [
     {
+      icon: MapPin,
+      title: language === "fr" ? "Zone d'intervention" : "Service Area",
+      content: t.contact.info.location,
+      color: "from-customs-dark to-customs-medium",
+    },
+    {
       icon: Phone,
       title: language === "fr" ? "Téléphone" : "Phone",
       content: t.contact.info.phone,
@@ -79,12 +85,6 @@ const Contact = () => {
       title: "Email",
       content: t.contact.info.email,
       color: "from-customs-medium to-customs-light",
-    },
-    {
-      icon: MapPin,
-      title: language === "fr" ? "Zone d'intervention" : "Service Area",
-      content: t.contact.info.location,
-      color: "from-customs-dark to-customs-medium",
     },
   ];
 
@@ -319,19 +319,24 @@ const Contact = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t.contact.subject}
                   </label>
-                  <select
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  >
-                    {t.contact.subjectOptions.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none pr-10"
+                    >
+                      {t.contact.subjectOptions.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                  </div>
                 </div>
 
                 <div>

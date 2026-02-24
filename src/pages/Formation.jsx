@@ -130,7 +130,7 @@ const Formation = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         <motion.div
           className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.2, 0.05] }}
@@ -149,17 +149,52 @@ const Formation = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white leading-tight">
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
             <TextReveal text={t.nav.formation} delay={0.1} />
           </div>
+        </div>
+      </section>
+
+      {/* Subtitle Section */}
+      <section className="py-14 md:py-18 bg-section-tint relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots-pattern opacity-10" />
+        <div
+          className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
+          style={{ fontSize: "200px", opacity: 0.04 }}
+        >
+          "
+        </div>
+        <motion.div
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-blue-200/30 rounded-full blur-3xl"
+          animate={{ x: [0, 15, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-cyan-200/20 rounded-full blur-3xl"
+          animate={{ x: [0, -15, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+          />
           <motion.p
-            className="text-lg md:text-xl text-blue-100 max-w-4xl"
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {t.formation.hero.subtitle}
           </motion.p>
+          <motion.div
+            className="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-950 rounded-full mx-auto mt-8"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
+          />
         </div>
       </section>
 
@@ -243,7 +278,7 @@ const Formation = () => {
             >
               <button 
                 onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
-                className="bg-blue-950 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-800 transition-all duration-300 text-lg"
+                className="bg-blue-950 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-800 transition-all duration-300 text-lg"
               >
                 {t.formation.hero.cta}
               </button>
@@ -290,17 +325,17 @@ const Formation = () => {
               >
                 {/* Top gradient accent */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                   {training.title}
                 </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
+                <p className="text-gray-600 mb-6 leading-relaxed flex-grow text-center">
                   {training.description}
                 </p>
                 <button 
                   onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full bg-blue-950 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition-all duration-300 mt-auto"
+                  className="w-full bg-blue-950 text-white py-3 rounded-full font-semibold hover:bg-blue-800 transition-all duration-300 mt-auto"
                 >
-                  {t.common.view}
+                  En savoir plus
                 </button>
               </motion.div>
               </TiltCard>
@@ -446,7 +481,7 @@ const Formation = () => {
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-950 to-blue-950 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-blue-950 to-blue-950 text-white py-4 rounded-full font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
                 whileHover={{ scale: loading ? 1 : 1.02 }}
                 whileTap={{ scale: loading ? 1 : 0.98 }}
               >
