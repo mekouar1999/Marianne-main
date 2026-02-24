@@ -31,7 +31,7 @@ const getSections = (language) => {
     content: (
       <>
         <p className="text-gray-700 mb-3">{isEn ? "The data controller is:" : "Le responsable du traitement des données est :"}</p>
-        <p className="text-gray-700"><strong>Marianne Artusio-Chenot</strong></p>
+        <p className="text-gray-700">Marianne Artusio-Chenot</p>
         <p className="text-gray-700">12 rue Defly 06000 Nice, France</p>
         <p className="text-gray-700">Email : martusiochenot@customs-solutions.fr</p>
       </>
@@ -155,8 +155,8 @@ const getSections = (language) => {
         </ul>
         <p className="text-gray-700">
           {isEn
-            ? <>You can exercise these rights by sending an email to: <strong>martusiochenot@customs-solutions.fr</strong></>
-            : <>Vous pouvez exercer ces droits en envoyant un e-mail à :{" "}<strong>martusiochenot@customs-solutions.fr</strong></>
+            ? "You can exercise these rights by sending an email to: martusiochenot@customs-solutions.fr"
+            : "Vous pouvez exercer ces droits en envoyant un e-mail à : martusiochenot@customs-solutions.fr"
           }
         </p>
       </>
@@ -170,7 +170,7 @@ const Privacy = () => {
   const sections = getSections(language);
   const pageTitle = t?.privacy?.title || "Politique de confidentialité";
   const backLabel = language === "en" ? "← Back to home" : "← Retour à l'accueil";
-  const updatedLabel = language === "en" ? "Last updated: January 15, 2025" : "Dernière mise à jour : 15 janvier 2025";
+  const updatedLabel = language === "en" ? "Last updated: February 24, 2026" : "Dernière mise à jour : 24 février 2026";
   return (
     <motion.div
       className="min-h-screen bg-gray-50 pt-20"

@@ -63,12 +63,8 @@ const getSections = (language) => {
     content: (
       <p className="text-gray-700">
         {isEn
-          ? <>
-              For any question regarding this cookie policy, you can contact us at: <strong>martusiochenot@customs-solutions.fr</strong>
-            </>
-          : <>
-              Pour toute question concernant cette politique de cookies, vous pouvez nous contacter à l'adresse suivante : <strong>martusiochenot@customs-solutions.fr</strong>
-            </>
+          ? "For any question regarding this cookie policy, you can contact us at: martusiochenot@customs-solutions.fr"
+          : "Pour toute question concernant cette politique de cookies, vous pouvez nous contacter à l'adresse suivante : martusiochenot@customs-solutions.fr"
         }
       </p>
     ),
@@ -81,7 +77,7 @@ const Cookies = () => {
   const sections = getSections(language);
   const pageTitle = t?.cookies?.title || "Politique de Cookies";
   const backLabel = language === "en" ? "← Back to home" : "← Retour à l'accueil";
-  const updatedLabel = language === "en" ? "Last updated: January 15, 2025" : "Dernière mise à jour : 15 janvier 2025";
+  const updatedLabel = language === "en" ? "Last updated: February 24, 2026" : "Dernière mise à jour : 24 février 2026";
   return (
     <motion.div
       className="min-h-screen bg-gray-50 pt-20"

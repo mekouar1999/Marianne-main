@@ -222,11 +222,7 @@ const Experience = () => {
         </div>
       ))}
     </div>
-    <div className="pt-4 border-t border-gray-200">
-      {testimonial.date && (
-        <span className="text-xs text-gray-500">{testimonial.date}</span>
-      )}
-    </div>
+    {/* Removed date display */}
   </div>
 </motion.div>
               </TiltCard>

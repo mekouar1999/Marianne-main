@@ -13,14 +13,14 @@ const getSections = (language) => {
       <>
         <p className="text-gray-700 mb-4">
           {isEn
-            ? <><strong>The site</strong>, accessible at <strong>customs-engineering-solutions.com</strong>, is published by:</>
-            : <>Le présent site, accessible à l'adresse{" "}<strong>customs-engineering-solutions.com</strong> est édité par :</>
+            ? <>The site, accessible at customs-engineering-solutions.com, is published by:</>
+            : <>Le présent site, accessible à l'adresse customs-engineering-solutions.com est édité par :</>
           }
         </p>
-        <p className="text-gray-700"><strong>Customs Engineering Solutions</strong></p>
-        <p className="text-gray-700"><strong>{isEn ? "Status" : "Statut"} :</strong> {isEn ? "Simplified joint-stock company" : "Société par actions simplifiée"}</p>
-        <p className="text-gray-700"><strong>SIRET :</strong> 87913830300026</p>
-        <p className="text-gray-700"><strong>{isEn ? "Address" : "Adresse"} :</strong> 12 rue Defly 06000 Nice, France</p>
+        <p className="text-gray-700">Customs Engineering Solutions</p>
+        <p className="text-gray-700">{isEn ? "Status" : "Statut"} : {isEn ? "Simplified joint-stock company" : "Société par actions simplifiée"}</p>
+        <p className="text-gray-700">SIRET : 87913830300026</p>
+        <p className="text-gray-700">{isEn ? "Address" : "Adresse"} : 12 rue Defly 06000 Nice, France</p>
       </>
     ),
   },
@@ -29,7 +29,7 @@ const getSections = (language) => {
     content: (
       <>
         <p className="text-gray-700">Marianne Artusio-Chenot</p>
-        <p className="text-gray-700">Email : <strong>martusiochenot@customs-solutions.fr</strong></p>
+        <p className="text-gray-700">Email : martusiochenot@customs-solutions.fr</p>
       </>
     ),
   },
@@ -38,10 +38,10 @@ const getSections = (language) => {
     content: (
       <>
         <p className="text-gray-700 mb-4">{isEn ? "The site was designed and developed by:" : "Le site a été conçu et développé par :"}</p>
-        <p className="text-gray-700"><strong>Melissa BONNET</strong></p>
-        <p className="text-gray-700"><strong>{isEn ? "Address" : "Adresse"} :</strong> 15 avenue des moulins, 06670 Saint-Martin-du-Var</p>
-        <p className="text-gray-700"><strong>Contact :</strong> contact@melissabonnet.fr</p>
-        <p className="text-gray-700"><strong>{isEn ? "Website" : "Site web"} :</strong> https://www.melissabonnet.fr/</p>
+        <p className="text-gray-700">Melissa BONNET</p>
+        <p className="text-gray-700">{isEn ? "Address" : "Adresse"} : 15 avenue des moulins, 06670 Saint-Martin-du-Var</p>
+        <p className="text-gray-700">Contact : contact@melissabonnet.fr</p>
+        <p className="text-gray-700">{isEn ? "Website" : "Site web"} : https://www.melissabonnet.fr/</p>
       </>
     ),
   },
@@ -49,9 +49,9 @@ const getSections = (language) => {
     title: isEn ? "Hosting" : "Hébergement",
     content: (
       <>
-        <p className="text-gray-700 mb-4">{isEn ? <>The site is hosted by <strong>OVH SAS</strong></> : <>Le site est hébergé par la société <strong>OVH SAS</strong></>}</p>
-        <p className="text-gray-700"><strong>{isEn ? "Address" : "Adresse"} :</strong> 2 rue Kellermann – 59100 Roubaix – France</p>
-        <p className="text-gray-700"><strong>{isEn ? "Website" : "Site web"} :</strong> https://www.ovhcloud.com/fr/</p>
+        <p className="text-gray-700 mb-4">{isEn ? "The site is hosted by OVH SAS" : "Le site est hébergé par la société OVH SAS"}</p>
+        <p className="text-gray-700">{isEn ? "Address" : "Adresse"} : 2 rue Kellermann – 59100 Roubaix – France</p>
+        <p className="text-gray-700">{isEn ? "Website" : "Site web"} : https://www.ovhcloud.com/fr/</p>
       </>
     ),
   },
@@ -78,8 +78,8 @@ const getSections = (language) => {
         </p>
         <p className="text-gray-700">
           {isEn
-            ? <>You have the right to access, correct or delete your personal data. To exercise this right, please contact: <strong>martusiochenot@customs-solutions.fr</strong></>
-            : <>Vous disposez d'un droit d'accès, de rectification ou de suppression de vos données personnelles. Pour exercer ce droit, veuillez contacter :{" "}<strong>martusiochenot@customs-solutions.fr</strong></>
+            ? "You have the right to access, correct or delete your personal data. To exercise this right, please contact: martusiochenot@customs-solutions.fr"
+            : "Vous disposez d'un droit d'accès, de rectification ou de suppression de vos données personnelles. Pour exercer ce droit, veuillez contacter : martusiochenot@customs-solutions.fr"
           }
         </p>
       </>
@@ -93,7 +93,7 @@ const Legal = () => {
   const sections = getSections(language);
   const pageTitle = t?.legal?.title || "Mentions légales";
   const backLabel = language === "en" ? "← Back to home" : "← Retour à l'accueil";
-  const updatedLabel = language === "en" ? "Last updated: January 15, 2025" : "Dernière mise à jour : 15 janvier 2025";
+  const updatedLabel = language === "en" ? "Last updated: February 24, 2026" : "Dernière mise à jour : 24 février 2026";
   return (
     <motion.div
       className="min-h-screen bg-gray-50 pt-20"
