@@ -20,6 +20,7 @@ const TextReveal = ({
 }) => {
   const words = text.split(" ");
 
+  // key={text} ensures the component remounts and re-animates when the text changes (e.g. language switch)
   const containerVariants = {
     hidden: {},
     visible: {
@@ -58,6 +59,7 @@ const TextReveal = ({
 
   return (
     <motion.div
+      key={text}
       className={`inline ${className}`}
       variants={containerVariants}
       initial="hidden"

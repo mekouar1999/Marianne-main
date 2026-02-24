@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Quote, ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "../components/TextReveal";
 import TiltCard from "../components/TiltCard";
@@ -208,7 +208,6 @@ const Experience = () => {
 
   {/* Quote and text */}
   <div className="flex-1">
-    <Quote className="w-8 h-8 text-blue-200 mb-4" />
     <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
   </div>
 

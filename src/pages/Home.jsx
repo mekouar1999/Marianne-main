@@ -103,14 +103,14 @@ const Home = () => {
             <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
               <TextReveal text={t.misc.trustMessage} delay={0.1} />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 lg:gap-8 items-center" style={{ perspective: "800px" }}>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 lg:gap-8 items-center">
               {["Corteva Agriscience", "Dow Chemical", "GEFCO", "ALIS International", "VAT Solutions"].map((name, index) => (
                 <motion.div
                   key={name}
                   className={`relative bg-gradient-to-br from-white to-gray-50 h-14 md:h-16 rounded-xl flex items-center justify-center px-4 border border-gray-200/50 hover:border-blue-300 hover:shadow-xl transition-all duration-500 group cursor-default overflow-hidden ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
-                  initial={{ opacity: 0, rotateY: 90, scale: 0.8 }}
-                  whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
-                  transition={{ duration: 0.7, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
                   viewport={{ once: true }}
                   whileHover={{ y: -4, scale: 1.05 }}
                 >

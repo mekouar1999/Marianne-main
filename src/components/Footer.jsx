@@ -119,6 +119,14 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
+                    href="/blog"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {t.nav.blog}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/contact"
                     className="text-gray-400 hover:text-white transition-colors"
                   >

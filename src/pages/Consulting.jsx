@@ -279,12 +279,6 @@ const Consulting = () => {
       {/* Subtitle Section */}
       <section className="py-14 md:py-18 bg-section-tint relative overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-10" />
-        <div
-          className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
-          style={{ fontSize: "200px", opacity: 0.04 }}
-        >
-          "
-        </div>
         <motion.div
           className="absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-blue-200/30 rounded-full blur-3xl"
           animate={{ x: [0, 15, 0] }}
@@ -365,13 +359,7 @@ const Consulting = () => {
           animate={{ x: [0, -20, 0], scale: [1.1, 1, 1.1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
         />
-        {/* Large decorative quote */}
-        <div
-          className="absolute top-2 left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
-          style={{ fontSize: "180px", opacity: 0.04 }}
-        >
-          "
-        </div>
+        {/* Removed large decorative quote mark */}
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Top accent */}

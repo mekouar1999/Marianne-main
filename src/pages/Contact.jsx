@@ -150,6 +150,7 @@ const Contact = () => {
           >
             {t.contact.title}
           </motion.h1>
+          {t.contact.subtitle ? (
           <motion.p
             className="text-lg md:text-xl text-blue-100 max-w-2xl whitespace-pre-line"
             initial={{ opacity: 0, y: 30 }}
@@ -162,6 +163,8 @@ const Contact = () => {
           >
             {t.contact.subtitle}
           </motion.p>
+          ) : null}
+          
         </div>
       </section>
 
@@ -196,7 +199,7 @@ const Contact = () => {
                 {info.title === "Email" ? (
                   <a
                     href={`mailto:${info.content}`}
-                    className="text-gray-600 hover:text-gray-800 hover:underline transition-colors"
+                    className="text-gray-600 hover:text-gray-800 hover:underline transition-colors whitespace-nowrap inline-block"
                   >
                     {info.content}
                   </a>

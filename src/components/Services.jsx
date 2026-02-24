@@ -122,7 +122,7 @@ const Services = () => {
                 />
                 
                 <motion.h3
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 text-center"
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 md:mb-8 text-center min-h-[4rem] md:min-h-[5.5rem] lg:min-h-[7rem]"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -130,13 +130,13 @@ const Services = () => {
                 </motion.h3>
 
                 <div className="flex-grow">
-                  <div className="mb-8 md:mb-10">
+                  <div className="mb-8 md:mb-10 min-h-[3.5rem] md:min-h-[4.5rem] lg:min-h-[5rem]">
                     <p className="text-gray-600 leading-relaxed text-base md:text-lg lg:text-xl text-justify whitespace-pre-line">
                       {service.description}
                     </p>
                   </div>
 
-                  <div className="mb-8 md:mb-10">
+                  <div className="mb-8 md:mb-10 min-h-[3.5rem] md:min-h-[4.5rem] lg:min-h-[5.5rem] flex flex-col justify-start">
                     <h4 className="font-semibold text-gray-900 mb-4 md:mb-6 text-lg md:text-xl">
                       {t.services.title}
                     </h4>

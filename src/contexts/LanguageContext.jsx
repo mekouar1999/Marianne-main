@@ -832,6 +832,7 @@ const translations = {
     },
     cookies: {
       title: "Cookie management",
+      subtitle: "Manage your cookie preferences and learn how we use cookies.",
       message: "We use cookies to improve your experience on our site. By continuing to browse, you accept our use of cookies.",
       accept: "Accept",
       decline: "Decline",

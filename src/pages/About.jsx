@@ -168,13 +168,6 @@ const About = () => {
       {/* Subtitle Section */}
       <section className="py-16 md:py-20 bg-section-tint relative overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-10" />
-        {/* Decorative large quote mark */}
-        <div
-          className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-serif text-blue-950 select-none pointer-events-none leading-none"
-          style={{ fontSize: "220px", opacity: 0.04 }}
-        >
-          "
-        </div>
         {/* Animated side orbs */}
         <motion.div
           className="absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 bg-blue-200/30 rounded-full blur-3xl"
@@ -357,15 +350,15 @@ const About = () => {
               viewport={{ once: true }}
             >
               <div className="grid md:grid-cols-3 gap-8 items-center">
-                <div className="text-center md:text-left">
+                <div className="flex flex-col items-center">
                   <img
                     src={director.image}
                     alt={director.name}
-                    className="w-32 h-32 rounded-full mx-auto md:mx-0 mb-4 object-cover"
+                    className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                   />
                   <a
                     href={director.linkedin}
-                    className="inline-flex items-center justify-center w-10 h-10 bg-customs-dark text-white rounded-full hover:bg-customs-medium transition-colors"
+                    className="inline-flex items-center justify-center w-10 h-10 bg-customs-dark text-white rounded-full hover:bg-customs-medium transition-colors mt-2"
                   >
                     <Linkedin className="w-5 h-5" />
                   </a>

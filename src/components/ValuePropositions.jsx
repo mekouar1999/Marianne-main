@@ -108,7 +108,7 @@ const ValuePropositions = () => {
             >
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-400 overflow-hidden flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50">
                 {/* Header with gradient */}
-                <div className={`bg-gradient-to-br ${proposition.gradient} text-white px-8 py-6 text-center relative overflow-hidden`}>
+                <div className={`bg-gradient-to-br ${proposition.gradient} text-white px-8 py-6 text-center relative overflow-hidden min-h-[88px] flex items-center justify-center`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
                   <h3 className="text-base font-bold leading-tight relative z-10">
