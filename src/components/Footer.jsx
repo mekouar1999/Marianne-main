@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import ObfuscatedEmail from "./ObfuscatedEmail";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -151,12 +152,12 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="w-5 h-5 text-white" />
-                  <a
-                    href={`mailto:${t.footer.info.email}`}
+                  <ObfuscatedEmail
+                    user="martusiochenot"
+                    domain="customs-solutions"
+                    tld="fr"
                     className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {t.footer.info.email}
-                  </a>
+                  />
                 </div>
                 <div className="flex items-center space-x-3">
                   <MapPin className="w-5 h-5 text-white" />

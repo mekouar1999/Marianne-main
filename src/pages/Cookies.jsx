@@ -1,4 +1,5 @@
 // frontend/src/pages/Cookies.jsx
+import ObfuscatedEmail from "../components/ObfuscatedEmail";
 import React from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
@@ -63,9 +64,15 @@ const getSections = (language) => {
     content: (
       <p className="text-gray-700">
         {isEn
-          ? "For any question regarding this cookie policy, you can contact us at: martusiochenot@customs-solutions.fr"
-          : "Pour toute question concernant cette politique de cookies, vous pouvez nous contacter à l'adresse suivante : martusiochenot@customs-solutions.fr"
+          ? "For any question regarding this cookie policy, you can contact us at : "
+          : "Pour toute question concernant cette politique de cookies, vous pouvez nous contacter à l'adresse suivante : "
         }
+        <ObfuscatedEmail
+          user="martusiochenot"
+          domain="customs-solutions"
+          tld="fr"
+          className="hover:underline"
+        />
       </p>
     ),
   },

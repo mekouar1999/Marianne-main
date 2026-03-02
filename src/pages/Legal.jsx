@@ -1,4 +1,5 @@
 // frontend/src/pages/Legal.jsx
+import ObfuscatedEmail from "../components/ObfuscatedEmail";
 import React from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
@@ -29,7 +30,7 @@ const getSections = (language) => {
     content: (
       <>
         <p className="text-gray-700">Marianne Artusio-Chenot</p>
-        <p className="text-gray-700">Email : martusiochenot@customs-solutions.fr</p>
+        <p className="text-gray-700">Email : <ObfuscatedEmail user="martusiochenot" domain="customs-solutions" tld="fr" className="hover:underline" /></p>
       </>
     ),
   },
@@ -40,7 +41,7 @@ const getSections = (language) => {
         <p className="text-gray-700 mb-4">{isEn ? "The site was designed and developed by:" : "Le site a été conçu et développé par :"}</p>
         <p className="text-gray-700">Melissa BONNET</p>
         <p className="text-gray-700">{isEn ? "Address" : "Adresse"} : 15 avenue des moulins, 06670 Saint-Martin-du-Var</p>
-        <p className="text-gray-700">Contact : contact@melissabonnet.fr</p>
+        <p className="text-gray-700">Contact : <ObfuscatedEmail user="contact" domain="melissabonnet" tld="fr" className="hover:underline" /></p>
         <p className="text-gray-700">{isEn ? "Website" : "Site web"} : https://www.melissabonnet.fr/</p>
       </>
     ),

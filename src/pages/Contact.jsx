@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, CheckCircle } from "lucide-react";
+import ObfuscatedEmail from "../components/ObfuscatedEmail";
 import { useLanguage } from "../contexts/LanguageContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -196,13 +197,13 @@ const Contact = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {info.title}
                 </h3>
-                {info.title === "Email" ? (
-                  <a
-                    href={`mailto:${info.content}`}
+                {info.title === "Email" || info.title === "E-mail" ? (
+                  <ObfuscatedEmail
+                    user="martusiochenot"
+                    domain="customs-solutions"
+                    tld="fr"
                     className="text-gray-600 hover:text-gray-800 hover:underline transition-colors whitespace-nowrap inline-block"
-                  >
-                    {info.content}
-                  </a>
+                  />
                 ) : (
                   <p className="text-gray-600">{info.content}</p>
                 )}
