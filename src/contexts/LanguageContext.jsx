@@ -146,7 +146,7 @@ const translations = {
       hero: {
         title: "Consulting douanier expert",
         subtitle:
-          "Nos services de consulting offrent un accompagnement sur-mesure pour vos besoins spécifiques en matière de douane et de commerce international. Que ce soit pour résoudre des problématiques complexes, optimiser vos processus ou vous mettre en conformité avec les réglementations en vigueur, nous mettons à votre disposition notre expertise reconnue.",
+          "Nos services de consulting offrent un accompagnement sur-mesure pour vos besoins spécifiques en matière de douane et de commerce international.\nQue ce soit pour résoudre des problématiques complexes, optimiser vos processus ou vous mettre en conformité avec les réglementations en vigueur, nous mettons à votre disposition notre expertise reconnue.",
         description:
           "Parmi nos prestations, nous proposons une assistance immédiate via notre help-line, des audits approfondis de vos opérations douanières, ainsi que des interventions ponctuelles adaptées à vos projets. Nous sommes votre partenaire stratégique pour sécuriser et simplifier vos échanges internationaux.",
         cta: "Parlons de vos besoins",
@@ -290,7 +290,7 @@ const translations = {
       email: "Mail*",
       phone: "Téléphone",
       subject: "Objet*",
-      subjectOptions: ["Option 1", "Option 2", "Option 3", "Option 4"],
+      subjectOptions: ["Conseil", "Formation", "Autre"],
       message: "Message*",
       send: "Envoyer",
       success: "Message envoyé avec succès !",
@@ -298,7 +298,7 @@ const translations = {
       required: "Les champs marqués d'une étoile (*) sont obligatoires",
       info: {
         title: "Informations de contact",
-        phone: "06.02.01.53.69",
+        phone: "+33 (0)6.02.01.53.69",
         email: "martusiochenot@customs-solutions.fr",
         location: "France et Europe",
         linkedin:
@@ -580,7 +580,7 @@ const translations = {
       hero: {
         title: "Expert customs consulting",
         subtitle:
-          "Our consulting services offer tailor-made support for your specific needs in customs and international trade. Whether to solve complex problems, optimize your processes or bring you into compliance with current regulations, we make our recognized expertise available to you.",
+          "Our consulting services offer tailor-made support for your specific needs in customs and international trade.\nWhether to solve complex problems, optimize your processes or bring you into compliance with current regulations, we make our recognized expertise available to you.",
         description:
           "Among our services, we offer immediate assistance via our help line, in-depth audits of your customs operations, as well as one-off interventions adapted to your projects. We are your strategic partner to secure and simplify your international exchanges.",
         cta: "Let's talk about your needs",
@@ -723,7 +723,7 @@ const translations = {
       email: "Email*",
       phone: "Phone",
       subject: "Subject*",
-      subjectOptions: ["Option 1", "Option 2", "Option 3", "Option 4"],
+      subjectOptions: ["Consulting", "Training", "Other"],
       message: "Message*",
       send: "Send",
       success: "Message sent successfully!",
@@ -731,7 +731,7 @@ const translations = {
       required: "Fields marked with an asterisk (*) are required",
       info: {
         title: "Contact information",
-        phone: "06.02.01.53.69",
+        phone: "+33 6.02.01.53.69",
         email: "martusiochenot@customs-solutions.fr",
         location: "France and Europe",
         linkedin:

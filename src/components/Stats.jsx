@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { Award, BookOpen, Users } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
@@ -65,9 +66,9 @@ const Stats = () => {
   const { t } = useLanguage();
   
   const stats = [
-    { number: 20, label: t.stats.experience },
-    { number: 200, label: t.stats.formations },
-    { number: 300, label: t.stats.clients },
+    { number: 20, label: t.stats.experience, icon: Award },
+    { number: 200, label: t.stats.formations, icon: BookOpen },
+    { number: 300, label: t.stats.clients, icon: Users },
   ];
 
   return (
@@ -90,6 +91,21 @@ const Stats = () => {
               }}
               viewport={{ once: true }}
             >
+              {/* Icon above counter */}
+              <motion.div
+                className="flex items-center justify-center mb-3"
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md"
+                  style={{ background: "linear-gradient(135deg, #00346D, #0FC2F8)" }}
+                >
+                  <stat.icon className="w-7 h-7 text-white" />
+                </div>
+              </motion.div>
               <motion.div
                 className="relative inline-block mb-4 md:mb-6"
                 whileHover={{ scale: 1.1 }}

@@ -1,193 +1,340 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import {
-  Type,
   Bold,
   Italic,
+  Underline,
+  Strikethrough,
   List,
-  Quote,
+  ListOrdered,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
   Link,
-  Eye,
-  Code
+  Undo,
+  Redo,
+  Quote,
+  Minus
 } from 'lucide-react';
-import { proseClasses } from '../utils/proseClasses';
 
+/* -----------------------------------------------------------------------
+   Word-like WYSIWYG editor — contentEditable + execCommand.
+   Content is stored/emitted as HTML (same format the blog uses).
+----------------------------------------------------------------------- */
 const BasicTextEditor = ({ value, onChange, placeholder }) => {
-  const [content, setContent] = useState(value || '');
-  const [showPreview, setShowPreview] = useState(false);
 
-  const handleContentChange = (e) => {
-    const newContent = e.target.value;
-    setContent(newContent);
-    if (onChange) {
-      onChange(newContent);
+  const editorRef = useRef(null);
+  const initialised = useRef(false);
+  const [styleValue, setStyleValue] = React.useState("");
+  const [fontSizeValue, setFontSizeValue] = React.useState("");
+  const [currentColor, setCurrentColor] = React.useState('#000000');
+  const colorInputRef = useRef(null);
+  const savedSelection = useRef(null);
+
+  // Set initial HTML once on mount; also reset when parent clears value.
+  useEffect(() => {
+    const el = editorRef.current;
+    if (!el) return;
+    if (!initialised.current) {
+      el.innerHTML = value || '';
+      initialised.current = true;
+      return;
+    }
+    // Sync only when value is cleared externally (e.g. after form submit)
+    if ((value === '' || value == null) && el.innerHTML !== '') {
+      el.innerHTML = '';
+    }
+  }, [value]);
+
+  const emitChange = useCallback(() => {
+    if (editorRef.current && onChange) {
+      onChange(editorRef.current.innerHTML);
+    }
+  }, [onChange]);
+
+  // ── Formatting helpers ──────────────────────────────────────────────
+  const exec = (command, arg = null) => {
+    editorRef.current?.focus();
+    document.execCommand(command, false, arg);
+    emitChange();
+  };
+
+  const formatBlock = (tag) => exec('formatBlock', tag);
+
+  const insertHR = () =>
+    exec('insertHTML', '<hr style="border:none;border-top:1px solid #d1d5db;margin:1rem 0" />');
+
+  const insertLink = () => {
+    const selection = window.getSelection();
+    const selectedText = selection?.toString() || '';
+    const url = window.prompt('URL du lien :', 'https://');
+    if (!url) return;
+    if (selectedText) {
+      exec('createLink', url);
+    } else {
+      const text = window.prompt('Texte du lien :', url) || url;
+      exec('insertHTML', `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`);
     }
   };
 
-  const addTemplate = (template) => {
-    const newContent = content + '\n' + template + '\n';
-    setContent(newContent);
-    onChange(newContent);
-  };
-
-  const templates = [
-    {
-      icon: Type,
-      label: 'Titre Principal',
-      template: '<h2>Votre titre principal ici</h2>',
-      title: 'Ajouter un titre principal'
-    },
-    {
-      icon: Type,
-      label: 'Sous-titre',
-      template: '<h3>Votre sous-titre ici</h3>',
-      title: 'Ajouter un sous-titre'
-    },
-    {
-      icon: Bold,
-      label: 'Texte gras',
-      template: '<p><strong>Texte en gras</strong></p>',
-      title: 'Ajouter du texte en gras'
-    },
-    {
-      icon: Italic,
-      label: 'Texte italique',
-      template: '<p><em>Texte en italique</em></p>',
-      title: 'Ajouter du texte en italique'
-    },
-    {
-      icon: List,
-      label: 'Liste à puces',
-      template: '<ul>\n<li>Premier élément</li>\n<li>Deuxième élément</li>\n<li>Troisième élément</li>\n</ul>',
-      title: 'Ajouter une liste à puces'
-    },
-    {
-      icon: List,
-      label: 'Liste numérotée',
-      template: '<ol>\n<li>Premier élément</li>\n<li>Deuxième élément</li>\n<li>Troisième élément</li>\n</ol>',
-      title: 'Ajouter une liste numérotée'
-    },
-    {
-      icon: Quote,
-      label: 'Citation',
-      template: '<blockquote><p>Votre citation ici</p></blockquote>',
-      title: 'Ajouter une citation'
-    },
-    {
-      icon: Link,
-      label: 'Lien',
-      template: '<p><a href="https://example.com">Texte du lien</a></p>',
-      title: 'Ajouter un lien'
+  // Save / restore selection (needed for color picker which steals focus)
+  const saveSelection = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) {
+      savedSelection.current = sel.getRangeAt(0).cloneRange();
     }
-  ];
-
-  const addParagraph = () => {
-    addTemplate('<p>Votre paragraphe ici</p>');
   };
+
+  const restoreSelection = () => {
+    if (savedSelection.current) {
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(savedSelection.current);
+    }
+  };
+
+  // Convert rgb(r,g,b) → #rrggbb
+  const rgbToHex = (rgb) => {
+    const m = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    if (!m) return '#000000';
+    return '#' + m.slice(1).map(n => parseInt(n).toString(16).padStart(2, '0')).join('');
+  };
+
+  // Apply exact pixel font size using insertHTML (fully undo-trackable)
+  const applyFontSize = (px) => {
+    if (!px || px <= 0) return;
+    editorRef.current?.focus();
+    restoreSelection();
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if (range.collapsed) {
+      // No selection: just record the desired size; next typed char will get it
+      // via a zero-width span trick
+      document.execCommand('fontSize', false, '7');
+      const fonts = editorRef.current.querySelectorAll('font[size="7"]');
+      fonts.forEach((font) => {
+        font.removeAttribute('size');
+        font.style.fontSize = px + 'px';
+      });
+    } else {
+      // Wrap selected HTML in a sized span via insertHTML (tracked by undo)
+      const selectedHtml = (() => {
+        const div = document.createElement('div');
+        div.appendChild(range.cloneContents());
+        return div.innerHTML;
+      })();
+      document.execCommand(
+        'insertHTML', false,
+        `<span style="font-size:${px}px">${selectedHtml}</span>`
+      );
+    }
+    emitChange();
+  };
+
+  // Update the color swatch and font size to reflect the color/size at the current cursor position
+  const updateCurrentColorAndFontSize = () => {
+    // Color
+    const raw = document.queryCommandValue('foreColor');
+    if (raw) setCurrentColor(rgbToHex(raw));
+    // Font size
+    {
+      let px = '';
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount > 0) {
+        let node = sel.anchorNode;
+        if (node && node.nodeType === 3) node = node.parentNode;
+        while (node && node !== editorRef.current) {
+          const fs = window.getComputedStyle(node).fontSize;
+          if (fs && fs.endsWith('px')) {
+            px = parseInt(fs, 10);
+            break;
+          }
+          node = node.parentNode;
+        }
+      }
+      setFontSizeValue(px ? String(px) : '');
+    }
+  };
+
+  // Prevent toolbar clicks from stealing focus / losing selection
+  const handleToolbarMouseDown = (e) => e.preventDefault();
+
+  // ── Sub-components ──────────────────────────────────────────────────
+  const ToolBtn = ({ onClick, title, children }) => (
+    <button
+      type="button"
+      title={title}
+      onMouseDown={handleToolbarMouseDown}
+      onClick={onClick}
+      className="p-1.5 rounded text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors"
+    >
+      {children}
+    </button>
+  );
+
+  const Sep = () => <span className="w-px h-5 bg-gray-300 mx-0.5 self-center shrink-0" />;
+
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden">
-      {/* Toolbar */}
-      <div className="bg-gray-50 border-b border-gray-300 p-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-700">Modèles rapides:</span>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setShowPreview(false)}
-              className={`px-3 py-1 text-xs rounded transition-colors ${
-                !showPreview 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <Code className="w-3 h-3 inline mr-1" />
-              Éditer
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowPreview(true)}
-              className={`px-3 py-1 text-xs rounded transition-colors ${
-                showPreview 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <Eye className="w-3 h-3 inline mr-1" />
-              Aperçu
-            </button>
-          </div>
-        </div>
-        
-        {!showPreview && (
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={addParagraph}
-              className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
-            >
-              + Paragraphe
-            </button>
-            
-            {templates.map((template, index) => {
-              const IconComponent = template.icon;
-              return (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => addTemplate(template.template)}
-                  title={template.title}
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
-                >
-                  <IconComponent className="w-3 h-3" />
-                  {template.label}
-                </button>
-              );
-            })}
-          </div>
-        )}
+    <div className="border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+
+      {/* ── Toolbar ─────────────────────────────────────────────────── */}
+      <div className="bg-gray-50 border-b border-gray-200 px-3 py-2 flex flex-wrap items-center gap-1">
+
+        {/* Paragraph / heading style */}
+        <select
+          value={styleValue}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (val) {
+              formatBlock(val);
+              setTimeout(() => setStyleValue(''), 0);
+            }
+          }}
+          className="text-xs border border-gray-300 rounded px-1.5 py-1 text-gray-700 bg-white focus:outline-none"
+          title="Style de paragraphe"
+        >
+          <option value="" disabled>Style</option>
+          <option value="p">Paragraphe</option>
+          <option value="h1">Titre 1</option>
+          <option value="h2">Titre 2</option>
+          <option value="h3">Titre 3</option>
+          <option value="h4">Titre 4</option>
+          <option value="blockquote">Citation</option>
+        </select>
+
+        {/* Font size */}
+        <select
+          value={fontSizeValue}
+          onMouseDown={saveSelection}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (val) {
+              applyFontSize(Number(val));
+              setTimeout(() => setFontSizeValue(''), 0);
+            }
+          }}
+          className="text-xs border border-gray-300 rounded px-1.5 py-1 text-gray-700 bg-white focus:outline-none"
+          title="Taille de police (px)"
+        >
+          <option value="" disabled>Taille</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="24">24</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="48">48</option>
+          <option value="64">64</option>
+        </select>
+
+        {/* Text color */}
+        <label
+          title="Couleur du texte"
+          className="relative flex items-center px-1.5 h-7 rounded cursor-pointer text-gray-600 hover:bg-gray-200 transition-colors"
+          onMouseDown={saveSelection}
+        >
+          {/* A + live color swatch */}
+          <span className="flex flex-col items-center leading-none select-none">
+            <span className="text-sm font-bold font-serif" style={{ color: currentColor }}>A</span>
+            <span className="w-4 h-1.5 rounded-sm mt-0.5 border border-gray-300" style={{ backgroundColor: currentColor }} />
+          </span>
+          <input
+            ref={colorInputRef}
+            type="color"
+            value={currentColor}
+            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+            onChange={(e) => {
+              setCurrentColor(e.target.value);
+              editorRef.current?.focus();
+              restoreSelection();
+              exec('foreColor', e.target.value);
+            }}
+          />
+        </label>
+
+        <Sep />
+
+        <ToolBtn onClick={() => exec('bold')} title="Gras (Ctrl+B)">
+          <Bold className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('italic')} title="Italique (Ctrl+I)">
+          <Italic className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('underline')} title="Souligné (Ctrl+U)">
+          <Underline className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('strikeThrough')} title="Barré">
+          <Strikethrough className="w-4 h-4" />
+        </ToolBtn>
+
+        <Sep />
+
+        <ToolBtn onClick={() => exec('justifyLeft')} title="Aligner à gauche">
+          <AlignLeft className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('justifyCenter')} title="Centrer">
+          <AlignCenter className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('justifyRight')} title="Aligner à droite">
+          <AlignRight className="w-4 h-4" />
+        </ToolBtn>
+
+        <Sep />
+
+        <ToolBtn onClick={() => exec('insertUnorderedList')} title="Liste à puces">
+          <List className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('insertOrderedList')} title="Liste numérotée">
+          <ListOrdered className="w-4 h-4" />
+        </ToolBtn>
+
+        <Sep />
+
+        <ToolBtn onClick={insertLink} title="Insérer un lien">
+          <Link className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={insertHR} title="Séparateur horizontal">
+          <Minus className="w-4 h-4" />
+        </ToolBtn>
+
+        <Sep />
+
+        <ToolBtn onClick={() => exec('undo')} title="Annuler (Ctrl+Z)">
+          <Undo className="w-4 h-4" />
+        </ToolBtn>
+        <ToolBtn onClick={() => exec('redo')} title="Rétablir (Ctrl+Y)">
+          <Redo className="w-4 h-4" />
+        </ToolBtn>
       </div>
 
-      {/* Content Area */}
-      {showPreview ? (
-        /* Preview */
-        <div className="min-h-[400px] p-4 bg-white">
-          <div 
-            className={proseClasses}
-            dangerouslySetInnerHTML={{ __html: content || '<p class="text-gray-400">Aucun contenu à prévisualiser...</p>' }}
-          />
-        </div>
-      ) : (
-        /* Editor */
-        <textarea
-          value={content}
-          onChange={handleContentChange}
-          placeholder={placeholder || "Rédigez votre contenu ici...\n\nUtilisez les boutons ci-dessus pour ajouter des éléments formatés, ou tapez directement du HTML."}
-          className="w-full min-h-[400px] p-4 resize-none focus:outline-none border-none bg-white text-gray-900"
-          style={{
-            fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace',
-            fontSize: '14px',
-            lineHeight: '1.6',
-            direction: 'ltr'
-          }}
-        />
-      )}
+      {/* ── Editable area ───────────────────────────────────────────── */}
+      <div
+        ref={editorRef}
+        contentEditable
+        suppressContentEditableWarning
+        onInput={emitChange}
+        onBlur={emitChange}
+        onMouseUp={updateCurrentColorAndFontSize}
+        onKeyUp={updateCurrentColorAndFontSize}
+        data-placeholder={placeholder || 'Commencez à écrire votre article ici…'}
+        className="min-h-[380px] max-h-[640px] overflow-y-auto p-5 outline-none bg-white
+          prose prose-sm sm:prose max-w-none
+          [&:empty]:before:content-[attr(data-placeholder)]
+          [&:empty]:before:text-gray-400
+          [&:empty]:before:pointer-events-none"
+        style={{ lineHeight: '1.75' }}
+      />
 
-      {/* Help Text */}
-      <div className="bg-gray-50 border-t border-gray-300 px-4 py-2">
-        <div className="text-xs text-gray-500">
-          {showPreview ? (
-            <p>👁️ <strong>Mode Aperçu:</strong> Voici comment votre contenu apparaîtra aux visiteurs. Cliquez sur "Éditer" pour modifier.</p>
-          ) : (
-            <div>
-              <p className="mb-1">✏️ <strong>Mode Édition:</strong></p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>Utilisez les boutons pour insérer des éléments formatés</li>
-                <li>Modifiez le texte dans les balises HTML après insertion</li>
-                <li>Cliquez sur "Aperçu" pour voir le résultat final</li>
-              </ul>
-            </div>
-          )}
-        </div>
+      {/* ── Footer hint ─────────────────────────────────────────────── */}
+      <div className="bg-gray-50 border-t border-gray-200 px-3 py-1.5 flex items-center gap-2 text-xs text-gray-400">
+        <Quote className="w-3 h-3 shrink-0" />
+        <span>Vous pouvez coller du texte depuis Word — la mise en forme sera conservée.</span>
       </div>
     </div>
   );

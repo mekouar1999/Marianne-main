@@ -359,6 +359,8 @@ const About = () => {
                   <a
                     href={director.linkedin}
                     className="inline-flex items-center justify-center w-10 h-10 bg-customs-dark text-white rounded-full hover:bg-customs-medium transition-colors mt-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Linkedin className="w-5 h-5" />
                   </a>
@@ -380,24 +382,7 @@ const About = () => {
                     <p className="text-justify">{director.expertise}</p>
                   </div>
 
-                  <div className="mt-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">
-                      {t.misc.servicesOffered}
-                    </h4>
-                    <div className="grid grid-cols-1 gap-2">
-                      {director.services.map((service, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-2"
-                        >
-                          <div className="w-2 h-2 bg-customs-dark rounded-full"></div>
-                          <span className="text-sm text-gray-600">
-                            {service}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </motion.div>

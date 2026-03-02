@@ -17,8 +17,8 @@ const ValuePropositions = () => {
       description: t.hero.section1.description,
       ctaText: t.hero.section1.cta,
       ctaLink: "/consulting",
-      gradient: "from-blue-950 to-blue-800",
-      accentColor: "cyan-400",
+      gradient: "from-[#00346D] to-[#0a5a9e]",
+      btnGradient: "from-[#0FC2F8] to-[#00346D]",
     },
     {
       icon: BookOpen,
@@ -26,8 +26,8 @@ const ValuePropositions = () => {
       description: t.hero.section2.description,
       ctaText: t.hero.section2.cta,
       ctaLink: "/formation",
-      gradient: "from-slate-900 to-slate-700",
-      accentColor: "blue-400",
+      gradient: "from-[#00346D] to-[#0FC2F8]",
+      btnGradient: "from-[#00346D] to-[#0FC2F8]",
     },
     {
       icon: TrendingUp,
@@ -35,8 +35,8 @@ const ValuePropositions = () => {
       description: t.hero.section3.description,
       ctaText: t.hero.section3.cta,
       ctaLink: "/consulting",
-      gradient: "from-blue-900 to-indigo-800",
-      accentColor: "sky-400",
+      gradient: "from-[#0FC2F8] to-[#00346D]",
+      btnGradient: "from-[#0a5a9e] to-[#00346D]",
     },
   ];
 
@@ -134,7 +134,7 @@ const ValuePropositions = () => {
                   {/* CTA Button */}
                   <div className="mt-auto">
                     <Link href={proposition.ctaLink}>
-                      <MagneticButton className="w-full bg-gradient-to-r from-blue-950 to-blue-900 text-white py-3 px-6 rounded-full font-semibold flex items-center justify-center space-x-2 shimmer-btn">
+                      <MagneticButton className={`w-full bg-gradient-to-r ${proposition.btnGradient} text-white py-3 px-6 rounded-full font-semibold flex items-center justify-center space-x-2 shimmer-btn`}>
                         <span className="text-center">{proposition.ctaText}</span>
                         <motion.div
                           animate={{ x: [0, 5, 0] }}

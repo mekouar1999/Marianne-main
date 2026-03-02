@@ -60,18 +60,14 @@ const Home = () => {
       {/* Hero Slider Section */}
       <HeroSlider />
 
-      {/* Services Section */}
-      <div>
-        <Services />
-      </div>
-
-      {/* Stats Section */}
-      <div className="mt-8 md:mt-12 lg:mt-16">
-        <Stats />
-      </div>
-
+      {/* Notre expertise — first */}
       <div>
         <ValuePropositions />
+      </div>
+
+      {/* Nos services — second */}
+      <div>
+        <Services />
       </div>
 
       {/* Trust Indicators */}
@@ -133,6 +129,11 @@ const Home = () => {
       {/* Testimonials */}
       <div>
         <TestimonialsSection />
+      </div>
+
+      {/* Stats — bottom of page */}
+      <div>
+        <Stats />
       </div>
 
       {/* Final CTA */}

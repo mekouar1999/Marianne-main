@@ -92,7 +92,6 @@ const Consulting = () => {
           "Réponse sous 2h en urgence",
           "Experts dédiés par secteur",
           "Support multilingue",
-          "Assistance 24/7 pour les cas critiques",
         ],
         color: "from-green-500 to-green-600",
       },
@@ -130,7 +129,6 @@ const Consulting = () => {
           "Response within 2h for emergencies",
           "Dedicated experts by sector",
           "Multilingual support",
-          "24/7 assistance for critical cases",
         ],
         color: "from-green-500 to-green-600",
       },
@@ -297,7 +295,7 @@ const Consulting = () => {
             transition={{ duration: 0.7, delay: 0.25 }}
           />
           <motion.p
-            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic"
+            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic whitespace-pre-line"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -346,49 +344,36 @@ const Consulting = () => {
         </div>
       </section>
 
-      {/* Consulting Description Section */}
-      <section className="py-24 bg-mesh relative overflow-hidden">
-        {/* Pulsing orbs */}
+      {/* Consulting Statement Section */}
+      <section className="py-24 bg-gray-950 relative overflow-hidden">
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        {/* Glow */}
         <motion.div
-          className="absolute -left-24 top-1/2 -translate-y-1/2 w-64 h-64 bg-blue-200/25 rounded-full blur-3xl"
-          animate={{ x: [0, 20, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyan-400/5 rounded-full blur-3xl"
+          animate={{ opacity: [0.05, 0.12, 0.05] }}
+          transition={{ duration: 5, repeat: Infinity }}
         />
-        <motion.div
-          className="absolute -right-24 top-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-200/20 rounded-full blur-3xl"
-          animate={{ x: [0, -20, 0], scale: [1.1, 1, 1.1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-        />
-        {/* Removed large decorative quote mark */}
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Top accent */}
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
-            className="w-16 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full mx-auto mb-10"
+            className="w-12 h-0.5 bg-cyan-400 mb-12"
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           />
-
           <motion.p
-            className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light italic text-center"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
           >
-            {t.consulting.hero.description}
+            {language === 'fr'
+              ? <>Votre partenaire stratégique pour <span className="text-cyan-400">sécuriser</span> et <span className="text-cyan-400">simplifier</span> vos échanges internationaux.</>            
+              : <>Your strategic partner to <span className="text-cyan-400">secure</span> and <span className="text-cyan-400">simplify</span> your international trade.</>}
           </motion.p>
-
-          {/* Bottom accent */}
-          <motion.div
-            className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-950 rounded-full mx-auto mt-10"
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          />
         </div>
       </section>
 
