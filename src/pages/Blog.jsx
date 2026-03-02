@@ -110,14 +110,7 @@ const Blog = () => {
           <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 melissa2 text-white leading-tight">
             <TextReveal text={t.blog.title} delay={0.1} />
           </div>
-          <motion.p
-            className="text-base sm:text-lg md:text-xl text-blue-100 max-w-4xl leading-relaxed"
-            initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {t.blog.subtitle}
-          </motion.p>
+
         </div>
       </section>
 
@@ -151,7 +144,7 @@ const Blog = () => {
                     </option>
                   ))}
                 </select>
-                <div className="absolute inset-y-0 right-6 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                   <ChevronDown className="w-4 h-4 text-gray-400" />
                 </div>
               </div>

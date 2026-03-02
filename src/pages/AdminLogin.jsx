@@ -72,8 +72,8 @@ const AdminLogin = () => {
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             />
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Admin Login</h1>
-            <p className="text-gray-600">Access the blog administration panel</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Connexion Admin</h1>
+            <p className="text-gray-600">Accédez au panneau d'administration du blog</p>
           </div>
 
           {/* Error Message */}
@@ -92,7 +92,7 @@ const AdminLogin = () => {
             {/* Username Field */}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Username
+                Identifiant
               </label>
               <div className="relative">
                 <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -102,7 +102,7 @@ const AdminLogin = () => {
                   value={credentials.username}
                   onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                   className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-customs-dark focus:border-customs-dark outline-none transition bg-gray-50 hover:bg-white"
-                  placeholder="Enter your username"
+                  placeholder="Entrez votre identifiant"
                   required
                   autoFocus
                 />
@@ -112,7 +112,7 @@ const AdminLogin = () => {
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
+                Mot de passe
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -122,7 +122,7 @@ const AdminLogin = () => {
                   value={credentials.password}
                   onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                   className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-customs-dark focus:border-customs-dark outline-none transition bg-gray-50 hover:bg-white"
-                  placeholder="Enter your password"
+                  placeholder="Entrez votre mot de passe"
                   required
                 />
                 <button
@@ -149,10 +149,10 @@ const AdminLogin = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Signing in...
+                  Connexion en cours...
                 </span>
               ) : (
-                'Sign In'
+                'Se connecter'
               )}
             </motion.button>
           </form>
@@ -164,14 +164,14 @@ const AdminLogin = () => {
               className="inline-flex items-center gap-2 text-gray-600 hover:text-customs-dark transition-colors font-medium group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Return to site
+              Retour au site
             </a>
           </div>
         </div>
 
         {/* Footer Note */}
         <p className="text-center text-sm text-gray-500 mt-6">
-          Secure admin access
+          Accès administrateur sécurisé
         </p>
       </motion.div>
     </div>

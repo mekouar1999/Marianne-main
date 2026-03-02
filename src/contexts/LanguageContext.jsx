@@ -325,7 +325,7 @@ const translations = {
       privacy: "Politique de confidentialité",
       cookies: "Cookies",
       info: {
-        phone: "06.02.01.53.69",
+        phone: "+33(0)6.02.01.53.69",
         email: "martusiochenot@customs-solutions.fr",
         location: "France et Europe",
         linkedin:
@@ -758,7 +758,7 @@ const translations = {
       privacy: "Privacy Policy",
       cookies: "Cookies",
       info: {
-        phone: "06.02.01.53.69",
+        phone: "+33 6.02.01.53.69",
         email: "martusiochenot@customs-solutions.fr",
         location: "France and Europe",
         linkedin:

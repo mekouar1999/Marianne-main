@@ -240,7 +240,7 @@ const About = () => {
                 viewport={{ once: true }}
               >
                 {/* Header */}
-                <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
+                <div className="text-white p-8 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #00346D, #0FC2F8)' }}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
                   <h3 className="text-lg font-bold leading-tight mb-2 relative z-10">
                     {item.title}
@@ -298,7 +298,7 @@ const About = () => {
                 viewport={{ once: true }}
               >
                 {/* Header */}
-                <div className="bg-gradient-to-br from-blue-950 to-blue-800 text-white p-8 text-center relative overflow-hidden">
+                <div className="text-white p-8 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #00346D, #0FC2F8)' }}>
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
                   <h3 className="text-lg font-bold leading-tight relative z-10">
                     {pillar.title}

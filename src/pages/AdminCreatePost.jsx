@@ -8,7 +8,8 @@ import {
   Eye,
   Image,
   X,
-  Upload
+  Upload,
+  ChevronDown
 } from 'lucide-react';
 import BasicTextEditor from '../components/BasicTextEditor';
 
@@ -177,7 +178,16 @@ const AdminCreatePost = () => {
                   name="language"
                   value={formData.language}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent bg-white"
+                  style={{
+                    appearance: 'none',
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 2.5rem center',
+                    paddingRight: '4rem',
+                  }}
                 >
                   <option value="fr">Français</option>
                   <option value="en">Anglais</option>
@@ -281,7 +291,7 @@ const AdminCreatePost = () => {
                     onChange={handleInputChange}
                     className="rounded border-gray-300 text-blue-950 focus:ring-blue-950"
                   />
-                  <span className="text-sm font-medium text-gray-700">Publier immédiatement</span>
+                  <span className="text-sm font-medium text-gray-700">Publier maintenant</span>
                 </label>
               </div>
 
@@ -298,7 +308,7 @@ const AdminCreatePost = () => {
                   className="inline-flex items-center space-x-2 bg-blue-950 text-white px-6 py-2 rounded-lg hover:bg-blue-900 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <Save className="w-4 h-4" />
-                  <span>{loading ? 'Création...' : 'Créer l\'Article'}</span>
+                  <span>{loading ? 'Création...' : 'Créer'}</span>
                 </button>
               </div>
             </div>

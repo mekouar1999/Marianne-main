@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Shield, BookOpen, TrendingUp } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "./TextReveal";
-import MagneticButton from "./MagneticButton";
 
 const ValuePropositions = () => {
   const { t } = useLanguage();
@@ -134,15 +133,10 @@ const ValuePropositions = () => {
                   {/* CTA Button */}
                   <div className="mt-auto">
                     <Link href={proposition.ctaLink}>
-                      <MagneticButton className={`w-full bg-gradient-to-r ${proposition.btnGradient} text-white py-3 px-6 rounded-full font-semibold flex items-center justify-center space-x-2 shimmer-btn`}>
-                        <span className="text-center">{proposition.ctaText}</span>
-                        <motion.div
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          <ArrowRight className="w-5 h-5" />
-                        </motion.div>
-                      </MagneticButton>
+                      <button className={`w-full bg-gradient-to-r ${proposition.btnGradient} text-white py-3 px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition-opacity duration-200 hover:opacity-85`}>
+                        <span>{proposition.ctaText}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
                     </Link>
                   </div>
                 </div>

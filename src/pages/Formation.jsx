@@ -177,7 +177,8 @@ const Formation = () => {
             transition={{ duration: 0.7, delay: 0.25 }}
           />
           <motion.p
-            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic"
+            className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light italic whitespace-pre-line"
+            style={{ textAlign: 'center' }}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -245,22 +246,10 @@ const Formation = () => {
               {t.formation.hero.title}
             </h2>
             <div className="text-lg text-gray-700 leading-relaxed space-y-6 max-w-3xl mx-auto">
-              <p 
-                className="whitespace-pre-line text-justify md:text-left"
-                style={{ 
-                  textJustify: 'inter-word',
-                  hyphens: 'auto'
-                }}
-              >
+              <p className="whitespace-pre-line" style={{ textAlign: 'left' }}>
                 {t.formation.hero.subtitle}
               </p>
-              <p 
-                className="text-justify md:text-left"
-                style={{ 
-                  textJustify: 'inter-word',
-                  hyphens: 'auto'
-                }}
-              >
+              <p style={{ textAlign: 'left' }}>
                 {t.formation.hero.description}
               </p>
             </div>

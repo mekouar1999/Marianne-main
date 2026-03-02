@@ -151,20 +151,7 @@ const Contact = () => {
           >
             {t.contact.title}
           </motion.h1>
-          {t.contact.subtitle ? (
-          <motion.p
-            className="text-lg md:text-xl text-blue-100 max-w-2xl whitespace-pre-line"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 1,
-              delay: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
-          >
-            {t.contact.subtitle}
-          </motion.p>
-          ) : null}
+
           
         </div>
       </section>
@@ -367,7 +354,7 @@ const Contact = () => {
                 <motion.button
                   type="submit"
                   disabled={loading}
-                  className="contact-submit-btn w-full py-4 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  className="contact-submit-btn w-full py-4 rounded-full font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                 >

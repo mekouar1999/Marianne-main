@@ -363,17 +363,29 @@ const Consulting = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           />
-          <motion.p
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true }}
-          >
-            {language === 'fr'
-              ? <>Votre partenaire stratégique pour <span className="text-cyan-400">sécuriser</span> et <span className="text-cyan-400">simplifier</span> vos échanges internationaux.</>            
-              : <>Your strategic partner to <span className="text-cyan-400">secure</span> and <span className="text-cyan-400">simplify</span> your international trade.</>}
-          </motion.p>
+          {language === 'fr' ? (
+            <motion.p
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight"
+              style={{ textAlign: 'left' }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
+            >
+              <>Votre partenaire stratégique pour <span className="text-cyan-400">sécuriser</span> et <span className="text-cyan-400">simplifier</span> vos échanges internationaux.</>
+            </motion.p>
+          ) : (
+            <motion.p
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight max-w-4xl"
+              style={{ textAlign: 'left' }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
+            >
+              <>Your strategic partner to <span className="text-cyan-400">secure</span> and <span className="text-cyan-400">simplify</span> your international trade.</>
+            </motion.p>
+          )}
         </div>
       </section>
 
