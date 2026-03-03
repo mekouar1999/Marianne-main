@@ -117,7 +117,7 @@ const Experience = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         {/* Animated orbs */}
         <motion.div
@@ -139,7 +139,7 @@ const Experience = () => {
         />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
             <TextReveal text={t.experience.title} delay={0.1} />
           </div>
 

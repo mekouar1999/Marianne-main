@@ -249,7 +249,7 @@ const Consulting = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 pb-10 sm:pb-12 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         <motion.div
           className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.2, 0.05] }}
@@ -365,25 +365,25 @@ const Consulting = () => {
           />
           {language === 'fr' ? (
             <motion.p
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight"
-              style={{ textAlign: 'left' }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight"
+              style={{ textAlign: 'left', lineHeight: '1.4' }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
             >
-              <>Votre partenaire stratégique pour <span className="text-cyan-400">sécuriser</span> et <span className="text-cyan-400">simplifier</span> vos échanges internationaux.</>
+              <>Votre partenaire stratégique pour <span className="text-blue-400">sécuriser</span> et <span className="text-blue-400">simplifier</span> vos échanges internationaux.</>
             </motion.p>
           ) : (
             <motion.p
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight max-w-4xl"
-              style={{ textAlign: 'left' }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight max-w-4xl"
+              style={{ textAlign: 'left', lineHeight: '1.4' }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
             >
-              <>Your strategic partner to <span className="text-cyan-400">secure</span> and <span className="text-cyan-400">simplify</span> your international trade.</>
+              <>Your strategic partner to <span className="text-blue-400">secure</span> and <span className="text-blue-400">simplify</span> your international trade.</>
             </motion.p>
           )}
         </div>

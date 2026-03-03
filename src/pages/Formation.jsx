@@ -246,10 +246,10 @@ const Formation = () => {
               {t.formation.hero.title}
             </h2>
             <div className="text-lg text-gray-700 leading-relaxed space-y-6 max-w-3xl mx-auto">
-              <p className="whitespace-pre-line" style={{ textAlign: 'left' }}>
+              <p className="whitespace-pre-line" style={{ textAlign: 'center' }}>
                 {t.formation.hero.subtitle}
               </p>
-              <p style={{ textAlign: 'left' }}>
+              <p style={{ textAlign: 'center' }}>
                 {t.formation.hero.description}
               </p>
             </div>
@@ -434,7 +434,7 @@ const Formation = () => {
                       onChange={handleChange}
                       className="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 appearance-none bg-white"
                     >
-                      <option value="">{t.common.filter}...</option>
+                      <option value=""></option>
                       {trainings.map((training) => (
                         <option key={training.id} value={training.title}>
                           {training.title}

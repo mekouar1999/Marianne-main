@@ -5,6 +5,7 @@ import { MapPin, Phone, Mail, CheckCircle } from "lucide-react";
 import ObfuscatedEmail from "../components/ObfuscatedEmail";
 import { useLanguage } from "../contexts/LanguageContext";
 import LoadingSpinner from "../components/LoadingSpinner";
+import TextReveal from "../components/TextReveal";
 
 const Contact = () => {
   const { t, language } = useLanguage();
@@ -132,27 +133,15 @@ const Contact = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/5 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 melissa2 text-white"
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              type: "spring",
-              stiffness: 100
-            }}
-          >
-            {t.contact.title}
-          </motion.h1>
-
-          
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
+            <TextReveal text={t.contact.title} delay={0.1} />
+          </div>
         </div>
       </section>
 

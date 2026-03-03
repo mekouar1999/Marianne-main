@@ -215,7 +215,7 @@ const AdminDashboard = () => {
                 className="inline-flex items-center space-x-2 bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors"
               >
                 <Plus className="w-4 h-4" />
-                <span>Créer le Premier Article</span>
+                <span>Créer le premier article</span>
               </Link>
             </div>
           ) : (
@@ -279,7 +279,7 @@ const AdminDashboard = () => {
                             <Link
                               href={`/blog/${post.slug}`}
                               className="text-blue-600 hover:text-blue-900 p-1"
-                              title="Voir l'Article"
+                              title="Voir l'article"
                             >
                               <Eye className="w-4 h-4" />
                             </Link>
@@ -287,14 +287,14 @@ const AdminDashboard = () => {
                           <Link
                             href={`/admin/edit-post/${post._id}`}
                             className="text-indigo-600 hover:text-indigo-900 p-1"
-                            title="Modifier l'Article"
+                            title="Modifier l'article"
                           >
                             <Edit className="w-4 h-4" />
                           </Link>
                           <button
                             onClick={() => handleDelete(post._id)}
                             className="text-red-600 hover:text-red-900 p-1"
-                            title="Supprimer l'Article"
+                            title="Supprimer l'article"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>

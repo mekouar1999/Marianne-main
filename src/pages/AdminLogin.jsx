@@ -73,7 +73,7 @@ const AdminLogin = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             />
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Connexion Admin</h1>
-            <p className="text-gray-600">Accédez au panneau d'administration du blog</p>
+            <p className="text-gray-600">Accédez à votre espace de gestion</p>
           </div>
 
           {/* Error Message */}

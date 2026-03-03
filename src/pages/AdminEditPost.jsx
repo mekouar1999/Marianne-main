@@ -8,7 +8,8 @@ import {
   Eye,
   Image,
   X,
-  Upload
+  Upload,
+  ChevronDown
 } from 'lucide-react';
 import BasicTextEditor from '../components/BasicTextEditor';
 
@@ -151,10 +152,10 @@ const AdminEditPost = () => {
                 className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>Retour au Tableau de Bord</span>
+                <span>Retour au tableau de bord</span>
               </Link>
               <div className="h-6 w-px bg-gray-300"></div>
-              <h1 className="text-2xl font-bold text-gray-900">Modifier l'Article</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Modifier l'article</h1>
             </div>
           </div>
         </div>
@@ -170,7 +171,7 @@ const AdminEditPost = () => {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Détails de l'Article</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">Détails de l'article</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
@@ -193,16 +194,21 @@ const AdminEditPost = () => {
                 <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-2">
                   Langue
                 </label>
-                <select
-                  id="language"
-                  name="language"
-                  value={formData.language}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent"
-                >
-                  <option value="fr">Français</option>
-                  <option value="en">Anglais</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="language"
+                    name="language"
+                    value={formData.language}
+                    onChange={handleInputChange}
+                    className="w-full px-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-950 focus:border-transparent appearance-none bg-white"
+                  >
+                    <option value="fr">Français</option>
+                    <option value="en">Anglais</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                    <ChevronDown className="w-4 h-4 text-gray-400" />
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -241,7 +247,7 @@ const AdminEditPost = () => {
 
           {/* Image Upload */}
           <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Image à la Une</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">Image à la une</h2>
             
             {!imagePreview ? (
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
@@ -276,7 +282,7 @@ const AdminEditPost = () => {
                   <X className="w-4 h-4" />
                 </button>
                 <label htmlFor="image" className="absolute bottom-2 right-2 bg-blue-950 text-white rounded-lg px-3 py-1 text-sm cursor-pointer hover:bg-blue-900">
-                  Changer
+                  Remplacer
                 </label>
                 <input
                   type="file"
