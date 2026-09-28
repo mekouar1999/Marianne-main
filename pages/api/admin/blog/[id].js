@@ -1,9 +1,7 @@
 import dbConnect from '../../../../lib/mongodb';
 import { BlogPost, Admin } from '../../../../lib/models';
 import multer from 'multer';
-import path from 'path';
 import { promisify } from 'util';
-import fs from 'fs';
 
 // Authentication middleware
 const requireAuth = async (req) => {
@@ -21,17 +19,8 @@ const requireAuth = async (req) => {
   return admin;
 };
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'blog-' + uniqueSuffix + path.extname(file.originalname))
-  }
-});
+// Use memory storage: the Vercel filesystem is read-only, images are stored in MongoDB
+const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage: storage,
@@ -76,14 +65,6 @@ export default async function handler(req, res) {
       const post = await BlogPost.findById(id);
       if (!post) {
         return res.status(404).json({ success: false, message: 'Article non trouvé' });
-      }
-      
-      // Delete image file if it's not the default
-      if (post.image && post.image !== '/uploads/default-blog.jpg' && !post.image.startsWith('http')) {
-        const imagePath = path.join('./public', post.image);
-        if (fs.existsSync(imagePath)) {
-          fs.unlinkSync(imagePath);
-        }
       }
       
       await BlogPost.findByIdAndDelete(id);
@@ -140,14 +121,14 @@ export default async function handler(req, res) {
       
       // Handle image update
       if (req.file) {
-        // Delete old image if it's not the default
-        if (existingPost.image && existingPost.image !== '/uploads/default-blog.jpg' && !existingPost.image.startsWith('http')) {
-          const oldImagePath = path.join('./public', existingPost.image);
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
-          }
-        }
-        updateData.image = `/uploads/${req.file.filename}`;
+        const base64Data = req.file.buffer.toString('base64');
+        updateData.imageData = {
+          data: base64Data,
+          contentType: req.file.mimetype,
+          filename: req.file.originalname,
+          size: req.file.size
+        };
+        updateData.image = `data:${req.file.mimetype};base64,${base64Data}`;
       }
       
       const updatedPost = await BlogPost.findByIdAndUpdate(id, updateData, { new: true });
