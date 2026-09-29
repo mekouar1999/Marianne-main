@@ -16,8 +16,8 @@ const ValuePropositions = () => {
       description: t.hero.section1.description,
       ctaText: t.hero.section1.cta,
       ctaLink: "/consulting",
-      gradient: "from-[#00346D] to-[#0a5a9e]",
-      btnGradient: "from-[#0FC2F8] to-[#00346D]",
+      gradient: "from-[#002B54] via-[#005596] to-[#0FC2F8]",
+      btnGradient: "from-[#002B54] to-[#0FC2F8]",
     },
     {
       icon: BookOpen,
@@ -25,8 +25,8 @@ const ValuePropositions = () => {
       description: t.hero.section2.description,
       ctaText: t.hero.section2.cta,
       ctaLink: "/formation",
-      gradient: "from-[#00346D] to-[#0FC2F8]",
-      btnGradient: "from-[#00346D] to-[#0FC2F8]",
+      gradient: "from-[#002B54] via-[#005596] to-[#0FC2F8]",
+      btnGradient: "from-[#002B54] to-[#0FC2F8]",
     },
     {
       icon: TrendingUp,
@@ -34,8 +34,8 @@ const ValuePropositions = () => {
       description: t.hero.section3.description,
       ctaText: t.hero.section3.cta,
       ctaLink: "/consulting",
-      gradient: "from-[#0FC2F8] to-[#00346D]",
-      btnGradient: "from-[#0a5a9e] to-[#00346D]",
+      gradient: "from-[#002B54] via-[#005596] to-[#0FC2F8]",
+      btnGradient: "from-[#002B54] to-[#0FC2F8]",
     },
   ];
 
@@ -107,9 +107,9 @@ const ValuePropositions = () => {
             >
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-400 overflow-hidden flex flex-col h-full border border-gray-100/80 hover:border-blue-200/50">
                 {/* Header with gradient */}
-                <div className={`bg-gradient-to-br ${proposition.gradient} text-white px-8 py-6 text-center relative overflow-hidden min-h-[88px] flex items-center justify-center`}>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+                <div className={`bg-gradient-to-r ${proposition.gradient} text-white px-8 py-6 text-center relative overflow-hidden min-h-[88px] flex items-center justify-center`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
                   <h3 className="text-base font-bold leading-tight relative z-10">
                     {proposition.title}
                   </h3>

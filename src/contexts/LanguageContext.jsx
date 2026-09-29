@@ -318,7 +318,7 @@ const translations = {
     footer: {
       title: "Customs Engineering Solutions",
       description:
-        "Solutions personnalisées en gestion douanière et commerce international.",
+        "Solutions personnalisées en gestion\ndouanière et commerce international.",
       links: "Liens rapides",
       contact: "Contact",
       legal: "Mentions légales",
