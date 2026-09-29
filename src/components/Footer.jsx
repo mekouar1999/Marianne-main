@@ -73,11 +73,15 @@ const Footer = () => {
               <div className="mb-4">
                 <Link href="/">
                   <span className="inline-block cursor-pointer">
-                    <Logo invert={true} />
+                    <img
+                      src="/Content/p.png"
+                      alt="Customs Engineering Solutions"
+                      className="h-14 sm:h-16 w-auto max-w-[220px] object-contain"
+                    />
                   </span>
                 </Link>
               </div>
-              <p className="text-gray-400 mb-6 text-left">
+              <p className="text-gray-400 mb-6 text-left whitespace-pre-line">
                 {t.footer.description}
               </p>
             </div>

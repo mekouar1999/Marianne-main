@@ -117,32 +117,34 @@ const Experience = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        {/* Animated orbs */}
+      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#040E25] via-[#002B54] to-[#005596] relative overflow-hidden">
+        {/* Discrete circular overlay shapes for depth */}
+        <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full border border-white/10 bg-white/5 pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full border border-white/5 bg-white/[0.02] pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none" />
+
+        {/* Animated glowing orb */}
         <motion.div
-          className="absolute top-16 right-20 w-80 h-80 rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(96,165,250,0.18) 0%, transparent 70%)" }}
-          animate={{ scale: [1, 1.25, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/3 -translate-y-1/2 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.25, 1], opacity: [0.1, 0.25, 0.1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
+
+        {/* Decorative rotating circle contour */}
         <motion.div
-          className="absolute bottom-10 left-10 w-60 h-60 rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(34,211,238,0.14) 0%, transparent 70%)" }}
-          animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/5"
+          className="absolute right-12 top-1/2 -translate-y-1/2 w-52 h-52 border border-cyan-300/15 rounded-full pointer-events-none"
           animate={{ rotate: 360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
+
+        {/* Subtle grid pattern background */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
+        {/* Title Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight flex justify-center items-center">
             <TextReveal text={t.experience.title} delay={0.1} />
           </div>
-
         </div>
       </section>
 
@@ -254,7 +256,7 @@ const Experience = () => {
                 transition={{ duration: 2.5, repeat: Infinity }}
               />
               <Link href="/contact">
-                <MagneticButton className="bg-gradient-to-r from-blue-950 to-blue-900 text-white px-8 py-4 rounded-full font-semibold inline-flex items-center space-x-2 shimmer-btn btn-glow">
+                <MagneticButton className="bg-gradient-to-r from-[#002B54] to-[#0FC2F8] text-white px-8 py-4 rounded-full font-semibold inline-flex items-center space-x-2 shimmer-btn btn-glow hover:opacity-95 hover:shadow-lg hover:shadow-cyan-500/25">
                   <span>{t.misc.requestConsultation}</span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}

@@ -249,26 +249,32 @@ const Consulting = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-32 pb-10 md:pt-40 md:pb-12 bg-modern-blue relative overflow-hidden">
+      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#040E25] via-[#002B54] to-[#005596] relative overflow-hidden">
+        {/* Discrete circular overlay shapes for depth */}
+        <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full border border-white/10 bg-white/5 pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full border border-white/5 bg-white/[0.02] pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 h-64 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none" />
+
+        {/* Animated glowing orb */}
         <motion.div
-          className="absolute top-10 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.4, 1], opacity: [0.05, 0.2, 0.05] }}
-          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute top-1/2 left-1/3 -translate-y-1/2 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.25, 1], opacity: [0.1, 0.25, 0.1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
+
+        {/* Decorative rotating circle contour */}
         <motion.div
-          className="absolute bottom-0 left-1/3 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 1 }}
-        />
-        <motion.div
-          className="absolute right-10 top-10 w-40 h-40 border border-cyan-400/10 rounded-full"
+          className="absolute right-12 top-1/2 -translate-y-1/2 w-52 h-52 border border-cyan-300/15 rounded-full pointer-events-none"
           animate={{ rotate: 360 }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+
+        {/* Subtle grid pattern background */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight">
+        {/* Title Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight flex justify-center items-center">
             <TextReveal text={t.consulting.hero.title} delay={0.1} />
           </div>
         </div>

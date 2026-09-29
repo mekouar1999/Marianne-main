@@ -66,7 +66,7 @@ const HeroSlider = () => {
         transition={{ duration: 20, ease: "linear" }}
       >
         <img
-          src="/Content/PREMIERE PHOTO PAGE D'ACCUEIL.jpg"
+          src="/Content/pp.png"
           alt={t.hero.title}
           className="w-full h-full object-cover"
         />
