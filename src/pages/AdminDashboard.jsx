@@ -15,12 +15,19 @@ import {
   ArrowRight
 } from 'lucide-react';
 import AdminSidebar from '../components/AdminSidebar';
+import ConfirmModal from '../components/ConfirmModal';
+import { notify } from '../components/AdminToast';
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [admin, setAdmin] = useState(null);
+  const [confirmState, setConfirmState] = useState(null);
   const router = useRouter();
+
+  const askConfirm = (options) => setConfirmState(options);
+  const closeConfirm = () => setConfirmState(null);
+  const flash = (type, title, description) => notify(type, title, description);
 
   useEffect(() => {
     checkAuth();
@@ -76,27 +83,46 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDelete = async (postId) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-      return;
-    }
+  const handleDelete = (post) => {
+    askConfirm({
+      title: 'Supprimer l\'article',
+      message: (
+        <>
+          Voulez-vous vraiment supprimer l'article{' '}
+          <strong className="text-gray-900">« {post.title} »</strong> ({post.language?.toUpperCase() || 'FR'}) ?
+          Cette action est irréversible et retirera immédiatement l'article du blog.
+        </>
+      ),
+      confirmLabel: 'Supprimer',
+      danger: true,
+      onConfirm: async () => {
+        closeConfirm();
+        try {
+          const response = await fetch(`/api/admin/blog/${post._id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+          });
 
-    try {
-      const response = await fetch(`/api/admin/blog/${postId}`, {
-        method: 'DELETE',
-        credentials: 'include'
-      });
-
-      if (response.ok) {
-        setPosts(posts.filter(post => post._id !== postId));
-      } else {
-        const errorData = await response.json();
-        alert(`Erreur lors de la suppression: ${errorData.message || 'Erreur inconnue'}`);
-      }
-    } catch (error) {
-      console.error('Delete error:', error);
-      alert('Erreur lors de la suppression de l\'article');
-    }
+          if (response.ok) {
+            setPosts((prev) => prev.filter((p) => p._id !== post._id));
+            flash(
+              'success',
+              'Article supprimé',
+              `L'article « ${post.title} » a été supprimé avec succès.`
+            );
+          } else {
+            const errorData = await response.json().catch(() => null);
+            flash(
+              'error',
+              'Échec de la suppression',
+              errorData?.message || 'Erreur lors de la suppression de l\'article.'
+            );
+          }
+        } catch (error) {
+          flash('error', 'Erreur serveur', 'Impossible de joindre le serveur.');
+        }
+      },
+    });
   };
 
   if (loading) {
@@ -294,7 +320,7 @@ const AdminDashboard = () => {
                             <Edit className="w-4 h-4" />
                           </Link>
                           <button
-                            onClick={() => handleDelete(post._id)}
+                            onClick={() => handleDelete(post)}
                             className="text-red-600 hover:text-red-900 p-1"
                             title="Supprimer l'article"
                           >
@@ -317,6 +343,12 @@ const AdminDashboard = () => {
           Retour au site
         </Link>
       </div>
+
+      <ConfirmModal
+        open={!!confirmState}
+        {...(confirmState || {})}
+        onCancel={closeConfirm}
+      />
     </div>
   );
 };

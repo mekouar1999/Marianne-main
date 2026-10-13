@@ -22,6 +22,7 @@ const translations = {
       about: "À propos",
       contact: "Contact",
       blog: "Blog",
+      veille: "Veille réglementaire",
     },
     hero: {
       title: "Votre partenaire de solutions douanes sur mesure",
@@ -315,6 +316,16 @@ const translations = {
       recent: "Articles récents",
       search: "Rechercher...",
     },
+    veille: {
+      title: "Veille réglementaire",
+      subtitle:
+        "Suivez les actualités, directives et évolutions douanières majeures décryptées par notre experte",
+      readMore: "Lire le post",
+      categories: "Thématiques",
+      tags: "Mots-clés",
+      recent: "Post récents",
+      search: "Rechercher une actualité...",
+    },
     footer: {
       title: "Customs Engineering Solutions",
       description:
@@ -458,6 +469,7 @@ const translations = {
       about: "About",
       contact: "Contact",
       blog: "Blog",
+      veille: "Regulatory Watch",
     },
     hero: {
       title: "Your partner for customized customs solutions",
@@ -747,6 +759,16 @@ const translations = {
       tags: "Keywords",
       recent: "Recent articles",
       search: "Search...",
+    },
+    veille: {
+      title: "Regulatory watch",
+      subtitle:
+        "Follow key customs directives, news, and regulatory updates analyzed by our expert",
+      readMore: "Read post",
+      categories: "Topics",
+      tags: "Keywords",
+      recent: "Recent posts",
+      search: "Search regulatory updates...",
     },
     footer: {
       title: "Customs Engineering Solutions",

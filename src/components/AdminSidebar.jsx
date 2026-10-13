@@ -1,13 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FileText, Briefcase, Award, Globe, LogOut } from 'lucide-react';
+import { FileText, Briefcase, Award, GraduationCap, Mail, Globe, LogOut, Scale } from 'lucide-react';
 
-// Add new admin sections here (e.g. Formation, Expérience...)
+// Ordre des onglets du back office
 const NAV_ITEMS = [
-  { href: '/admin/dashboard', label: 'Blog', icon: FileText },
   { href: '/admin/consulting', label: 'Consulting', icon: Briefcase },
-  { href: '/admin/experience', label: 'Expérience', icon: Award },
+  { href: '/admin/formation', label: 'Formation', icon: GraduationCap },
+  { href: '/admin/experience', label: 'Expérience client', icon: Award },
+  { href: '/admin/dashboard', label: 'Blog', icon: FileText },
+  { href: '/admin/veille', label: 'Veille réglementaire', icon: Scale },
+  { href: '/admin/contact', label: 'Formulaire de contact', icon: Mail },
 ];
 
 const AdminSidebar = ({ admin, onLogout }) => {
@@ -21,19 +24,22 @@ const AdminSidebar = ({ admin, onLogout }) => {
     >
       {/* Brand */}
       <div className="px-6 py-7 border-b border-white/10">
-        <p className="text-2xl font-bold tracking-wide leading-tight">CUSTOMS</p>
+        <p className="text-2xl font-bold tracking-wide leading-tight">C.E.S</p>
         <p className="text-2xl font-bold tracking-wide leading-tight text-cyan-400">ADMIN</p>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
-          const active = router.pathname === href;
+          const active =
+            router.pathname === href ||
+            (href === '/admin/dashboard' && (router.pathname.startsWith('/admin/create-post') || router.pathname.startsWith('/admin/edit-post'))) ||
+            (href !== '/admin/dashboard' && router.pathname.startsWith(href + '/'));
           return (
             <Link
               key={href}
               href={href}
-              id={`admin-nav-${label.toLowerCase()}`}
+              id={`admin-nav-${label.toLowerCase().replace(/\s+/g, '-')}`}
               className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                 active
                   ? 'border border-cyan-400/80 bg-white/5 text-white shadow-[0_0_12px_rgba(34,211,238,0.25)]'

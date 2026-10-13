@@ -90,7 +90,7 @@ const Blog = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#040E25] via-[#002B54] to-[#005596] relative overflow-hidden">
+      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#002B54] via-[#004f8f] to-[#0078bd] relative overflow-hidden">
         {/* Discrete circular overlay shapes for depth */}
         <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full border border-white/10 bg-white/5 pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full border border-white/5 bg-white/[0.02] pointer-events-none" />
@@ -164,67 +164,62 @@ const Blog = () => {
       {featuredPost && (
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="bg-slate-50/90 rounded-2xl shadow-xl overflow-hidden relative"
-              initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
-              whileInView={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-              viewport={{ once: true }}
-            >
-              {/* Top gradient accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 z-10" />
-              <div className="grid lg:grid-cols-2 gap-8">
-                <div className="relative">
-                  <img
-                    src={
-                      featuredPost.imageData?.data 
-                        ? `data:${featuredPost.imageData.contentType};base64,${featuredPost.imageData.data}`
-                        : featuredPost.image || '/uploads/default-blog.jpg'
-                    }
-                    alt={featuredPost.title}
-                    className="w-full h-64 lg:h-full object-cover"
-                    onError={(e) => {
-                      e.target.src = '/uploads/default-blog.jpg';
-                    }}
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-950 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {t.misc.featuredArticle}
-                    </span>
+            <Link href={`/blog/${featuredPost.slug}`} className="block group">
+              <motion.div
+                className="bg-slate-50/90 rounded-2xl shadow-xl overflow-hidden relative cursor-pointer group-hover:shadow-2xl transition-all duration-300"
+                initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+                whileInView={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
+                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true }}
+              >
+                {/* Top gradient accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-950 to-cyan-400 z-10" />
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={
+                        featuredPost.imageData?.data 
+                          ? `data:${featuredPost.imageData.contentType};base64,${featuredPost.imageData.data}`
+                          : featuredPost.image || '/uploads/default-blog.jpg'
+                      }
+                      alt={featuredPost.title}
+                      className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = '/uploads/default-blog.jpg';
+                      }}
+                    />
+                  </div>
+
+                  <div className="p-8 lg:p-12 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                        <span className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1 text-cyan-600" />
+                          {new Date(featuredPost.publishedAt).toLocaleDateString(
+                            "fr-FR"
+                          )}
+                        </span>
+                      </div>
+
+                      <h2 className="text-3xl font-bold text-gray-900 mb-4 group-hover:text-blue-950 transition-colors">
+                        {featuredPost.title}
+                      </h2>
+
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {featuredPost.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-end pt-4">
+                      <span className="inline-flex items-center space-x-2 text-blue-950 group-hover:text-cyan-600 font-semibold transition-colors">
+                        <span>{t.blog.readMore}</span>
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1.5 transition-transform" />
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <div className="p-8 lg:p-12">
-                  <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                    <span className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {new Date(featuredPost.publishedAt).toLocaleDateString(
-                        "fr-FR"
-                      )}
-                    </span>
-                  </div>
-
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    {featuredPost.title}
-                  </h2>
-
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {featuredPost.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-end">
-
-                    <Link
-                      href={`/blog/${featuredPost.slug}`}
-                      className="inline-flex items-center space-x-2 text-blue-950 hover:text-blue-800 font-medium"
-                    >
-                      <span>{t.blog.readMore}</span>
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           </div>
         </section>
       )}
@@ -253,7 +248,7 @@ const Blog = () => {
               {currentPosts.map((post, index) => (
                 <motion.article
                   key={post.id}
-                  className="bg-slate-50/90 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group relative"
+                  className="bg-slate-50/90 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group relative cursor-pointer"
                   initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   transition={{ 
@@ -263,55 +258,52 @@ const Blog = () => {
                   }}
                   viewport={{ once: true }}
                 >
-                  {/* Top gradient accent */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-950 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-10" />
-                  <div className="relative">
-                    <img
-                      src={
-                        post.imageData?.data 
-                          ? `data:${post.imageData.contentType};base64,${post.imageData.data}`
-                          : post.image || '/uploads/default-blog.jpg'
-                      }
-                      alt={post.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.target.src = '/uploads/default-blog.jpg';
-                      }}
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-white/90 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
-                        {post.categories[0]}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-3">
-                      <span className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {new Date(post.publishedAt).toLocaleDateString("fr-FR")}
-                      </span>
+                  <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
+                    {/* Top gradient accent */}
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-950 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-10" />
+                    
+                    {/* Image */}
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={
+                          post.imageData?.data 
+                            ? `data:${post.imageData.contentType};base64,${post.imageData.data}`
+                            : post.image || '/uploads/default-blog.jpg'
+                        }
+                        alt={post.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          e.target.src = '/uploads/default-blog.jpg';
+                        }}
+                      />
                     </div>
 
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-950 transition-colors">
-                      {post.title}
-                    </h3>
+                    <div className="p-6 flex flex-col flex-grow justify-between">
+                      <div>
+                        <div className="flex items-center text-sm text-gray-500 mb-3">
+                          <span className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1 text-cyan-600" />
+                            {new Date(post.publishedAt).toLocaleDateString("fr-FR")}
+                          </span>
+                        </div>
 
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {post.excerpt}
-                    </p>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-950 transition-colors">
+                          {post.title}
+                        </h3>
 
-                    <div className="flex items-center justify-end">
+                        <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+                          {post.excerpt}
+                        </p>
+                      </div>
 
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="inline-flex items-center text-blue-950 hover:text-blue-800 text-sm font-medium"
-                      >
-                        <span>{t.blog.readMore}</span>
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Link>
+                      <div className="flex items-center justify-end pt-2">
+                        <span className="inline-flex items-center text-blue-950 group-hover:text-cyan-600 text-sm font-semibold transition-colors">
+                          <span>{t.blog.readMore}</span>
+                          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1.5 transition-transform" />
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </motion.article>
               ))}
             </div>

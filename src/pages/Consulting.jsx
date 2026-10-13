@@ -261,7 +261,7 @@ const Consulting = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#040E25] via-[#002B54] to-[#005596] relative overflow-hidden">
+      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#002B54] via-[#004f8f] to-[#0078bd] relative overflow-hidden">
         {/* Discrete circular overlay shapes for depth */}
         <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full border border-white/10 bg-white/5 pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full border border-white/5 bg-white/[0.02] pointer-events-none" />
@@ -383,19 +383,19 @@ const Consulting = () => {
       </section>
 
       {/* Consulting Statement Section */}
-      <section className="py-24 bg-gray-950 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-50 relative overflow-hidden border-t border-b border-blue-100/60">
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        {/* Glow */}
+        {/* Soft pastel ambient glow */}
         <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyan-400/5 rounded-full blur-3xl"
-          animate={{ opacity: [0.05, 0.12, 0.05] }}
-          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyan-200/25 rounded-full blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
-            className="w-12 h-0.5 bg-cyan-400 mb-12"
+            className="w-16 h-1 bg-gradient-to-r from-[#002B54] via-[#005596] to-cyan-400 rounded-full mb-10"
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -403,58 +403,63 @@ const Consulting = () => {
           />
           {language === 'fr' ? (
             <motion.p
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight"
-              style={{ textAlign: 'left', lineHeight: '1.4' }}
-              initial={{ opacity: 0, y: 40 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#002B54] tracking-tight leading-snug"
+              style={{ textAlign: 'left', lineHeight: '1.35' }}
+              initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
             >
-              <>Votre partenaire stratégique pour <span className="text-blue-400">sécuriser</span> et <span className="text-blue-400">simplifier</span> vos échanges internationaux.</>
+              <>Votre partenaire stratégique pour <span className="bg-gradient-to-r from-[#005596] to-cyan-600 bg-clip-text text-transparent font-extrabold">sécuriser</span> et <span className="bg-gradient-to-r from-[#005596] to-cyan-600 bg-clip-text text-transparent font-extrabold">simplifier</span> vos échanges internationaux.</>
             </motion.p>
           ) : (
             <motion.p
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight max-w-4xl"
-              style={{ textAlign: 'left', lineHeight: '1.4' }}
-              initial={{ opacity: 0, y: 40 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#002B54] tracking-tight leading-snug max-w-4xl"
+              style={{ textAlign: 'left', lineHeight: '1.35' }}
+              initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
             >
-              <>Your strategic partner to <span className="text-blue-400">secure</span> and <span className="text-blue-400">simplify</span> your international trade.</>
+              <>Your strategic partner to <span className="bg-gradient-to-r from-[#005596] to-cyan-600 bg-clip-text text-transparent font-extrabold">secure</span> and <span className="bg-gradient-to-r from-[#005596] to-cyan-600 bg-clip-text text-transparent font-extrabold">simplify</span> your international trade.</>
             </motion.p>
           )}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-950 to-blue-950">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 md:py-24 bg-gradient-to-r from-[#002B54] via-[#004f8f] to-[#0078bd] relative overflow-hidden">
+        {/* Ambient glow & decorative accents */}
+        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-blue-400/10 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
           >
             <motion.div
-              className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mx-auto mb-6"
+              className="w-20 h-1.5 bg-gradient-to-r from-cyan-300 via-white to-cyan-300 rounded-full mx-auto mb-6 shadow-sm"
               initial={{ scaleX: 0, opacity: 0 }}
               whileInView={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             />
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 whitespace-pre-line">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 whitespace-pre-line leading-tight">
               {t.misc.readyQuestion}
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-blue-100/90 mb-8 max-w-2xl mx-auto leading-relaxed">
               {t.misc.ctaExperienceDescription}
             </p>
             <Link href="/contact">
               <MagneticButton
-                className="bg-white text-blue-950 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center space-x-2"
+                className="bg-white text-[#002B54] px-8 sm:px-10 py-4 rounded-full text-base sm:text-lg font-bold hover:bg-cyan-50 hover:shadow-2xl hover:shadow-cyan-400/25 transition-all duration-300 shadow-xl inline-flex items-center space-x-2.5 group"
               >
                 <span>{t.misc.callToContact}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 text-[#005596] group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
             </Link>
           </motion.div>
