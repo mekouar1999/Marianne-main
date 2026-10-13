@@ -49,6 +49,7 @@ const Header = () => {
     { key: "experience", path: "/experience", label: t.nav.experience },
     { key: "about", path: "/about", label: t.nav.about },
     { key: "blog", path: "/blog", label: t.nav.blog },
+    { key: "veille", path: "/veille", label: t.nav.veille || "Veille réglementaire" },
     { key: "contact", path: "/contact", label: t.nav.contact },
   ];
 
@@ -82,7 +83,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-5 xl:space-x-7 text-sm xl:text-[15px]">
             {navigationItems.map((item) => (
               <div key={item.key} className="relative">
                 {item.dropdown ? (
@@ -180,7 +181,7 @@ const Header = () => {
 
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden p-2 rounded-lg transition-colors ${
+              className={`lg:hidden p-2 rounded-lg transition-colors ${
                 scrolled
                   ? "hover:bg-gray-100 text-gray-700"
                   : "hover:bg-white/10 text-white"
@@ -201,7 +202,7 @@ const Header = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="md:hidden bg-white border-t border-gray-200"
+            className="lg:hidden bg-white border-t border-gray-200"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

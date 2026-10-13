@@ -1,8 +1,6 @@
-import { Resend } from 'resend';
 import dbConnect from '../../lib/mongodb';
 import { Contact } from '../../lib/models';
-
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+import { sendContactEmails } from '../../lib/mailer';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -10,54 +8,78 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { firstName, lastName, company, email, phone, subject, message, training } = req.body;
-    
-    // Save to database if connected
+    const {
+      firstName,
+      lastName,
+      name,
+      company,
+      email,
+      phone,
+      subject,
+      message,
+      training,
+      language = 'fr',
+    } = req.body || {};
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Email requis' });
+    }
+
+    // Normaliser prénom / nom si un champ "name" unique a été transmis
+    const derivedFirstName = firstName || (name ? name.split(' ')[0] : '');
+    const derivedLastName = lastName || (name ? name.split(' ').slice(1).join(' ') : '');
+
+    // 1. Sauvegarde dans MongoDB pour consultation dans le back office (/admin/contact)
+    let savedContact = null;
     try {
       await dbConnect();
-      const contact = new Contact(req.body);
-      await contact.save();
+      savedContact = await Contact.create({
+        firstName: derivedFirstName,
+        lastName: derivedLastName,
+        name: name || `${derivedFirstName} ${derivedLastName}`.trim(),
+        company: company || '',
+        email: email.trim(),
+        phone: phone || '',
+        subject: subject || (training ? 'formation' : 'contact'),
+        training: training || '',
+        message: message || '',
+        language: language || 'fr',
+        status: 'new',
+      });
     } catch (dbError) {
-      console.warn("Database save warning:", dbError.message);
+      console.warn('Database save warning:', dbError.message);
     }
 
-    // Send email using Resend if configured
-    if (resend) {
-      const fullName = firstName && lastName ? `${firstName} ${lastName}` : (req.body.name || 'Non spécifié');
-      const emailSubject = subject || 'Nouveau message de contact';
-      
-      let emailContent = `
-        <h2>Nouveau message de contact</h2>
-        <p><strong>Nom:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Société:</strong> ${company || 'Non spécifiée'}</p>
-        ${phone ? `<p><strong>Téléphone:</strong> ${phone}</p>` : ''}
-        ${training ? `<p><strong>Formation intéressée:</strong> ${training}</p>` : ''}
-        <p><strong>Sujet:</strong> ${emailSubject}</p>
-        <h3>Message:</h3>
-        <p>${message || 'Aucun message spécifique'}</p>
-        <hr>
-        <p><em>Message envoyé depuis le formulaire de contact du site Customs Engineering Solutions</em></p>
-      `;
-
-      await resend.emails.send({
-        from: 'Contact Form <contact@resend.dev>',
-        to: ['martusiochenot@customs-solutions.fr'],
-        subject: `[Site Web] ${emailSubject} - ${fullName}`,
-        html: emailContent,
-        replyTo: email,
+    // 2. Envoi automatique via Nodemailer :
+    // - Accusé de réception au visiteur ("Nous avons bien reçu votre mail et vous répondons dans les plus brefs délais")
+    // - Notification à l'administrateur
+    try {
+      await sendContactEmails({
+        firstName: derivedFirstName,
+        lastName: derivedLastName,
+        name: name || `${derivedFirstName} ${derivedLastName}`.trim(),
+        company,
+        email,
+        phone,
+        subject: subject || (training ? 'formation' : 'contact'),
+        training,
+        message,
+        language,
       });
+    } catch (mailError) {
+      console.error('Nodemailer send warning:', mailError.message);
     }
 
     return res.status(200).json({
       success: true,
-      message: "Formulaire soumis avec succès",
+      message: 'Formulaire soumis avec succès',
+      data: savedContact ? { id: savedContact._id } : null,
     });
   } catch (error) {
-    console.error("Contact form processing error:", error.message);
-    return res.status(200).json({
-      success: true,
-      message: "Formulaire reçu avec succès",
+    console.error('Contact form processing error:', error.message);
+    return res.status(500).json({
+      success: false,
+      message: 'Erreur lors du traitement du formulaire',
     });
   }
 }

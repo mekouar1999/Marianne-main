@@ -10,8 +10,19 @@ import TiltCard from "../components/TiltCard";
 import MagneticButton from "../components/MagneticButton";
 
 const Formation = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const currentLanguage = language || 'fr';
   const [isDesktop, setIsDesktop] = useState(false);
+  const [remoteTrainings, setRemoteTrainings] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/formation')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.data) setRemoteTrainings(data.data);
+      })
+      .catch(() => {});
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -130,7 +141,7 @@ const Formation = () => {
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#040E25] via-[#002B54] to-[#005596] relative overflow-hidden">
+      <section className="pt-32 pb-14 md:pt-40 md:pb-16 bg-gradient-to-r from-[#002B54] via-[#004f8f] to-[#0078bd] relative overflow-hidden">
         {/* Discrete circular overlay shapes for depth */}
         <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full border border-white/10 bg-white/5 pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full border border-white/5 bg-white/[0.02] pointer-events-none" />
@@ -304,7 +315,7 @@ const Formation = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {trainings.map((training, index) => (
+            {(remoteTrainings?.[currentLanguage]?.length ? remoteTrainings[currentLanguage] : trainings).map((training, index) => (
               <TiltCard key={training.id} maxTilt={10} className="h-full">
               <motion.div
                 className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col border border-blue-100/60 hover:border-blue-200/50 group relative overflow-hidden h-full"

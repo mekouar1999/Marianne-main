@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import readline from 'readline';
 
 // Load environment variables FIRST
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 
 const rl = readline.createInterface({
   input: process.stdin,

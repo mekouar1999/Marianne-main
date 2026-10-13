@@ -170,7 +170,7 @@ const Privacy = () => {
   const sections = getSections(language);
   const pageTitle = t?.privacy?.title || "Politique de confidentialité";
   const backLabel = language === "en" ? "← Back to home" : "← Retour à l'accueil";
-  const updatedLabel = language === "en" ? "Last updated: February 24, 2026" : "Dernière mise à jour : 24 février 2026";
+  const updatedLabel = language === "en" ? "Last updated: October 13, 2026" : "Dernière mise à jour : 13 octobre 2026";
   return (
     <motion.div
       className="min-h-screen bg-gray-50 pt-20"
