@@ -161,18 +161,19 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <motion.button
               onClick={toggleLanguage}
-              className={`flex items-center space-x-1 transition-colors ${
+              className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-200 border ${
                 scrolled
-                  ? "text-gray-700 hover:text-[#00346D]"
-                  : "text-white hover:text-[#00346D]"
+                  ? "border-gray-200 bg-gray-50/80 text-gray-700 hover:border-[#00346D] hover:text-[#00346D]"
+                  : "border-white/30 bg-white/10 text-white hover:border-white hover:bg-white/20"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Changer de langue"
+              title="Changer de langue (FR / EN)"
             >
-              <Globe className="w-4 h-4" />
-              <span className="text-sm font-medium">
-                {language.toUpperCase()}
-              </span>
+              <span className={language === "fr" ? "font-bold text-cyan-400" : "opacity-60"}>FR</span>
+              <span className="mx-1.5 opacity-30">/</span>
+              <span className={language === "en" ? "font-bold text-cyan-400" : "opacity-60"}>EN</span>
             </motion.button>
 
             {/* Admin/User Icon */}

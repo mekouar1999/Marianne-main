@@ -14,6 +14,7 @@ import {
   Settings,
   ArrowRight
 } from 'lucide-react';
+import AdminSidebar from '../components/AdminSidebar';
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -107,7 +108,8 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 lg:pl-64">
+      <AdminSidebar admin={admin} onLogout={handleLogout} />
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

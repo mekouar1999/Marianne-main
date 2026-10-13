@@ -6,6 +6,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "../components/TextReveal";
 import TiltCard from "../components/TiltCard";
 import MagneticButton from "../components/MagneticButton";
+import ServicesCarousel from "../components/ServicesCarousel";
 
 const ServiceCard = ({ title, description, features, delay }) => (
   <TiltCard maxTilt={12} className="h-full">
@@ -71,6 +72,17 @@ const ProcessStep = ({ number, title, description, delay }) => (
 const Consulting = () => {
   const { t, language } = useLanguage();
   const [isDesktop, setIsDesktop] = useState(false);
+  const [remoteServices, setRemoteServices] = useState(null);
+
+  // Load admin-editable service cards (fallback: hardcoded cards below)
+  useEffect(() => {
+    fetch('/api/consulting')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.data) setRemoteServices(data.data);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -342,11 +354,31 @@ const Consulting = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {services[currentLanguage].map((service, index) => (
-              <ServiceCard key={index} {...service} delay={index * 0.2} />
-            ))}
-          </div>
+          {(() => {
+            const displayedServices = remoteServices?.[currentLanguage]?.length
+              ? remoteServices[currentLanguage]
+              : services[currentLanguage];
+
+            // 4 cards or more: carousel, otherwise the original grid
+            if (displayedServices.length >= 4) {
+              return (
+                <ServicesCarousel
+                  items={displayedServices}
+                  renderItem={(service, index) => (
+                    <ServiceCard {...service} delay={Math.min(index, 2) * 0.2} />
+                  )}
+                />
+              );
+            }
+
+            return (
+              <div className="grid md:grid-cols-3 gap-8">
+                {displayedServices.map((service, index) => (
+                  <ServiceCard key={index} {...service} delay={index * 0.2} />
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
