@@ -155,26 +155,6 @@ const HeroSlider = () => {
                 />
               </div>
             </motion.div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              className="absolute bottom-8 left-1/2 -translate-x-1/2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.5 }}
-            >
-              <motion.div
-                className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center"
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.div
-                  className="w-1.5 h-3 bg-white/60 rounded-full mt-2"
-                  animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -1,5 +1,4 @@
-// frontend/src/pages/Experience.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
@@ -7,9 +6,68 @@ import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "../components/TextReveal";
 import TiltCard from "../components/TiltCard";
 import MagneticButton from "../components/MagneticButton";
+import ServicesCarousel from "../components/ServicesCarousel";
+
+const TestimonialCard = ({ testimonial, index }) => (
+  <TiltCard maxTilt={10} className="h-full">
+    <motion.div
+      className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70 hover:border-blue-200/50 group h-full flex flex-col"
+      initial={{ opacity: 0, y: 60, scale: 0.88 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.9, delay: Math.min(index, 2) * 0.2, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true }}
+    >
+      <div className="text-center mb-6">
+        {/* Professional photo with modern design */}
+        <div className="relative mb-6 overflow-hidden rounded-xl">
+          <motion.img
+            src={testimonial.photo}
+            alt={`${testimonial.name}`}
+            className="w-full h-48 object-cover rounded-xl shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-transparent rounded-xl"></div>
+        </div>
+        <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
+        <p className="text-gray-600 text-sm">{testimonial.position}</p>
+        <p className="text-blue-950 text-sm font-medium">{testimonial.company}</p>
+      </div>
+
+      {/* Quote and text */}
+      <div className="flex-1">
+        <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
+      </div>
+
+      {/* Results always at bottom */}
+      <div className="mt-auto">
+        <div className="space-y-1 mb-4">
+          <h5 className="font-semibold text-gray-900 text-sm mb-1">Résultats obtenus :</h5>
+          {(testimonial.results || []).map((result, idx) => (
+            <div key={idx} className="flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+              <span className="text-sm text-gray-600">{result}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  </TiltCard>
+);
 
 const Experience = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const currentLanguage = language || 'fr';
+  const [remoteTestimonials, setRemoteTestimonials] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/experience')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.data) setRemoteTestimonials(data.data);
+      })
+      .catch(() => {});
+  }, []);
 
   const testimonials = [
   {
@@ -174,55 +232,30 @@ const Experience = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TiltCard key={testimonial.id} maxTilt={10} className="h-full">
-              <motion.div
-                className="bg-slate-50/90 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100/70 hover:border-blue-200/50 group h-full flex flex-col"
-                initial={{ opacity: 0, y: 60, scale: 0.88 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.9, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
-                viewport={{ once: true }}
-              >
-  <div className="text-center mb-6">
-    {/* Professional photo with modern design */}
-    <div className="relative mb-6 overflow-hidden rounded-xl">
-      <motion.img
-        src={testimonial.photo}
-        alt={`${testimonial.name}`}
-        className="w-full h-48 object-cover rounded-xl shadow-lg"
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.5 }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-transparent rounded-xl"></div>
-    </div>
-    <h4 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h4>
-    <p className="text-gray-600 text-sm">{testimonial.position}</p>
-    <p className="text-blue-950 text-sm font-medium">{testimonial.company}</p>
-  </div>
+          {(() => {
+            const displayedTestimonials = remoteTestimonials?.[currentLanguage]?.length
+              ? remoteTestimonials[currentLanguage]
+              : testimonials;
 
-  {/* Quote and text */}
-  <div className="flex-1">
-    <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
-  </div>
+            if (displayedTestimonials.length >= 4) {
+              return (
+                <ServicesCarousel
+                  items={displayedTestimonials}
+                  renderItem={(item, index) => (
+                    <TestimonialCard key={index} testimonial={item} index={index} />
+                  )}
+                />
+              );
+            }
 
-  {/* Results always at bottom */}
-  <div className="mt-auto">
-    <div className="space-y-1 mb-4">
-      <h5 className="font-semibold text-gray-900 text-sm mb-1">Résultats obtenus :</h5>
-      {testimonial.results.map((result, idx) => (
-        <div key={idx} className="flex items-center space-x-2">
-          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-          <span className="text-sm text-gray-600">{result}</span>
-        </div>
-      ))}
-    </div>
-    {/* Removed date display */}
-  </div>
-</motion.div>
-              </TiltCard>
-            ))}
-          </div>
+            return (
+              <div className="grid lg:grid-cols-3 gap-8">
+                {displayedTestimonials.map((testimonial, index) => (
+                  <TestimonialCard key={index} testimonial={testimonial} index={index} />
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 

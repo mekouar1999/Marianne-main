@@ -443,7 +443,7 @@ const translations = {
       ourJourney: "Notre parcours depuis la création...",
       ourExpertise: "Notre expertise",
       ourExpertiseSubtitle: "Des solutions professionnelles adaptées à chaque étape de vos opérations douanières",
-      copyright: "© 2025 Customs Engineering Solutions.\nTous droits réservés.",
+      copyright: "© 2026 Customs Engineering Solutions.\nTous droits réservés.",
       joinSatisfiedClients: "Rejoignez nos clients satisfaits",
       ctaExperienceDescription: "Découvrez comment nous pouvons vous aider à optimiser vos opérations douanières et générer des économies significatives.",
       requestConsultation: "Demander une consultation"
@@ -877,7 +877,7 @@ const translations = {
       ourJourney: "Our journey since creation...",
       ourExpertise: "Our Expertise",
       ourExpertiseSubtitle: "Professional solutions adapted to each stage of your customs operations",
-      copyright: "© 2025 Customs Engineering Solutions. All rights reserved.",
+      copyright: "© 2026 Customs Engineering Solutions. All rights reserved.",
       joinSatisfiedClients: "Join our satisfied clients",
       ctaExperienceDescription: "Discover how we can help you optimize your customs operations and generate significant savings.",
       requestConsultation: "Request a consultation"

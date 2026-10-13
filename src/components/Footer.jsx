@@ -174,10 +174,10 @@ const Footer = () => {
                     href={t.footer.info.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors"
                   >
-                    <Linkedin className="w-5 h-5" />
-                    <span>LinkedIn</span>
+                    <Linkedin className="w-5 h-5 flex-shrink-0" />
+                    <span className="leading-none">LinkedIn</span>
                   </a>
                 </div>
               </div>
@@ -203,20 +203,6 @@ const Footer = () => {
               </Link>
               <Link href="/cookies" className="text-gray-400 hover:text-white text-sm transition-colors">
                 {t.footer.cookies}
-              </Link>
-              {/* Admin Login Icon */}
-              <Link href="/admin/login" className="ml-2">
-                <motion.div
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.95 }}
-                  title="Admin Login"
-                  className="flex items-center justify-center transition-colors"
-                  style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 20 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-400 hover:text-white">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 19.125a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21c-2.676 0-5.216-.584-7.499-1.875z" />
-                  </svg>
-                </motion.div>
               </Link>
             </div>
           </div>
