@@ -6,7 +6,7 @@ import {
   ArrowLeft,
   Save,
   Scale,
-  Sparkles,
+  ChevronDown,
   Trash2,
   Eye,
 } from 'lucide-react';
@@ -269,53 +269,25 @@ const AdminEditVeillePost = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Category */}
-              <div>
-                <label htmlFor="category" className="block text-sm font-semibold text-gray-900 mb-2">
-                  Thématique / Domaine
-                </label>
-                <select
-                  id="category"
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#002B54] focus:border-transparent bg-white text-gray-900 text-sm"
-                >
-                  {CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                  <option value="Autre">Autre thématique...</option>
-                </select>
-                {formData.category === 'Autre' && (
-                  <input
-                    type="text"
-                    name="customCategory"
-                    value={formData.customCategory}
-                    onChange={handleInputChange}
-                    placeholder="Précisez la thématique"
-                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                  />
-                )}
-              </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Language */}
               <div>
                 <label htmlFor="language" className="block text-sm font-semibold text-gray-900 mb-2">
                   Langue
                 </label>
-                <select
-                  id="language"
-                  name="language"
-                  value={formData.language}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#002B54] focus:border-transparent bg-white text-gray-900 text-sm"
-                >
-                  <option value="fr">Français (FR)</option>
-                  <option value="en">Anglais (EN)</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="language"
+                    name="language"
+                    value={formData.language}
+                    onChange={handleInputChange}
+                    className="w-full appearance-none [-webkit-appearance:none] [-moz-appearance:none] px-4 pr-12 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#002B54] focus:border-transparent bg-white text-gray-900 text-sm cursor-pointer"
+                  >
+                    <option value="fr">Français (FR)</option>
+                    <option value="en">Anglais (EN)</option>
+                  </select>
+                  <ChevronDown className="w-4 h-4 text-gray-500 absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
               </div>
 
               {/* Publication Status */}
@@ -339,14 +311,6 @@ const AdminEditVeillePost = () => {
                   </span>
                 </div>
               </div>
-            </div>
-
-            {/* Note badge */}
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center space-x-3 text-xs text-slate-600">
-              <Sparkles className="w-4 h-4 text-[#002B54] flex-shrink-0" />
-              <span>
-                <strong>Section Veille Réglementaire :</strong> Les actualités sont directement présentées sous forme de dépêches épurées, sans photo requise.
-              </span>
             </div>
 
             {/* Excerpt */}

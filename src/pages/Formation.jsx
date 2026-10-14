@@ -1,8 +1,8 @@
 // frontend/src/pages/Formation.jsx - Simplified Version
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { CheckCircle, Users, Award, Clock, Target, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle, Users, Award, Clock, Target, ChevronDown, X, HelpCircle, BookOpen, ArrowRight } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "../components/TextReveal";
@@ -14,6 +14,7 @@ const Formation = () => {
   const currentLanguage = language || 'fr';
   const [isDesktop, setIsDesktop] = useState(false);
   const [remoteTrainings, setRemoteTrainings] = useState(null);
+  const [selectedTraining, setSelectedTraining] = useState(null);
 
   useEffect(() => {
     fetch('/api/formation')
@@ -32,6 +33,15 @@ const Formation = () => {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const handleSelectTrainingAndContact = (trainingTitle) => {
+    setFormData((prev) => ({ ...prev, training: trainingTitle }));
+    setSelectedTraining(null);
+    setTimeout(() => {
+      const el = document.getElementById('contact-form');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  };
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -102,6 +112,7 @@ const Formation = () => {
           subject: "formation",
           firstName: formData.name.split(" ")[0] || formData.name,
           lastName: formData.name.split(" ").slice(1).join(" ") || "",
+          language: currentLanguage || 'fr',
         }),
       });
 
@@ -333,10 +344,11 @@ const Formation = () => {
                   {training.description}
                 </p>
                 <button 
-                  onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full bg-blue-950 text-white py-3 rounded-full font-semibold hover:bg-blue-800 transition-all duration-300 mt-auto"
+                  onClick={() => setSelectedTraining(training)}
+                  className="w-full bg-blue-950 text-white py-3 rounded-full font-semibold hover:bg-cyan-600 transition-all duration-300 mt-auto flex items-center justify-center space-x-2 group/btn shadow-md hover:shadow-lg"
                 >
-                  En savoir plus
+                  <span>{currentLanguage === 'en' ? 'Learn more' : 'En savoir plus'}</span>
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </motion.div>
               </TiltCard>
@@ -499,6 +511,185 @@ const Formation = () => {
           )}
         </div>
       </section>
+
+      {/* Modal Window for "En savoir plus" */}
+      <AnimatePresence>
+        {selectedTraining && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <motion.div
+              className="fixed inset-0 bg-[#040E25]/75 backdrop-blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedTraining(null)}
+            />
+
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden my-8 z-10 border border-blue-100 flex flex-col max-h-[90vh]"
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Top Accent Gradient */}
+              <div className="h-2 bg-gradient-to-r from-blue-950 via-cyan-400 to-blue-950 flex-shrink-0" />
+
+              {/* Modal Content - Scrollable */}
+              <div className="p-6 sm:p-8 overflow-y-auto flex-1">
+                {/* Header */}
+                <div className="flex justify-between items-start gap-4 mb-4">
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-cyan-100/80 text-cyan-900 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                      {currentLanguage === 'en' ? 'Training Program' : 'Programme de formation'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                      {selectedTraining.title}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setSelectedTraining(null)}
+                    aria-label="Fermer"
+                    className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Subtitle / Intro */}
+                {selectedTraining.description && (
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-6 italic border-l-4 border-cyan-400 pl-4 py-2 bg-slate-50 rounded-r-xl">
+                    "{selectedTraining.description}"
+                  </p>
+                )}
+
+                {/* Key badges / specs - Spacious 2-row layout */}
+                <div className="space-y-2.5 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {/* Durée */}
+                    <div className="flex items-center space-x-3 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200/80">
+                      <div className="w-9 h-9 rounded-lg bg-cyan-100/80 flex items-center justify-center flex-shrink-0 text-cyan-800">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+                          {currentLanguage === 'en' ? 'Duration' : 'Durée'}
+                        </span>
+                        <span className="text-sm font-semibold text-gray-900 block">
+                          {selectedTraining.duration || (currentLanguage === 'en' ? 'Tailored' : 'Sur mesure')}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Prérequis */}
+                    <div className="flex items-center space-x-3 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200/80">
+                      <div className="w-9 h-9 rounded-lg bg-blue-100/80 flex items-center justify-center flex-shrink-0 text-blue-900">
+                        <CheckCircle className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+                          {currentLanguage === 'en' ? 'Prerequisites' : 'Prérequis'}
+                        </span>
+                        <span className="text-sm font-semibold text-gray-900 block">
+                          {selectedTraining.prerequisites || (currentLanguage === 'en' ? 'None' : 'Aucun')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Public visé - Pleine largeur pour éviter tout chevauchement */}
+                  <div className="flex items-start space-x-3 p-3.5 bg-slate-50/90 rounded-xl border border-slate-200/80">
+                    <div className="w-9 h-9 rounded-lg bg-indigo-100/80 flex items-center justify-center flex-shrink-0 text-indigo-900 mt-0.5">
+                      <Users className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+                        {currentLanguage === 'en' ? 'Target Audience' : 'Public visé'}
+                      </span>
+                      <span className="text-sm text-gray-800 leading-relaxed block mt-0.5">
+                        {selectedTraining.targetAudience || (currentLanguage === 'en' ? 'All teams' : 'Tous collaborateurs')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Objectives */}
+                {selectedTraining.objectives && selectedTraining.objectives.filter(Boolean).length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-blue-950 mb-3 flex items-center space-x-2">
+                      <Target className="w-4 h-4 text-cyan-600" />
+                      <span>{currentLanguage === 'en' ? 'Training Objectives' : 'Objectifs pédagogiques'}</span>
+                    </h4>
+                    <div className="space-y-2.5 bg-slate-50/60 p-4 rounded-2xl border border-slate-100">
+                      {selectedTraining.objectives.filter(Boolean).map((obj, idx) => (
+                        <div key={idx} className="flex items-start space-x-2.5 text-xs sm:text-sm text-gray-700">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{obj}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Detailed syllabus / modules */}
+                {selectedTraining.details && (
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-blue-950 mb-3 flex items-center space-x-2">
+                      <BookOpen className="w-4 h-4 text-cyan-600" />
+                      <span>{currentLanguage === 'en' ? 'Detailed Program & Modules' : 'Programme détaillé'}</span>
+                    </h4>
+                    <div className="p-4 sm:p-5 bg-slate-50/90 rounded-2xl border border-gray-200/80 text-sm text-gray-800 leading-relaxed space-y-3 font-sans">
+                      {selectedTraining.details.split('\n\n').map((block, idx) => {
+                        const lines = block.split('\n');
+                        const header = lines[0];
+                        const items = lines.slice(1);
+                        const isModule = header.trim().toLowerCase().startsWith('module');
+                        return (
+                          <div key={idx} className={isModule ? "p-3.5 bg-white rounded-xl border border-gray-200/60 shadow-sm" : ""}>
+                            <p className={isModule ? "font-bold text-blue-950 text-sm mb-2" : "font-semibold text-gray-900 text-sm mb-1"}>
+                              {header}
+                            </p>
+                            {items.length > 0 && (
+                              <ul className="space-y-1.5 pl-1">
+                                {items.map((line, lIdx) => (
+                                  <li key={lIdx} className="text-xs sm:text-sm text-gray-700 flex items-start space-x-2">
+                                    <span className="text-cyan-600 font-bold leading-tight select-none">•</span>
+                                    <span className="leading-relaxed">{line.replace(/^[•\-\*]\s*/, '')}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer CTA */}
+              <div className="p-4 sm:p-6 bg-slate-50 border-t border-gray-100 flex flex-col sm:flex-row justify-end items-center gap-3 flex-shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setSelectedTraining(null)}
+                  className="w-full sm:w-auto px-5 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors shadow-sm order-2 sm:order-1"
+                >
+                  {currentLanguage === 'en' ? 'Close' : 'Fermer'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTrainingAndContact(selectedTraining.title)}
+                  className="w-full sm:w-auto px-6 py-2.5 text-sm font-bold text-white bg-blue-950 hover:bg-cyan-600 rounded-xl transition-all shadow-md flex items-center justify-center space-x-2 order-1 sm:order-2"
+                >
+                  <span>{currentLanguage === 'en' ? 'Request this training' : 'Demander cette formation'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, Menu, X, ChevronDown } from "lucide-react";
+import { Globe, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import Logo from "./Logo";
 
@@ -14,28 +14,16 @@ const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const router = useRouter();
 
-  // Pages that have white backgrounds and need dark header styling from the start
-  const whiteBackgroundPages = [
-    "/legal",
-    "/privacy",
-    "/cookies",
-  ];
-  const isWhiteBackgroundPage = whiteBackgroundPages.some(
-    (page) =>
-      router.pathname === page || router.pathname.startsWith(page + "/")
-  );
-
+  // Keep track of scroll for subtle shadow enhancement
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50 || isWhiteBackgroundPage);
+      setScrolled(window.scrollY > 20);
     };
 
-    // Set initial state
-    setScrolled(window.scrollY > 50 || isWhiteBackgroundPage);
-
+    setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isWhiteBackgroundPage]);
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -66,15 +54,31 @@ const Header = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-xl border-b border-gray-200/60 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] border-b border-gray-200/50"
-          : "bg-gradient-to-b from-black/30 to-transparent"
+          ? "shadow-[0_4px_30px_rgba(0,0,0,0.08)]"
+          : "shadow-sm"
       }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
+      {/* Bandeau au-dessus du menu */}
+      <div className="bg-gradient-to-r from-[#001833] via-[#002B54] to-[#005596] text-white border-b border-cyan-400/20 py-1.5 sm:py-2 px-4 shadow-sm relative z-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <Link
+            href="/veille"
+            className="group inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-white hover:text-cyan-200 transition-colors"
+          >
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="tracking-wide">
+              {language === 'fr' ? 'Veille réglementaire' : 'Regulatory Watch'}
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-300 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -94,14 +98,8 @@ const Header = () => {
                   >
                     <Link
                       href={item.path}
-                      className={`flex items-center space-x-1 transition-colors font-medium ${
-                        scrolled
-                          ? `text-gray-700 hover:text-[#00346D] ${
-                              isActivePath(item.path) ? "text-[#00346D]" : ""
-                            }`
-                          : `text-white hover:text-[#00346D] ${
-                              isActivePath(item.path) ? "text-[#00346D]" : ""
-                            }`
+                      className={`flex items-center space-x-1 transition-colors font-medium text-gray-700 hover:text-[#00346D] ${
+                        isActivePath(item.path) ? "text-[#00346D] font-semibold" : ""
                       }`}
                     >
                       <span>{item.label}</span>
@@ -135,19 +133,13 @@ const Header = () => {
                     href={item.path}
                     className={`transition-colors font-medium ${
                       item.key === "contact"
-                        ? `px-4 py-2 rounded-full ${
+                        ? `px-4 py-2 rounded-full transition-all duration-200 ${
                             isActivePath(item.path)
-                              ? "bg-white text-[#00346D] hover:bg-gray-100"
-                              : scrolled
-                              ? "border-2 border-[#00346D] text-[#00346D] hover:bg-[#00346D] hover:text-white"
-                              : "border-2 border-white text-white hover:bg-white hover:text-[#00346D]"
+                              ? "bg-[#00346D] text-white shadow-sm"
+                              : "border-2 border-[#00346D] text-[#00346D] hover:bg-[#00346D] hover:text-white"
                           }`
-                        : scrolled
-                        ? `text-gray-700 hover:text-[#00346D] ${
-                            isActivePath(item.path) ? "text-[#00346D]" : ""
-                          }`
-                        : `text-white hover:text-[#00346D] ${
-                            isActivePath(item.path) ? "text-[#00346D]" : ""
+                        : `text-gray-700 hover:text-[#00346D] ${
+                            isActivePath(item.path) ? "text-[#00346D] font-semibold" : ""
                           }`
                     }`}
                   >
@@ -162,30 +154,21 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <motion.button
               onClick={toggleLanguage}
-              className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-200 border ${
-                scrolled
-                  ? "border-gray-200 bg-gray-50/80 text-gray-700 hover:border-[#00346D] hover:text-[#00346D]"
-                  : "border-white/30 bg-white/10 text-white hover:border-white hover:bg-white/20"
-              }`}
+              className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-200 border border-gray-200 bg-gray-50/80 text-gray-700 hover:border-[#00346D] hover:text-[#00346D]"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Changer de langue"
               title="Changer de langue (FR / EN)"
             >
-              <span className={language === "fr" ? "font-bold text-cyan-400" : "opacity-60"}>FR</span>
+              <span className={language === "fr" ? "font-bold text-[#00346D]" : "opacity-60"}>FR</span>
               <span className="mx-1.5 opacity-30">/</span>
-              <span className={language === "en" ? "font-bold text-cyan-400" : "opacity-60"}>EN</span>
+              <span className={language === "en" ? "font-bold text-[#00346D]" : "opacity-60"}>EN</span>
             </motion.button>
 
-            {/* Admin/User Icon */}
-
+            {/* Mobile Menu Button */}
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                scrolled
-                  ? "hover:bg-gray-100 text-gray-700"
-                  : "hover:bg-white/10 text-white"
-              }`}
+              className="lg:hidden p-2 rounded-lg transition-colors hover:bg-gray-100 text-gray-700"
               whileTap={{ scale: 0.95 }}
             >
               {isMenuOpen ? (

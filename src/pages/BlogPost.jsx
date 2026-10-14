@@ -195,17 +195,6 @@ const BlogPost = () => {
           </Link>
 
           <header className="mb-8">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {(currentPost.categories || []).map((category, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
-                >
-                  {category}
-                </span>
-              ))}
-            </div>
-
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               {currentPost.title}
             </h1>
@@ -385,33 +374,7 @@ const BlogPost = () => {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-200" />
-            <h2 className="text-3xl font-bold mb-4">
-              Besoin d'Aide avec Vos Opérations Douanières ?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Nos experts sont là pour vous accompagner dans l'optimisation de
-              vos processus douaniers.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center space-x-2 bg-white text-blue-700 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors"
-            >
-              <span>Nous Contacter</span>
-              <ArrowLeft className="w-5 h-5 rotate-180" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+
     </motion.div>
   );
 };

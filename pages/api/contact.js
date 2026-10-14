@@ -51,15 +51,16 @@ export default async function handler(req, res) {
     }
 
     // 2. Envoi automatique via Nodemailer :
-    // - Accusé de réception au visiteur ("Nous avons bien reçu votre mail et vous répondons dans les plus brefs délais")
+    // - Accusé de réception au visiteur ("Nous avons bien reçu votre message et vous répondons dans les plus brefs délais")
     // - Notification à l'administrateur
+    let emailResult = { userEmailSent: false, adminEmailSent: false };
     try {
-      await sendContactEmails({
+      emailResult = await sendContactEmails({
         firstName: derivedFirstName,
         lastName: derivedLastName,
         name: name || `${derivedFirstName} ${derivedLastName}`.trim(),
         company,
-        email,
+        email: email.trim(),
         phone,
         subject: subject || (training ? 'formation' : 'contact'),
         training,
@@ -67,12 +68,14 @@ export default async function handler(req, res) {
         language,
       });
     } catch (mailError) {
-      console.error('Nodemailer send warning:', mailError.message);
+      console.error('[Contact API] Nodemailer send error:', mailError.message);
     }
 
     return res.status(200).json({
       success: true,
       message: 'Formulaire soumis avec succès',
+      userEmailSent: emailResult.userEmailSent,
+      adminEmailSent: emailResult.adminEmailSent,
       data: savedContact ? { id: savedContact._id } : null,
     });
   } catch (error) {

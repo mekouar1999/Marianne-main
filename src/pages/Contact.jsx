@@ -34,7 +34,10 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          language: language || 'fr',
+        }),
       });
 
       const data = await response.json();
@@ -108,9 +111,10 @@ const Contact = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             {t.contact.success}
           </h2>
-          <p className="text-gray-600 mb-8">
-            Nous vous recontacterons dans les plus brefs délais pour répondre à
-            votre demande.
+          <p className="text-gray-600 mb-8 leading-relaxed">
+            {language === 'en'
+              ? 'A confirmation email has been sent to you. We will get back to you as soon as possible.'
+              : 'Un email de confirmation vous a été envoyé. Nous vous répondrons dans les plus brefs délais.'}
           </p>
           <motion.button
             onClick={() => setSuccess(false)}

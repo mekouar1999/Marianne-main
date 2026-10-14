@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import TextReveal from "./TextReveal";
 import MagneticButton from "./MagneticButton";
@@ -138,7 +138,7 @@ const Services = () => {
                           transition={{ duration: 0.4, delay: 0.1 * idx }}
                           viewport={{ once: true }}
                         >
-                          <CheckCircle2 className="w-4 h-4 text-[#0FC2F8] mt-0.5 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200" />
+                          <CheckCircle className="w-5 h-5 text-[#0FC2F8] mt-0.5 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200" />
                           <span className="text-gray-700 text-sm leading-relaxed flex-1">
                             {feature}
                           </span>

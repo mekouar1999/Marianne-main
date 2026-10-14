@@ -29,7 +29,7 @@ const ServiceCard = ({ title, description, features, delay }) => (
     <ul className="space-y-3">
       {features.map((feature, index) => (
         <li key={index} className="flex items-start space-x-3">
-          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+          <CheckCircle className="w-5 h-5 text-[#0FC2F8] mt-0.5 flex-shrink-0" />
           <span className="text-sm sm:text-base text-gray-700">{feature}</span>
         </li>
       ))}
