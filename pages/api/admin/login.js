@@ -10,10 +10,16 @@ export default async function handler(req, res) {
   try {
     await dbConnect();
     
-    const { username, password } = req.body;
+    const rawUsername = (req.body.username || '').trim();
+    const rawPassword = req.body.password || '';
     
-    const admin = await Admin.findOne({ username });
-    if (!admin || !await bcrypt.compare(password, admin.password)) {
+    // Case-insensitive match for username (e.g. CES or ces)
+    const escapedUsername = rawUsername.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const admin = await Admin.findOne({
+      username: { $regex: new RegExp(`^${escapedUsername}$`, 'i') },
+    });
+
+    if (!admin || !await bcrypt.compare(rawPassword, admin.password)) {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
     

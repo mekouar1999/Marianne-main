@@ -13,58 +13,71 @@ import { useLanguage } from "../contexts/LanguageContext";
 import TiltCard from "./TiltCard";
 import TextReveal from "./TextReveal";
 
+import { homeDefaults } from "../../lib/homeDefaults";
+
 const TestimonialsSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const currentLanguage = language || 'fr';
+  const [remoteTestimonials, setRemoteTestimonials] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [direction, setDirection] = useState(1);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Javier Madina",
-      position: "EMEA Crop Protection Order Fulfillment and Logistics leader",
-      company: "Corteva Agriscience",
-      image: "/Content/LinkedPH.png",
-      rating: 5,
-      text: "As a former manager of Marianne at Dow AgroSciences SAS I strongly recommend her positions in the International Trade Compliance/ International Trade Operations area due to her high interpersonal skills, professionalism, thorough knowledge and work commitment.",
-      date: "2 décembre 2018",
-    },
-    {
-      id: 2,
-      name: "Michelina Mammone",
-      position: "European Customs Coordinator",
-      company: "Dow Corning",
-      image: "/Content/LinkedPH.png",
-      rating: 5,
-      text: "Marianne has an extensive knowledge in customs legislation and customs operations. She put in place the Centralized Clearance System gathering 6 different Dow France sites. She is analytical, knows the figures, is an expert in excel.",
-      date: "8 décembre 2017",
-    },
-  ];
+  useEffect(() => {
+    fetch('/api/home-testimonials')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.success && data.data) {
+          setRemoteTestimonials(data.data);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to load testimonials:', err);
+      });
+  }, []);
+
+  const activeList = Array.isArray(remoteTestimonials?.[currentLanguage])
+    ? remoteTestimonials[currentLanguage]
+    : (homeDefaults[currentLanguage] || homeDefaults.fr);
+
+  useEffect(() => {
+    if (currentTestimonial >= activeList.length && activeList.length > 0) {
+      setCurrentTestimonial(0);
+    }
+  }, [activeList.length, currentTestimonial]);
 
   const nextTestimonial = () => {
+    if (activeList.length <= 1) return;
     setDirection(1);
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev + 1) % activeList.length);
   };
 
   const prevTestimonial = () => {
+    if (activeList.length <= 1) return;
     setDirection(-1);
     setCurrentTestimonial(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + activeList.length) % activeList.length
     );
   };
 
   // Auto-advance every 6 seconds
   useEffect(() => {
+    if (activeList.length <= 1) return;
     const timer = setInterval(() => {
       setDirection(1);
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      setCurrentTestimonial((prev) => (prev + 1) % activeList.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [testimonials.length]);
+  }, [activeList.length]);
 
-  const testimonial = testimonials[currentTestimonial];
+  if (!activeList || activeList.length === 0) {
+    return null;
+  }
+
+  const safeIndex = currentTestimonial % activeList.length;
+  const testimonial = activeList[safeIndex];
+
 
   const slideVariants = {
     enter: (dir) => ({ x: dir > 0 ? 300 : -300, opacity: 0, scale: 0.95 }),
@@ -113,7 +126,7 @@ const TestimonialsSection = () => {
         <div className="max-w-4xl mx-auto">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
-              key={currentTestimonial}
+              key={safeIndex}
               custom={direction}
               variants={slideVariants}
               initial="enter"
@@ -156,8 +169,12 @@ const TestimonialsSection = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-950 to-cyan-400 rounded-full blur-md opacity-30 scale-110" />
                     <img
-                      src={testimonial.image}
+                      src={testimonial.image || "/Content/LinkedPH.png"}
                       alt={testimonial.name}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/Content/LinkedPH.png";
+                      }}
                       className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full object-cover border-4 border-blue-950 shadow-lg relative z-10"
                     />
                   </motion.div>
@@ -165,15 +182,24 @@ const TestimonialsSection = () => {
                     <h4 className="font-semibold text-gray-900 text-lg md:text-xl lg:text-2xl mb-1 md:mb-2">
                       {testimonial.name}
                     </h4>
-                    <p className="text-blue-950 font-medium text-base md:text-lg mb-2 md:mb-3">
-                      {testimonial.position}
-                    </p>
-                    <div className="flex items-center justify-center space-x-2 mb-3 md:mb-4">
-                      <Building className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
-                      <span className="text-gray-600 text-sm md:text-base">
-                        {testimonial.company}
-                      </span>
-                    </div>
+                    {testimonial.position && (
+                      <p className="text-blue-950 font-medium text-base md:text-lg mb-2 md:mb-3">
+                        {testimonial.position}
+                      </p>
+                    )}
+                    {testimonial.company && (
+                      <div className="flex items-center justify-center space-x-2 mb-3 md:mb-4">
+                        <Building className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
+                        <span className="text-gray-600 text-sm md:text-base">
+                          {testimonial.company}
+                        </span>
+                      </div>
+                    )}
+                    {testimonial.date && (
+                      <p className="text-gray-400 text-xs">
+                        {testimonial.date}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -184,7 +210,7 @@ const TestimonialsSection = () => {
           {/* Auto-progress bar */}
           <div className="mt-4 h-0.5 bg-gray-200 rounded-full overflow-hidden">
             <motion.div
-              key={currentTestimonial}
+              key={safeIndex}
               className="h-full bg-gradient-to-r from-blue-950 to-cyan-400"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
@@ -194,7 +220,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Navigation */}
-        {testimonials.length > 1 && (
+        {activeList.length > 1 && (
           <motion.div
             className="flex justify-center items-center space-x-6 md:space-x-8 mt-8 md:mt-10"
             initial={{ opacity: 0, y: 20 }}
@@ -213,15 +239,15 @@ const TestimonialsSection = () => {
 
             {/* Dots Indicator */}
             <div className="flex space-x-2 md:space-x-3">
-              {testimonials.map((_, index) => (
+              {activeList.map((_, index) => (
                 <motion.button
                   key={index}
                   onClick={() => {
-                    setDirection(index > currentTestimonial ? 1 : -1);
+                    setDirection(index > safeIndex ? 1 : -1);
                     setCurrentTestimonial(index);
                   }}
                   className={`h-3 rounded-full transition-all ${
-                    index === currentTestimonial
+                    index === safeIndex
                       ? "bg-gradient-to-r from-blue-950 to-cyan-600 w-8"
                       : "bg-gray-300 hover:bg-gray-400 w-3"
                   }`}
@@ -241,6 +267,7 @@ const TestimonialsSection = () => {
             </motion.button>
           </motion.div>
         )}
+
       </div>
     </section>
   );

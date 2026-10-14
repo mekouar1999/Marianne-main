@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FileText, Briefcase, Award, GraduationCap, Mail, Globe, LogOut, Scale } from 'lucide-react';
+import { FileText, Briefcase, Award, GraduationCap, Mail, Globe, LogOut, Scale, Home } from 'lucide-react';
 
 // Ordre des onglets du back office
 const NAV_ITEMS = [
+  { href: '/admin/home', label: "Page d'accueil", icon: Home },
   { href: '/admin/consulting', label: 'Consulting', icon: Briefcase },
   { href: '/admin/formation', label: 'Formation', icon: GraduationCap },
   { href: '/admin/experience', label: 'Expérience client', icon: Award },
@@ -33,8 +34,10 @@ const AdminSidebar = ({ admin, onLogout }) => {
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active =
             router.pathname === href ||
+            (href === '/admin/home' && router.pathname === '/admin/testimonials') ||
             (href === '/admin/dashboard' && (router.pathname.startsWith('/admin/create-post') || router.pathname.startsWith('/admin/edit-post'))) ||
             (href !== '/admin/dashboard' && router.pathname.startsWith(href + '/'));
+
           return (
             <Link
               key={href}

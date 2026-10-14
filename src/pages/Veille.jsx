@@ -107,17 +107,9 @@ const Veille = () => {
 
         {/* Title Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-cyan-200 text-xs sm:text-sm font-medium mb-5">
-            <Scale className="w-4 h-4 text-cyan-300" />
-            <span>{language === 'fr' ? 'Actualités & Décryptages Douaniers' : 'Customs News & Legal Briefings'}</span>
-          </div>
           <div className="text-4xl md:text-5xl lg:text-6xl font-bold melissa2 text-white leading-tight flex justify-center items-center">
             <TextReveal text={t.veille?.title || 'Veille réglementaire'} delay={0.1} />
           </div>
-          <p className="mt-4 text-base md:text-lg text-blue-100/90 max-w-2xl mx-auto font-light">
-            {t.veille?.subtitle ||
-              'Suivez les actualités, directives et évolutions douanières majeures décryptées par notre experte.'}
-          </p>
         </div>
       </section>
 
@@ -314,9 +306,9 @@ const Veille = () => {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#002B54] hover:bg-cyan-50 font-semibold text-sm shadow-md transition-all hover:scale-105"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-white text-[#002B54] hover:bg-cyan-50 font-semibold text-sm shadow-md transition-all hover:scale-105"
               >
-                <span>{language === 'fr' ? 'Contacter notre experte' : 'Contact our expert'}</span>
+                <span>{language === 'fr' ? 'Nous contacter' : 'Contact us'}</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </div>

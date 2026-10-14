@@ -163,24 +163,12 @@ const VeilleDetail = () => {
                 {formattedDate}
               </span>
             )}
-            <span className="flex items-center text-blue-100/90 font-medium">
-              <Clock className="w-3.5 h-3.5 mr-1 text-cyan-300" />
-              {language === 'fr' ? '3 min de lecture' : '3 min read'}
-            </span>
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
             {post.title}
           </h1>
-
-          {/* Author line */}
-          <div className="flex items-center space-x-3 pt-2 text-sm text-blue-100">
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-white text-xs">
-              M
-            </div>
-            <span>Marianne Artusio-Chenot — Experte Douane & Commerce International</span>
-          </div>
         </div>
       </section>
 
@@ -191,7 +179,7 @@ const VeilleDetail = () => {
           {(post.excerpt || post.summary) && (
             <div className="mb-10 p-6 sm:p-7 rounded-2xl bg-blue-50/70 border-l-4 border-[#002B54] text-gray-800 shadow-sm">
               <h3 className="text-xs uppercase tracking-wider font-bold text-[#002B54] mb-2">
-                {language === 'fr' ? 'Point clé / Résumé exécutif' : 'Key Takeaways'}
+                {language === 'fr' ? 'Résumé' : 'Summary'}
               </h3>
               <p className="text-base sm:text-lg font-medium leading-relaxed text-gray-900">
                 {post.excerpt || post.summary}
@@ -315,7 +303,7 @@ const VeilleDetail = () => {
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center px-5 py-2.5 rounded-xl bg-white text-[#002B54] hover:bg-cyan-50 font-semibold text-sm transition-all flex-shrink-0 shadow-md"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-white text-[#002B54] hover:bg-cyan-50 font-semibold text-sm transition-all flex-shrink-0 shadow-md hover:scale-105"
             >
               <span>{language === 'fr' ? 'Prendre contact' : 'Get in touch'}</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
