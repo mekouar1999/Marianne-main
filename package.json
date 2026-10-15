@@ -10,7 +10,8 @@
     "lint": "next lint",
     "test": "vitest",
     "type-check": "tsc --noEmit",
-    "seed-blog": "node scripts/seed-blog-posts.js"
+    "seed-blog": "node scripts/seed-blog-posts.js",
+    "create-admin": "node scripts/create-admin.js"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",

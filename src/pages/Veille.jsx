@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import {
   Search,
   Calendar,
-  Clock,
   ArrowRight,
   Scale,
   ShieldCheck,
@@ -248,12 +247,7 @@ const Veille = () => {
                       </div>
 
                       {/* Footer CTA */}
-                      <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-between">
-                        <span className="text-xs font-medium text-gray-400 flex items-center">
-                          <Clock className="w-3.5 h-3.5 mr-1 text-gray-400" />
-                          {language === 'fr' ? '3 min de lecture' : '3 min read'}
-                        </span>
-
+                      <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-end">
                         <span className="inline-flex items-center space-x-1.5 text-sm font-semibold text-[#002B54] group-hover:text-cyan-600 transition-colors">
                           <span>{t.veille?.readMore || 'Lire le post'}</span>
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
