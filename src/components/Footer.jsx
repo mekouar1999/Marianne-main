@@ -90,11 +90,11 @@ const Footer = () => {
             </div>
 
             {/* Navigation (2 blocks side-by-side) */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-4">
               <h4 className="text-lg font-semibold mb-6 text-white tracking-wide">
                 {language === 'fr' ? 'Navigation' : 'Navigation'}
               </h4>
-              <div className="grid grid-cols-2 gap-x-6 sm:gap-x-10 gap-y-3">
+              <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-3 max-w-xs">
                 {/* 1er bloc */}
                 <ul className="space-y-3">
                   <li>
@@ -135,18 +135,18 @@ const Footer = () => {
                 <ul className="space-y-3">
                   <li>
                     <Link
-                      href="/about"
-                      className="text-gray-300 hover:text-white transition-colors text-sm"
-                    >
-                      {t.nav.about}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
                       href="/blog"
                       className="text-gray-300 hover:text-white transition-colors text-sm"
                     >
                       {t.nav.blog}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about"
+                      className="text-gray-300 hover:text-white transition-colors text-sm"
+                    >
+                      {t.nav.about}
                     </Link>
                   </li>
                   <li>
@@ -170,14 +170,14 @@ const Footer = () => {
             </div>
 
             {/* Contact */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-4">
               <h4 className="text-lg font-semibold mb-6 text-white tracking-wide">{t.footer.contact}</h4>
               <div className="space-y-3.5 text-sm">
                 <div className="flex items-center space-x-3">
                   <Phone className="w-5 h-5 text-white flex-shrink-0" />
                   <a
                     href={`tel:${t.footer.info.phone}`}
-                    className="text-gray-300 hover:text-white transition-colors leading-none"
+                    className="text-gray-300 hover:text-white transition-colors leading-none whitespace-nowrap"
                   >
                     {t.footer.info.phone}
                   </a>
@@ -188,12 +188,12 @@ const Footer = () => {
                     user="martusiochenot"
                     domain="customs-solutions"
                     tld="fr"
-                    className="text-gray-300 hover:text-white transition-colors leading-none"
+                    className="text-gray-300 hover:text-white transition-colors leading-none whitespace-nowrap inline-block"
                   />
                 </div>
                 <div className="flex items-center space-x-3">
                   <MapPin className="w-5 h-5 text-white flex-shrink-0" />
-                  <span className="text-gray-300 leading-none">
+                  <span className="text-gray-300 leading-none whitespace-nowrap">
                     {t.footer.info.location}
                   </span>
                 </div>
@@ -202,7 +202,7 @@ const Footer = () => {
                     href={t.footer.info.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-3 text-gray-300 hover:text-white transition-colors group"
+                    className="inline-flex items-center space-x-3 text-gray-300 hover:text-white transition-colors group whitespace-nowrap"
                   >
                     <Linkedin className="w-5 h-5 text-white group-hover:text-cyan-400 flex-shrink-0 transition-colors" />
                     <span className="leading-none">LinkedIn</span>

@@ -5,8 +5,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Calendar,
-  Clock,
-  User,
   ArrowLeft,
   Share2,
   Tag,
@@ -207,10 +205,6 @@ const BlogPost = () => {
                     {new Date(currentPost.publishedAt || new Date()).toLocaleDateString("fr-FR")}
                   </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5" />
-                  <span>{currentPost.readTime || '5 min de lecture'}</span>
-                </div>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -285,25 +279,7 @@ const BlogPost = () => {
               </div>
             )}
 
-            {/* Author Bio */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                  <User className="w-8 h-8 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {currentPost.author || 'Marianne Artusio-Chenot'}
-                  </h3>
-                  <p className="text-gray-600">
-                    Expert en conseil douanier avec plus de 20 ans d'expérience.
-                    Fondatrice de Customs Engineering Solutions, elle accompagne
-                    les entreprises dans l'optimisation de leurs opérations
-                    douanières.
-                  </p>
-                </div>
-              </div>
-            </div>
+
           </div>
         </motion.div>
       </article>
@@ -350,10 +326,6 @@ const BlogPost = () => {
                         {new Date(relatedPost.publishedAt).toLocaleDateString(
                           "fr-FR"
                         )}
-                      </span>
-                      <span className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {relatedPost.readTime}
                       </span>
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">

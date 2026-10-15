@@ -35,9 +35,8 @@ const Header = () => {
     { key: "consulting", path: "/consulting", label: t.nav.consulting },
     { key: "formation", path: "/formation", label: t.nav.formation },
     { key: "experience", path: "/experience", label: t.nav.experience },
-    { key: "about", path: "/about", label: t.nav.about },
     { key: "blog", path: "/blog", label: t.nav.blog },
-    { key: "veille", path: "/veille", label: t.nav.veille || "Veille réglementaire" },
+    { key: "about", path: "/about", label: t.nav.about },
     { key: "contact", path: "/contact", label: t.nav.contact },
   ];
 

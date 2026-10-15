@@ -186,13 +186,11 @@ const Contact = () => {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <motion.div
+                <div
                   className={`w-16 h-16 bg-gradient-to-br ${info.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-shadow duration-300`}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
                 >
                   <info.icon className="w-8 h-8 text-white" />
-                </motion.div>
+                </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {info.title}
                 </h3>

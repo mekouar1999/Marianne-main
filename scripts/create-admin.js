@@ -33,9 +33,20 @@ async function createAdmin() {
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({ username });
     if (existingAdmin) {
-      console.log('\n❌ Admin user with this username already exists');
+      console.log(`\n⚠️  L'utilisateur admin "${username}" existe déjà.`);
+      const answer = await question('Voulez-vous réinitialiser/mettre à jour son mot de passe ? (o/N) : ');
+      if (answer.toLowerCase() === 'o' || answer.toLowerCase() === 'y' || answer.toLowerCase() === 'oui' || answer.toLowerCase() === 'yes') {
+        const newPassword = await question('Nouveau mot de passe (défaut: admin123) : ') || 'admin123';
+        existingAdmin.password = await bcrypt.hash(newPassword, 12);
+        if (email) existingAdmin.email = email;
+        if (name) existingAdmin.name = name;
+        await existingAdmin.save();
+        console.log('\n✓ Mot de passe mis à jour avec succès !');
+        console.log('Identifiant :', username);
+        console.log('Mot de passe : [MODIFIÉ ET HACHÉ AVEC SUCCÈS]');
+      }
       rl.close();
-      process.exit(1);
+      process.exit(0);
     }
     
     // Create admin user
@@ -52,8 +63,8 @@ async function createAdmin() {
     console.log('\n✓ Admin user created successfully!');
     console.log('\nCredentials:');
     console.log('Username:', username);
-    console.log('Password:', password);
-    console.log('\n⚠️  Please save these credentials and keep them secure!');
+    console.log('Password: [ENREGISTRÉ ET HACHÉ EN BASE]');
+    console.log('\n⚠️  Conservez bien vos identifiants en lieu sûr !');
     
   } catch (error) {
     console.error('\n❌ Error creating admin:', error.message);
