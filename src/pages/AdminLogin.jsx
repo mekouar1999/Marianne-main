@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 import { Lock, Eye, EyeOff, ArrowLeft, User as UserIcon } from 'lucide-react';
 import Logo from '../components/Logo';
 
+const cleanInput = (value = '') =>
+  value
+    .replace(/[\u200B-\u200D\uFEFF\u200E\u200F\u202A-\u202E\u2060-\u206F]/g, '')
+    .replace(/\u00A0/g, ' ')
+    .trim();
+
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +22,10 @@ const AdminLogin = () => {
     setLoading(true);
     setError('');
 
+    const formData = new FormData(e.currentTarget);
+    const username = cleanInput(credentials.username || formData.get('username') || '');
+    const password = cleanInput(credentials.password || formData.get('password') || '');
+
     try {
       const response = await fetch('/api/admin/login', {
         method: 'POST',
@@ -23,7 +33,7 @@ const AdminLogin = () => {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(credentials),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
@@ -99,10 +109,16 @@ const AdminLogin = () => {
                 <input
                   type="text"
                   id="username"
+                  name="username"
                   value={credentials.username}
                   onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                  onBlur={(e) => setCredentials((prev) => ({ ...prev, username: cleanInput(e.target.value) }))}
                   className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-customs-dark focus:border-customs-dark outline-none transition bg-gray-50 hover:bg-white"
                   placeholder="Entrez votre identifiant"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  autoComplete="username"
+                  spellCheck={false}
                   required
                   autoFocus
                 />
@@ -119,10 +135,16 @@ const AdminLogin = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
+                  name="password"
                   value={credentials.password}
                   onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                  onBlur={(e) => setCredentials((prev) => ({ ...prev, password: cleanInput(e.target.value) }))}
                   className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-customs-dark focus:border-customs-dark outline-none transition bg-gray-50 hover:bg-white"
                   placeholder="Entrez votre mot de passe"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  autoComplete="current-password"
+                  spellCheck={false}
                   required
                 />
                 <button

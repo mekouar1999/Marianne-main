@@ -220,20 +220,20 @@ const AdminContact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64">
+    <div className="min-h-screen bg-gray-50 lg:pl-64 overflow-x-hidden">
       <AdminSidebar admin={admin} onLogout={handleLogout} />
 
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-6 gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:py-6 gap-3">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Formulaire de contact</h1>
-              <p className="text-gray-600 text-sm mt-0.5">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Formulaire de contact</h1>
+              <p className="text-gray-600 text-xs sm:text-sm mt-0.5">
                 Consultez, filtrez et gérez tous les formulaires reçus depuis le site
               </p>
             </div>
-            <div className="flex items-center space-x-3 w-full sm:w-auto justify-end">
+            <div className="flex items-center space-x-2.5 w-full sm:w-auto justify-start sm:justify-end">
               <button
                 onClick={() => fetchContacts(true)}
                 disabled={refreshing}
@@ -253,69 +253,69 @@ const AdminContact = () => {
                 <span>Exporter CSV</span>
               </button>
 
-              <div className="h-6 w-px bg-gray-200 hidden sm:block" />
+              <div className="h-6 w-px bg-gray-200 hidden lg:block" />
 
-              <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-700">
+              <div className="hidden lg:flex items-center space-x-2 text-sm text-gray-700">
                 <User className="w-4 h-4 text-gray-500" />
                 <span>{admin?.name}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center space-x-1.5 px-3 py-2 text-xs text-gray-600 hover:text-red-600 transition-colors"
+                className="hidden lg:inline-flex items-center space-x-1.5 px-3 py-2 text-xs text-gray-600 hover:text-red-600 transition-colors"
                 title="Se déconnecter"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Déconnexion</span>
+                <span>Déconnexion</span>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <main className="min-w-0">
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold text-gray-500 uppercase">Total reçus</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center font-bold flex-shrink-0">
                 <Inbox className="w-5 h-5" />
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold text-blue-600 uppercase">Nouveaux</p>
-                <p className="text-2xl font-bold text-blue-700 mt-1">{stats.new}</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-700 mt-1">{stats.new}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold flex-shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold text-amber-600 uppercase">En cours</p>
-                <p className="text-2xl font-bold text-amber-700 mt-1">{stats.contacted}</p>
+                <p className="text-xl sm:text-2xl font-bold text-amber-700 mt-1">{stats.contacted}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold flex-shrink-0">
                 <Clock className="w-5 h-5" />
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold text-emerald-600 uppercase">Traités</p>
-                <p className="text-2xl font-bold text-emerald-700 mt-1">{stats.closed}</p>
+                <p className="text-xl sm:text-2xl font-bold text-emerald-700 mt-1">{stats.closed}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold flex-shrink-0">
                 <CheckCircle className="w-5 h-5" />
               </div>
             </div>
           </div>
 
           {/* Filters and search */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-stretch sm:items-center mb-6">
             <div className="relative w-full sm:w-80">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
@@ -327,10 +327,10 @@ const AdminContact = () => {
               />
             </div>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto">
-              <Filter className="w-4 h-4 text-gray-400" />
-              <span className="text-xs text-gray-500 font-medium">Filtrer:</span>
-              <div className="inline-flex bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+            <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+              <Filter className="w-4 h-4 text-gray-400 flex-shrink-0" />
+              <span className="text-xs text-gray-500 font-medium flex-shrink-0">Filtrer:</span>
+              <div className="inline-flex bg-white rounded-xl shadow-sm border border-gray-200 p-1 flex-shrink-0">
                 {[
                   { key: 'all', label: 'Tous' },
                   { key: 'new', label: 'Nouveaux' },
@@ -340,7 +340,7 @@ const AdminContact = () => {
                   <button
                     key={key}
                     onClick={() => setStatusFilter(key)}
-                    className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
+                    className={`px-2.5 sm:px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
                       statusFilter === key
                         ? 'bg-blue-950 text-white shadow-sm'
                         : 'text-gray-600 hover:text-blue-950'
@@ -353,10 +353,10 @@ const AdminContact = () => {
             </div>
           </div>
 
-          {/* Messages Table */}
+          {/* Messages Table / Mobile Cards */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             {filteredContacts.length === 0 ? (
-              <div className="text-center py-16 px-4">
+              <div className="text-center py-12 sm:py-16 px-4">
                 <Inbox className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                 <p className="text-base font-semibold text-gray-700">Aucun formulaire trouvé</p>
                 <p className="text-xs text-gray-500 mt-1">
@@ -364,7 +364,88 @@ const AdminContact = () => {
                 </p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
+              <>
+                {/* Mobile Cards List */}
+                <div className="md:hidden divide-y divide-gray-100">
+                  {filteredContacts.map((contact) => {
+                    const name =
+                      `${contact.firstName || ''} ${contact.lastName || ''}`.trim() ||
+                      contact.name ||
+                      'Anonyme';
+                    const st = STATUS_CONFIG[contact.status || 'new'] || STATUS_CONFIG.new;
+                    return (
+                      <div
+                        key={contact._id}
+                        className="p-4 space-y-2.5 hover:bg-slate-50/70 transition-colors cursor-pointer"
+                        onClick={() => setSelectedContact(contact)}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="text-sm font-semibold text-gray-900 truncate">{name}</div>
+                            <div className="text-xs text-gray-500 truncate">{contact.email}</div>
+                          </div>
+                          <div onClick={(e) => e.stopPropagation()} className="flex-shrink-0">
+                            <select
+                              value={contact.status || 'new'}
+                              onChange={(e) => handleStatusChange(contact._id, e.target.value)}
+                              className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${st.bg} ${st.text} ${st.border} focus:outline-none cursor-pointer`}
+                            >
+                              <option value="new">Nouveau</option>
+                              <option value="contacted">Contacté</option>
+                              <option value="closed">Traité</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="text-xs text-gray-700 space-y-0.5">
+                          {contact.company && (
+                            <div className="font-medium text-gray-600">{contact.company}</div>
+                          )}
+                          <div className="capitalize font-medium text-gray-900">
+                            Sujet : {contact.subject || 'Contact'}
+                          </div>
+                          {contact.training && (
+                            <div className="inline-flex items-center text-xs text-blue-700 font-semibold">
+                              <GraduationCap className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
+                              <span className="line-clamp-1">{contact.training}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex items-center justify-between pt-1">
+                          <span className="text-xs text-gray-400">
+                            {new Date(contact.createdAt).toLocaleDateString('fr-FR', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                          <div className="flex items-center space-x-1" onClick={(e) => e.stopPropagation()}>
+                            <button
+                              onClick={() => setSelectedContact(contact)}
+                              title="Voir les détails"
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(contact)}
+                              title="Supprimer"
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Desktop Table */}
+                <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-sm">
                   <thead className="bg-gray-50/80 border-b border-gray-200 text-xs font-semibold uppercase text-gray-500 tracking-wider">
                     <tr>
@@ -453,6 +534,7 @@ const AdminContact = () => {
                   </tbody>
                 </table>
               </div>
+              </>
             )}
           </div>
         </main>

@@ -105,31 +105,31 @@ const AdminCreateVeillePost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Top Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4 sm:py-5">
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 sm:py-5 gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:space-x-4">
               <Link
                 href="/admin/veille"
-                className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
+                className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm font-medium"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Retour à la Veille</span>
               </Link>
-              <div className="h-5 w-px bg-gray-300"></div>
+              <div className="hidden sm:block h-5 w-px bg-gray-300"></div>
               <div className="flex items-center space-x-2">
-                <Scale className="w-5 h-5 text-[#002B54]" />
-                <h1 className="text-xl font-bold text-gray-900">Nouveau post réglementaire</h1>
+                <Scale className="w-5 h-5 text-[#002B54] flex-shrink-0" />
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900">Nouveau post réglementaire</h1>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2.5 sm:space-x-3">
               <button
                 type="button"
                 onClick={() => router.push('/admin/veille')}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
+                className="px-3.5 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-xs sm:text-sm font-medium"
               >
                 Annuler
               </button>
@@ -137,7 +137,7 @@ const AdminCreateVeillePost = () => {
                 type="button"
                 onClick={handleSubmit}
                 disabled={loading}
-                className="inline-flex items-center space-x-2 px-5 py-2 bg-[#002B54] text-white rounded-lg hover:bg-[#004f8f] transition-colors text-sm font-semibold shadow-sm disabled:opacity-50"
+                className="inline-flex items-center space-x-2 px-4 sm:px-5 py-2 bg-[#002B54] text-white rounded-lg hover:bg-[#004f8f] transition-colors text-xs sm:text-sm font-semibold shadow-sm disabled:opacity-50"
               >
                 <Save className="w-4 h-4" />
                 <span>{loading ? 'Publication...' : formData.published ? 'Publier le post' : 'Sauvegarder brouillon'}</span>

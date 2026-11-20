@@ -233,23 +233,23 @@ const AdminHome = () => {
     'w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition bg-white';
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64">
+    <div className="min-h-screen bg-gray-50 lg:pl-64 overflow-x-hidden">
       <AdminSidebar admin={admin} onLogout={handleLogout} />
 
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 gap-3">
             <div>
-              <div className="flex items-center space-x-3">
-                <Quote className="w-6 h-6 text-cyan-600" />
-                <h1 className="text-2xl font-bold text-gray-900">Page d'accueil — Témoignages</h1>
+              <div className="flex items-center space-x-2.5 sm:space-x-3">
+                <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-600 flex-shrink-0" />
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Page d'accueil — Témoignages</h1>
               </div>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-gray-600 text-xs sm:text-sm mt-1">
                 Gérez les témoignages clients visibles sur la page d'accueil (ajout, modification, suppression).
               </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <User className="w-5 h-5 text-gray-500" />
                 <span className="text-gray-700 font-medium">{admin?.name}</span>
@@ -266,7 +266,7 @@ const AdminHome = () => {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <main className="min-w-0">
           {/* Toolbar */}
           <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
@@ -386,7 +386,7 @@ const AdminHome = () => {
                 </div>
 
                 {/* Client Name & Company */}
-                <div className="grid grid-cols-2 gap-2 mb-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3">
                   <div>
                     <label className="text-xs font-semibold text-gray-700 block mb-1">Nom du client *</label>
                     <input
@@ -419,7 +419,7 @@ const AdminHome = () => {
                 </div>
 
                 {/* Date & Note */}
-                <div className="grid grid-cols-2 gap-2 mb-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3">
                   <div>
                     <label className="text-xs font-semibold text-gray-700 block mb-1">Date (optionnelle)</label>
                     <input
