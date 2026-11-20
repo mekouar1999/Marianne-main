@@ -2,6 +2,12 @@ import bcrypt from 'bcryptjs';
 import dbConnect from '../../../lib/mongodb';
 import { Admin } from '../../../lib/models';
 
+const sanitizeText = (value = '') =>
+  String(value)
+    .replace(/[\u200B-\u200D\uFEFF\u200E\u200F\u202A-\u202E\u2060-\u206F]/g, '')
+    .replace(/\u00A0/g, ' ')
+    .trim();
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
@@ -9,23 +15,52 @@ export default async function handler(req, res) {
 
   try {
     await dbConnect();
-    
-    const rawUsername = (req.body.username || '').trim();
-    const rawPassword = req.body.password || '';
-    
-    // Case-insensitive match for username (e.g. CES or ces)
-    const escapedUsername = rawUsername.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const admin = await Admin.findOne({
-      username: { $regex: new RegExp(`^${escapedUsername}$`, 'i') },
-    });
 
-    if (!admin || !await bcrypt.compare(rawPassword, admin.password)) {
+    const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+    const rawUsername = sanitizeText(body.username || '');
+    const rawPassword = String(body.password || '');
+    const cleanedPassword = sanitizeText(rawPassword);
+
+    if (!rawUsername || !cleanedPassword) {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
-    
-    // For simplicity, we'll use a basic session approach
-    // In production, consider using JWT or next-auth
-    res.setHeader('Set-Cookie', `admin-session=${admin._id}; HttpOnly; Path=/; Max-Age=86400`);
+
+    // Case-insensitive match for username (e.g. CES or ces, Fruser or fruser)
+    const escapedUsername = rawUsername.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const admin = await Admin.findOne({
+      username: { $regex: new RegExp(`^\\s*${escapedUsername}\\s*$`, 'i') },
+    });
+
+    if (!admin) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    // Build password candidates to handle mobile keyboard quirks:
+    // - trailing/leading whitespace or invisible copy-paste characters
+    // - mobile auto-capitalization of the first character
+    const firstChar = cleanedPassword.charAt(0);
+    const toggledFirstCharPassword =
+      firstChar
+        ? (firstChar === firstChar.toUpperCase() ? firstChar.toLowerCase() : firstChar.toUpperCase()) +
+          cleanedPassword.slice(1)
+        : cleanedPassword;
+
+    const passwordCandidates = [...new Set([rawPassword, cleanedPassword, toggledFirstCharPassword])].filter(Boolean);
+
+    let isPasswordValid = false;
+    for (const candidate of passwordCandidates) {
+      if (await bcrypt.compare(candidate, admin.password)) {
+        isPasswordValid = true;
+        break;
+      }
+    }
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    // Session cookie compatible with desktop and mobile browsers
+    res.setHeader('Set-Cookie', `admin-session=${admin._id}; HttpOnly; Path=/; Max-Age=86400; SameSite=Lax`);
     
     res.json({
       success: true,

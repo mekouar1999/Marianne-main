@@ -145,26 +145,26 @@ const AdminVeille = () => {
   }).length;
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64">
+    <div className="min-h-screen bg-gray-50 lg:pl-64 overflow-x-hidden">
       <AdminSidebar admin={admin} onLogout={handleLogout} />
 
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 gap-3">
             <div>
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-50 text-blue-900 rounded-lg">
-                  <Scale className="w-6 h-6" />
+                <div className="p-2 bg-blue-50 text-blue-900 rounded-lg flex-shrink-0">
+                  <Scale className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Veille réglementaire</h1>
-                  <p className="text-gray-600 text-sm">Gérez et partagez vos actualités douanières et réglementaires</p>
+                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Veille réglementaire</h1>
+                  <p className="text-gray-600 text-xs sm:text-sm">Gérez et partagez vos actualités douanières et réglementaires</p>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <User className="w-5 h-5 text-gray-500" />
                 <span className="text-gray-700">{admin?.name}</span>
@@ -183,80 +183,80 @@ const AdminVeille = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                <Scale className="w-6 h-6" />
+              <div className="p-2.5 sm:p-3 bg-blue-50 text-blue-600 rounded-xl flex-shrink-0">
+                <Scale className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total posts</p>
-                <p className="text-2xl font-bold text-gray-900">{posts.length}</p>
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">Total posts</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{posts.length}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-green-50 text-green-600 rounded-xl">
-                <CheckCircle className="w-6 h-6" />
+              <div className="p-2.5 sm:p-3 bg-green-50 text-green-600 rounded-xl flex-shrink-0">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Publiés</p>
-                <p className="text-2xl font-bold text-gray-900">{publishedCount}</p>
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">Publiés</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{publishedCount}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-yellow-50 text-yellow-600 rounded-xl">
-                <Clock className="w-6 h-6" />
+              <div className="p-2.5 sm:p-3 bg-yellow-50 text-yellow-600 rounded-xl flex-shrink-0">
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Brouillons</p>
-                <p className="text-2xl font-bold text-gray-900">{draftCount}</p>
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">Brouillons</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{draftCount}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
             <div className="flex items-center">
-              <div className="p-3 bg-purple-50 text-purple-600 rounded-xl">
-                <Calendar className="w-6 h-6" />
+              <div className="p-2.5 sm:p-3 bg-purple-50 text-purple-600 rounded-xl flex-shrink-0">
+                <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Ce mois-ci</p>
-                <p className="text-2xl font-bold text-gray-900">{thisMonthCount}</p>
+              <div className="ml-3 sm:ml-4 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">Ce mois-ci</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{thisMonthCount}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Section Heading & Actions - Exactly requested: "Post récents" */}
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-xl font-bold text-gray-900 tracking-tight">Post récents</h2>
-            <p className="text-xs text-gray-500 mt-0.5">Publications et actualités partagées dans la veille</p>
+        {/* Section Heading & Actions */}
+        <div className="flex justify-between items-center gap-3 mb-5 sm:mb-6">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">Post récents</h2>
+            <p className="text-xs text-gray-500 mt-0.5 truncate">Publications et actualités partagées dans la veille</p>
           </div>
           <Link
             href="/admin/veille/create-post"
             id="admin-create-veille-post-btn"
-            className="inline-flex items-center space-x-2 bg-[#002B54] text-white px-4 py-2.5 rounded-lg hover:bg-[#004f8f] shadow-sm hover:shadow transition-all duration-200"
+            className="inline-flex items-center space-x-2 bg-[#002B54] text-white px-3.5 py-2 rounded-lg hover:bg-[#004f8f] shadow-sm transition-all duration-200 flex-shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span className="font-medium text-sm">Nouveau post</span>
           </Link>
         </div>
 
-        {/* Posts Table */}
+        {/* Posts Table / Mobile Cards */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           {posts.length === 0 ? (
-            <div className="text-center py-16 px-4">
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 text-[#002B54] flex items-center justify-center mx-auto mb-4">
-                <Scale className="w-8 h-8" />
+            <div className="text-center py-12 sm:py-16 px-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 text-[#002B54] flex items-center justify-center mx-auto mb-4">
+                <Scale className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Aucun post pour le moment</h3>
               <p className="text-gray-500 max-w-md mx-auto mb-6 text-sm">
@@ -271,7 +271,76 @@ const AdminVeille = () => {
               </Link>
             </div>
           ) : (
-            <div className="overflow-x-auto">
+            <>
+              {/* Mobile Cards List */}
+              <div className="md:hidden divide-y divide-gray-100">
+                {posts.map((post) => (
+                  <div key={post._id} className="p-4 space-y-2.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 flex-1">
+                        {post.title}
+                      </h3>
+                      <span
+                        className={`inline-flex px-2 py-0.5 text-xs font-semibold rounded-full flex-shrink-0 ${
+                          post.published
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}
+                      >
+                        {post.published ? 'Publié' : 'Brouillon'}
+                      </span>
+                    </div>
+                    {(post.excerpt || post.summary) && (
+                      <p className="text-xs text-gray-500 line-clamp-2">
+                        {post.excerpt || post.summary}
+                      </p>
+                    )}
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <div className="flex flex-wrap items-center gap-1.5 text-xs text-gray-500">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-[#002B54] border border-blue-100">
+                          <Tag className="w-3 h-3 mr-1 opacity-70" />
+                          {post.category || 'Réglementation'}
+                        </span>
+                        <span className="px-2 py-0.5 bg-gray-100 rounded border border-gray-200 font-semibold text-gray-700">
+                          {(post.language || 'fr').toUpperCase()}
+                        </span>
+                        <span>
+                          {new Date(post.createdAt || post.publishedAt || Date.now()).toLocaleDateString('fr-FR')}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        {post.published && (
+                          <Link
+                            href={`/veille/${post.slug}`}
+                            target="_blank"
+                            className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
+                            title="Voir le post"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Link>
+                        )}
+                        <Link
+                          href={`/admin/veille/edit-post/${post._id}`}
+                          className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg"
+                          title="Modifier le post"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(post)}
+                          className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                          title="Supprimer le post"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -371,6 +440,7 @@ const AdminVeille = () => {
                 </tbody>
               </table>
             </div>
+            </>
           )}
         </div>
 
